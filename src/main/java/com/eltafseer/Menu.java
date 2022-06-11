@@ -17,6 +17,8 @@ public class Menu {
             buttons.addFirst(StudyYear.getByOrdinal(i).getArabicNotation());
         }
 
+        buttons.addFirst("لدي مشكلة");
+
         KeyboardRow keyboardRow = new KeyboardRow();
         keyboardRow.addAll(buttons);
         keyboardRows.add(keyboardRow);

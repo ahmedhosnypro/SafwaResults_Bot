@@ -3,25 +3,28 @@ package com.eltafseer;
 import kotlin.Pair;
 import org.sqlite.SQLiteDataSource;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
+import java.util.*;
 
 public class ResultsDataBase {
     private static final String JDBC_URL_PREFIX = "jdbc:sqlite:";
 
     private static final SQLiteDataSource dataSource = new SQLiteDataSource();
 
-    static HashMap<? extends YearsSubjects, String> getResults(StudyYear studyYear, String nameOrEmail) {
+    static LinkedHashMap<? extends YearsSubjects, String> getResults(StudyYear studyYear, String nameOrEmail) {
         setDataBaseURL(studyYear.getUrl());
 
-        HashMap<YearsSubjects, String> scores = new HashMap<>();
+        LinkedHashMap<YearsSubjects, String> scores = new LinkedHashMap<>();
 
-        YearsSubjects[] subjects = FstYearSubjects.values();
+        List<? extends YearsSubjects> subjects = Arrays.stream(FstYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
         switch (studyYear) {
-            case SND_YEAR -> subjects = SndYearSubjects.values();
-            case TRD_YEAR -> subjects = TrdYearSubjects.values();
+            case SND_YEAR ->
+                    subjects = Arrays.stream(SndYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case TRD_YEAR ->
+                    subjects = Arrays.stream(TrdYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
         }
 
         for (var subject : subjects) {
@@ -41,7 +44,8 @@ public class ResultsDataBase {
     }
 
     private static Pair<? extends YearsSubjects, String> getResults(YearsSubjects subject, String nameOrEmail, Connection con) {
-        String getResultsQuery = String.format("SELECT * FROM %s WHERE email = '%s' OR fullName = '%s'", subject.getEnglishName(), nameOrEmail, nameOrEmail);
+        String getResultsQuery = "SELECT * FROM " + subject.getEnglishName() +
+                " WHERE email LIKE '%" + nameOrEmail + "%' OR fullName LIKE '%" + nameOrEmail + "%'";
         try (Statement statement = con.createStatement()) {
             var resultSet = statement.executeQuery(getResultsQuery);
             if (resultSet.next()) {
@@ -54,6 +58,12 @@ public class ResultsDataBase {
     }
 
     private static void setDataBaseURL(String path) {
-        dataSource.setUrl(JDBC_URL_PREFIX + path);
+        var jarPath = ResultsDataBase.class.getProtectionDomain().getCodeSource()
+                .getLocation().getPath();
+        String jarParentPath = new File(jarPath).getAbsolutePath();
+        if (jarParentPath.endsWith("\\SafwaResults.exe")) {
+            jarParentPath = jarParentPath.replace("\\SafwaResults.exe", "");
+        }
+        dataSource.setUrl(JDBC_URL_PREFIX  + jarParentPath + "\\" + path);
     }
 }

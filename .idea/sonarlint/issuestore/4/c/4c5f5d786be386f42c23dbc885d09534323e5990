@@ -1,14 +1,0 @@
-
-g	java:S112'"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8¦€½î”0
-g	java:S1123"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8¦€½î”0
-K
-java:S1121".Extract the assignment out of this expression.(ªá¶ú8©€½î”0
-K
-java:S1121".Extract the assignment out of this expression.(¿úáŽ8«€½î”0
-m
-java:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ª‘·žüÿÿÿÿ8«€½î”0
-\
-java:S1118":Add a private constructor to hide the implicit public one.(»‚¡šþÿÿÿÿ8¹€½î”0
-H
-java:S1452"&Remove usage of generic wildcard type.(äýï¼úÿÿÿÿ8½€½î”0
-z	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(ª‘·žüÿÿÿÿ8À€½î”0

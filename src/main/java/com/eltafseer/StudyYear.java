@@ -5,10 +5,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 public enum StudyYear {
-    FST_YEAR("الفرقة الأولى", "D:\\13-Projects\\bot2\\src\\main\\resources\\fstYearResults.db"),
-    SND_YEAR("الفرقة الثانية", "D:\\13-Projects\\bot2\\src\\main\\resources\\sndYearResults.db"),
-    TRD_YEAR("الفرقة الثالثة", "D:\\13-Projects\\bot2\\src\\main\\resources\\TrdYearResults.db"),
+    FST_YEAR("الفرقة الأولى", "fstYearResults.db"),
+    SND_YEAR("الفرقة الثانية", "sndYearResults.db"),
+    TRD_YEAR("الفرقة الثالثة", "TrdYearResults.db"),
     ERROR("حدث خطأ ما", "");
+
 
     private final String arabicNotation;
     private final String url;

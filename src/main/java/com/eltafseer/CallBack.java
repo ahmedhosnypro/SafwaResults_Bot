@@ -26,6 +26,7 @@ public class CallBack extends SafwaResultsBot {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
         message.setText(messageText);
+        message.setReplyMarkup(Menu.studyYearsMenu());
         try {
             execute(message);
         } catch (TelegramApiException e) {

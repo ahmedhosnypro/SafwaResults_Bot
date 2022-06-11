@@ -2,13 +2,14 @@ package com.eltafseer;
 
 import org.sqlite.SQLiteDataSource;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IdYearDataBase {
-    private static final String BB_URL = "jdbc:sqlite:D:\\13-Projects\\bot2\\src\\main\\resources\\chatIdYears.db";
+    private static final String BB_URL = "chatIdYears.db";
 
     private static final SQLiteDataSource dataSource = new SQLiteDataSource();
 
@@ -30,7 +31,13 @@ public class IdYearDataBase {
             """;
 
     static {
-        dataSource.setUrl(BB_URL);
+        var jarPath = ResultsDataBase.class.getProtectionDomain().getCodeSource()
+                .getLocation().getPath();
+        String jarParentPath = new File(jarPath).getAbsolutePath();
+        if (jarParentPath.endsWith("\\SafwaResults.exe")) {
+            jarParentPath = jarParentPath.replace("\\SafwaResults.exe", "");
+        }
+        dataSource.setUrl("jdbc:sqlite:" + jarParentPath + "\\" + BB_URL);
     }
 
     static boolean setIdYear(long chatId, String inputStudyYear) {

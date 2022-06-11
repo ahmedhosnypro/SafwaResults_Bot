@@ -11,8 +11,8 @@ public enum TrdYearSubjects implements YearsSubjects {
     FIQH_HANBALY("الفقه الحنبلي", "fiqhHanbaly"),
     FIQH_MALKY("الفقه المالكي", "fiqhMalky"),
     FIQH_SHAFEEY("الفقه الشافعي", "fiqhShafeey"),
-    HISTORY("علوم القرآن", "history"),
-    MOSTALH_HADITH("الصرف", "mostalhHadith");
+    HISTORY("التاريخ", "history"),
+    MOSTALH_HADITH("مصطلح الحديث", "mostalhHadith");
 
     private final String arabicName;
     private final String englishName;
