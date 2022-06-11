@@ -13,10 +13,10 @@ public class CallBack extends SafwaResultsBot {
     void addNewId(String messageText, long chatId) {
         if (IdYearDataBase.setIdYear(chatId, messageText)) {
             sendMessage("اكتب اسمك رباعيا أو بريدك الإلكتروني", chatId);
-            Logger.logSuccess("اكتب اسمك رباعيا أو بريدك الإلكتروني");
+            Logger.logSuccess("اكتب اسمك رباعيا أو بريدك الإلكتروني", chatId);
         } else {
             sendYearsWithFeedBack("حاول مجددا", chatId);
-            Logger.logSuccess("حاول مجددا");
+            Logger.logSuccess("حاول مجددا", chatId);
         }
     }
 

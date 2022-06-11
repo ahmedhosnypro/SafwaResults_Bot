@@ -15,7 +15,7 @@ public class CommandProcessor extends SafwaResultsBot {
         if (messageText != null && !messageText.isBlank() && !messageText.isEmpty()) {
             if (messageText.equals("/start")) {
                 printStudyYears(chatId, "اختر الفرقة الدراسية");
-                Logger.logSuccess("اختر الفرقة الدراسية");
+                Logger.logSuccess("اختر الفرقة الدراسية" , chatId);
             } else if (messageText.startsWith("الفرقة")) {
                 addNewId(messageText, chatId);
             } else if (messageText.contains("مشكلة") || messageText.contains("مشكل") || messageText.contains("مشكله")) {
@@ -88,7 +88,7 @@ public class CommandProcessor extends SafwaResultsBot {
                     وتأكد من عدم وجود مسافات بينية زائدة
                        
                     """, chatId);
-            Logger.logSuccess("اكتب اسمك رباعيا أو بريدك الإلكتروني");
+            Logger.logSuccess("اكتب اسمك رباعيا أو بريدك الإلكتروني", chatId);
         } else {
             sendYearsWithFeedBack("حاول مجددا", chatId);
         }
@@ -112,7 +112,7 @@ public class CommandProcessor extends SafwaResultsBot {
         message.setChatId(String.valueOf(chatId));
         message.setText(messageText);
         message.setReplyMarkup(Menu.studyYearsMenu());
-        Logger.logSuccess(messageText);
+        Logger.logSuccess(messageText, chatId);
         try {
             execute(message);
         } catch (TelegramApiException e) {
@@ -164,7 +164,7 @@ public class CommandProcessor extends SafwaResultsBot {
             sendMessage(resultMessage.toString(), chatId);
             Logger.logSuccess("-----------------" +
                     messageText + "-----------------"
-                    + "\n" + resultMessage);
+                    + "\n" + resultMessage, chatId);
         } else {
             printStudyYears(chatId, """
                     اختر الفرقة الدراسية أولاً أو أرسل التالي اذا لم تظهر قائمة الفرق:

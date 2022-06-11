@@ -12,7 +12,7 @@ public class Logger {
     private static final String SUCCESS_LOG_PATH = "C:\\SafwaResults\\success.log";
     private static final String FAILURE_LOG_PATH = "C:\\SafwaResults\\fail.log";
 
-    static void logSuccess(String message) {
+    static void logSuccess(String message, long chatId) {
         File successLogFile = new File(SUCCESS_LOG_PATH);
         if (!successLogFile.exists()) {
             try {
@@ -29,7 +29,9 @@ public class Logger {
                     "--------------------\n" +
                     message + "\n--------------------------------------------------------\n\n";
             writer.println(printMessage);
-            System.out.println(printMessage);
+            System.out.println("\n--" +
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) +
+                    "-----" + chatId + "-----\n");
         } catch (IOException e) {
             System.out.println("can't find: " + SUCCESS_LOG_PATH);
         }
@@ -50,7 +52,6 @@ public class Logger {
             writer.println(message);
         } catch (IOException e) {
             System.out.println("can't find: " + FAILURE_LOG_PATH);
-            System.out.println(message);
         }
     }
 
