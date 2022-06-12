@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommandProcessor extends MyTelegramBot {
-    static final String PROBLEM_REGEX = "مشكلة|مشكل|مشكله|كيف|المساعدة|ساعدني|راسب";
+    static final String PROBLEM_REGEX = "مشكلة|مشكل|مشكله|كيف|المساعدة|ساعدني|راسب|لماذا|[?]|؟";
     public static final Pattern PROBLEM_PATTERN = Pattern.compile(PROBLEM_REGEX);
 
     void processCommand(String messageText, long chatId) {
