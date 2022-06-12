@@ -19,13 +19,7 @@ public class ResultsDataBase {
 
         LinkedHashMap<YearsSubjects, String> scores = new LinkedHashMap<>();
 
-        List<? extends YearsSubjects> subjects = Arrays.stream(FstYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
-        switch (studyYear) {
-            case SND_YEAR ->
-                    subjects = Arrays.stream(SndYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
-            case TRD_YEAR ->
-                    subjects = Arrays.stream(TrdYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
-        }
+        var subjects = listSubjects(studyYear);
 
         for (var subject : subjects) {
             var result = getResult(subject, nameOrEmail);
@@ -44,9 +38,9 @@ public class ResultsDataBase {
     }
 
     private static Pair<? extends YearsSubjects, String> getResults(YearsSubjects subject, String nameOrEmail, Connection con) {
-        String lowerCaseEmail = nameOrEmail.toLowerCase();
+        String upperCaseEmail = nameOrEmail.toUpperCase();
         String getResultsQuery = "SELECT * FROM " + subject.getEnglishName() +
-                " WHERE email LIKE '%" + nameOrEmail + "%' OR email LIKE '%" + lowerCaseEmail + "%' OR fullName LIKE '%" + nameOrEmail + "%'";
+                " WHERE  upper(email) LIKE '%" + upperCaseEmail + "%' OR fullName LIKE '%" + nameOrEmail + "%'";
         try (Statement statement = con.createStatement()) {
             var resultSet = statement.executeQuery(getResultsQuery);
             if (resultSet.next()) {
@@ -66,5 +60,47 @@ public class ResultsDataBase {
             jarParentPath = jarParentPath.replace("\\SafwaResults.exe", "");
         }
         dataSource.setUrl(JDBC_URL_PREFIX + jarParentPath + "\\" + path);
+    }
+
+    static boolean isExists(StudyYear studyYear, String nameOrEmail) {
+        setDataBaseURL(studyYear.getUrl());
+        List<? extends YearsSubjects> subjects = listSubjects(studyYear);
+        try (Connection con = dataSource.getConnection()) {
+            for (var subject : subjects) {
+                if (isExists(subject, nameOrEmail, con)) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+        return false;
+    }
+
+    private static List<? extends YearsSubjects> listSubjects(StudyYear studyYear) {
+        List<? extends YearsSubjects> subjects;
+        subjects = switch (studyYear) {
+            case SND_YEAR ->
+                    Arrays.stream(SndYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case TRD_YEAR ->
+                    Arrays.stream(TrdYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
+            default -> Arrays.stream(FstYearSubjects.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
+        };
+        return subjects;
+    }
+
+    private static boolean isExists(YearsSubjects subject, String nameOrEmail, Connection con) {
+        String upperCaseEmail = nameOrEmail.toUpperCase().trim();
+        String isExistQuery = "SELECT * FROM " + subject.getEnglishName() +
+                " WHERE  upper(email) LIKE '%" + upperCaseEmail + "%' OR fullName LIKE '%" + nameOrEmail + "%'";
+        try (Statement statement = con.createStatement()) {
+            var resultSet = statement.executeQuery(isExistQuery);
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+        return false;
     }
 }

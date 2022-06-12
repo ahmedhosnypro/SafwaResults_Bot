@@ -15,7 +15,7 @@ public class CommandProcessor extends SafwaResultsBot {
         if (messageText != null && !messageText.isBlank() && !messageText.isEmpty()) {
             if (messageText.equals("/start")) {
                 printStudyYears(chatId, "اختر الفرقة الدراسية");
-                Logger.logSuccess("اختر الفرقة الدراسية" , chatId);
+                Logger.logSuccess("اختر الفرقة الدراسية", chatId);
             } else if (messageText.startsWith("الفرقة")) {
                 addNewId(messageText, chatId);
             } else if (messageText.contains("مشكلة") || messageText.contains("مشكل") || messageText.contains("مشكله")) {
@@ -121,8 +121,11 @@ public class CommandProcessor extends SafwaResultsBot {
     }
 
     void getResults(String messageText, long chatId) {
-        if (isEmail(messageText) && isInValidEmail(messageText)) {
-            sendMessage("""
+        StudyYear studyYear = IdYearDataBase.getStudyYear(chatId);
+        if (studyYear != StudyYear.ERROR) {
+            boolean isEmail = isEmail(messageText);
+            if (isEmail && isInValidEmail(messageText)) {
+                sendMessage("""
                     يوجد خطأ بالبريد الالكتروني
                                         
                     تأكد من عدم وجود مسافات فارغة 
@@ -131,10 +134,46 @@ public class CommandProcessor extends SafwaResultsBot {
                                         
                     كذلك يجب مطابقته للبريد الموجود في الاستمارة
                     """, chatId);
-            return;
-        }
-        StudyYear studyYear = IdYearDataBase.getStudyYear(chatId);
-        if (studyYear != StudyYear.ERROR) {
+                return;
+            } else if (!isEmail) {
+                var arr = messageText.split(" ");
+                if (arr.length < 3) {
+                    sendMessage("""
+                        اكتب الاسم ثلاثيًا أو رباعيً
+                        """, chatId);
+                    return;
+                }
+
+                if (!ResultsDataBase.isExists(studyYear, messageText)) {
+                    sendMessage("""
+                        لا توجد نتيجة بهذا الاسم
+                                            
+                        تأكد من كتابة الهمزات (أءؤئ)
+                        والياء (ي ى) والتاء المربوطة (ـه ـة)
+
+                        بحيث يطابق الاسم الذي كتبته في استمارة الامتحان.
+                                            
+                        أو حاول البحث باستخدام البريد
+                                            
+                        وتاكد من اختيار الفرقة الدراسية بشكل صحيح
+                        """, chatId);
+                    return;
+                }
+            } else {
+                if (!ResultsDataBase.isExists(studyYear, messageText)) {
+                    sendMessage("""
+                        لا توجد نتيجة بهذا البريد 
+                                            
+                        تأكد من كتابة البريد بشكل صحيح وموافقته للبريد الذي سجلت به في الامتحان
+                                            
+                        أو حاول البحث باستخدام الاسم
+                                            
+                        وتاكد من اختيار الفرقة الدراسية بشكل صحيح
+                        """, chatId);
+                    return;
+                }
+            }
+
             var results = ResultsDataBase.getResults(studyYear, messageText);
             AtomicReference<Integer> totalScore = new AtomicReference<>(0);
             AtomicInteger subjectCnt = new AtomicInteger();
