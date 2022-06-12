@@ -1,19 +1,8 @@
 
 R
 "src/main/java/META-INF/MANIFEST.MF,6\3\63ef5783cbf71fdf39c1fd6ae6873fd812259930
-Q
-!src/main/java/com/safwa/Menu.java,d\8\d8dcc7284975f55d1e340b98c4f60df1a1fd65c3
-X
-(src/main/java/com/safwa/PrettyTable.java,d\8\d822c52a05b86f8018693c078db8a6f06ae444dc
-\
-,src/main/java/com/safwa/TrdYearSubjects.java,6\7\6711fd3b9cff66ae51eff44648e1d96054df6ee3
-Z
-*src/main/java/com/safwa/YearsSubjects.java,8\c\8c52b8e3648115c3fe8bfeffd3b2247fcb0b6b99
-\
-,src/main/java/com/safwa/SafwaResultsBot.java,c\1\c14bb1c8c3e9e5e87b049854d4d4be3fd0c83c08
-\
-,src/main/java/com/safwa/FstYearSubjects.java,8\8\880a239a04f753ca5fcda0f928ed516d6c9af116
-S
-#src/main/java/com/safwa/Logger.java,4\2\4278e11810cf19f2d6a52a03dafb3a4dfd8554c2
-[
-+src/main/java/com/safwa/IdYearDataBase.java,f\a\fa33efb16a4531872e1d206fa9a61498fe14370e
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+A
+system.properties,a\5\a5db35984da8ffa0e255c16a2e31ae7b26e7d222
