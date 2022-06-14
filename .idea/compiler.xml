@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="TelegramBotsMaven" />
         <module name="bot2" />
         <module name="EltafseerElnatiqBot" />
-        <module name="TelegramBotsMaven" />
+        <module name="SafwahResult_bot" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="18" />

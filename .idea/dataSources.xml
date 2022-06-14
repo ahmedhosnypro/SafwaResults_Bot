@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="sndYearResults.db" uuid="8ac0deb5-e014-4271-b30d-6281a207abcf">
+    <data-source source="LOCAL" name="TrdYearResults.db" uuid="2c412866-7760-408e-b944-2b795d42d9dd">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/resources/sndYearResults.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/target/classes/TrdYearResults.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="fstYearResults.db" uuid="3a469122-c6ad-4277-ab51-8020ef1456c0">
+    <data-source source="LOCAL" name="chatIdYears.db" uuid="79a059b8-7e58-4714-aabb-4cf9e4df8be7">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/resources/fstYearResults.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/target/classes/chatIdYears.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="TrdYearResults.db" uuid="0e588adb-636a-4c5a-b535-0952e591e137">
+    <data-source source="LOCAL" name="fstYearResults.db" uuid="ceeb5920-1b47-4c9b-b11b-10f06c665224">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/resources/TrdYearResults.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/target/classes/fstYearResults.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="identifier.sqlite" uuid="02df5d9d-1522-4c1a-b090-682fce549eee">
+    <data-source source="LOCAL" name="sndYearResults.db" uuid="463a3d0e-4c53-4f69-b7e8-1d5c42baee7c">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="chatIdYears.db" uuid="23278698-263a-4436-8d6b-88648fb1b0da">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/resources/chatIdYears.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/target/classes/sndYearResults.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
