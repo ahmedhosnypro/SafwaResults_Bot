@@ -12,6 +12,7 @@ new FormModel {
 			name: "this"
 			"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
 			"minimumSize": new java.awt.Dimension( 750, 750 )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/bot.png" )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
 				"$columnCount": 1
 				"$rowCount": 3
@@ -21,31 +22,19 @@ new FormModel {
 			} ) {
 				name: "botsPanel"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
-					"$columnCount": 2
-					"$rowCount": 2
-					"margin": new java.awt.Insets( 10, 10, 10, 10 )
+					"$columnCount": 4
+					"$rowCount": 1
+					"margin": new java.awt.Insets( 10, 10, 10, 20 )
 					"hGap": 10
 					"vGap": 10
 				} ) {
 					name: "resDirPanel"
-					"border": &LineBorder0 new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label3"
-						"text": "اختر موقع قاعدة البيانات"
-						"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
-						"horizontalAlignment": 0
-					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-						"fill": 3
-						"indent": 0
-						"colSpan": 2
-						"minimumSize": new java.awt.Dimension( 100, 50 )
-					} )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "selectResDirButton"
 						"icon": new com.jformdesigner.model.SwingIcon( 2, "Tree.closedIcon" )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "selectResDir", true ) )
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-						"row": 1
 						"hSizePolicy": 0
 						"vSizePolicy": 0
 						"anchor": 4
@@ -60,10 +49,22 @@ new FormModel {
 						"fill": 1
 						"column": 1
 						"hSizePolicy": 0
-						"row": 1
-						"maximumSize": new java.awt.Dimension( 300, 30 )
 						"vSizePolicy": 0
 						"anchor": 8
+						"minimumSize": new java.awt.Dimension( 500, 30 )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "اختر موقع قاعدة البيانات"
+						"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
+						"horizontalAlignment": 4
+					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+						"fill": 3
+						"indent": 0
+						"colSpan": 2
+						"minimumSize": new java.awt.Dimension( 100, 50 )
+						"column": 2
+						"anchor": 4
 					} )
 				}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 					"fill": 3
@@ -75,6 +76,7 @@ new FormModel {
 					"hSizePolicy": 0
 					"vSizePolicy": 0
 					"fill": 1
+					"anchor": 8
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
 					"$columnCount": 1
@@ -84,74 +86,65 @@ new FormModel {
 					"vGap": 10
 				} ) {
 					name: "botSettingsPanel"
-					"border": #LineBorder0
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "botSettingsLabel"
-						"text": "اعدادات البوت"
-					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
-						"$columnCount": 3
-						"$rowCount": 4
+						"$columnCount": 7
+						"$rowCount": 1
 						"margin": new java.awt.Insets( 10, 10, 10, 10 )
 						"hGap": 10
 						"vGap": 10
 					} ) {
 						name: "mainBotPanel"
 						"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
-						"border": #LineBorder0
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "mainBotNameLabel"
 							"text": "Main Bot Name"
-						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"anchor": 8
+						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "mainBotNameTextField"
 							"text": "SafwaResults_bot"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 1
 							"fill": 1
-							"minimumSize": new java.awt.Dimension( 50, 50 )
+							"minimumSize": new java.awt.Dimension( 50, 30 )
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "mainBotTokenLabel"
 							"text": "Main Bot Token"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-							"row": 1
+							"column": 2
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "mainBotTokenTextField"
 							"text": "5510651333:AAFnGs9PpkEX-IAaY9gleR-2P-AVonqtogs"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-							"column": 1
-							"row": 1
-							"minimumSize": new java.awt.Dimension( 50, 50 )
+							"column": 3
+							"minimumSize": new java.awt.Dimension( 50, 30 )
 						} )
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
-							"$columnCount": 2
-							"$rowCount": 1
-						} ) {
-							name: "mainBotControlPanel"
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "startMainBotButton"
-								"text": "Start Main Bot"
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startMainBot", true ) )
-							}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "stopMainBotButton"
-								"text": "Stop Main Bot"
-								"enabled": false
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopMainBot", true ) )
-							}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-								"column": 1
-							} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "startMainBotButton"
+							"text": "Start Main Bot"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startMainBot", true ) )
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-							"row": 2
-							"colSpan": 2
-							"column": 1
+							"column": 4
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "stopMainBotButton"
+							"text": "Stop Main Bot"
+							"enabled": false
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopMainBot", true ) )
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"column": 5
 						} )
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 						"row": 1
 						"vSizePolicy": 0
 						"hSizePolicy": 0
+						"minimumSize": new java.awt.Dimension( 750, 50 )
+						"anchor": 8
 					} )
 					add( new FormComponent( "javax.swing.JSeparator" ) {
 						name: "botSeparator"
@@ -162,14 +155,14 @@ new FormModel {
 						"vSizePolicy": 0
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
-						"$columnCount": 3
-						"$rowCount": 3
+						"$columnCount": 6
+						"$rowCount": 1
 						"margin": new java.awt.Insets( 10, 10, 10, 10 )
 						"hGap": 10
 						"vGap": 10
 					} ) {
 						name: "testBotPanel"
-						"border": #LineBorder0
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "testBotNameLabel"
 							"text": "Test Bot Name"
@@ -180,44 +173,35 @@ new FormModel {
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 1
 							"fill": 1
-							"minimumSize": new java.awt.Dimension( 50, 50 )
+							"minimumSize": new java.awt.Dimension( 50, 30 )
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "testBotTokenLabel"
 							"text": "Test Bot Token"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-							"row": 1
+							"column": 2
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "testBotTokenTextField"
 							"text": "5376740361:AAEsrMPqWleyGYF3r28ipJCyapQKW6YUtYk"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-							"column": 1
-							"row": 1
-							"minimumSize": new java.awt.Dimension( 50, 50 )
+							"column": 3
+							"minimumSize": new java.awt.Dimension( 50, 30 )
 						} )
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
-							"$columnCount": 2
-							"$rowCount": 1
-						} ) {
-							name: "testBotControlPanel"
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "startTestBotButton"
-								"text": "Start Test Bot"
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startTestBot", true ) )
-							}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "stopTestBotButton"
-								"text": "Stop Test Bot"
-								"enabled": false
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopTestBot", true ) )
-							}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-								"column": 1
-							} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "startTestBotButton"
+							"text": "Start Test Bot"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startTestBot", true ) )
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-							"row": 2
-							"colSpan": 2
-							"column": 1
+							"column": 4
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "stopTestBotButton"
+							"text": "Stop Test Bot"
+							"enabled": false
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopTestBot", true ) )
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"column": 5
 						} )
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 						"row": 3
@@ -238,24 +222,12 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
 				"$columnCount": 1
-				"$rowCount": 2
+				"$rowCount": 1
 				"hGap": 10
 				"vGap": 3
 			} ) {
 				name: "panel2"
 				"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "سجل عمل البرنامج"
-					"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
-					"horizontalAlignment": 0
-				}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-					"fill": 1
-					"useParentLayout": false
-					"hSizePolicy": 0
-					"anchor": 1
-					"vSizePolicy": 0
-				} )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "logScrollPanel"
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
@@ -267,7 +239,6 @@ new FormModel {
 						"margin": new java.awt.Insets( 10, 10, 10, 10 )
 					} )
 				}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-					"row": 1
 					"fill": 3
 					"anchor": 1
 				} )
@@ -279,8 +250,8 @@ new FormModel {
 				"anchor": 1
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 10, 25 )
-			"size": new java.awt.Dimension( 870, 705 )
+			"location": new java.awt.Point( 15, 25 )
+			"size": new java.awt.Dimension( 985, 705 )
 		} )
 	}
 }

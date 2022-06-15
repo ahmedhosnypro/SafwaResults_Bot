@@ -26,6 +26,11 @@
             <name>intellij</name>
             <url>https://www.jetbrains.com/intellij-repository/releases/</url>
         </repository>
+        <repository>
+            <id>ICM</id>
+            <name>ICM</name>
+            <url>https://maven.icm.edu.pl/artifactory/repo/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -96,11 +101,6 @@
             <version>2.3</version>
         </dependency>
         <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf-intellij-themes</artifactId>
-            <version>2.3</version>
-        </dependency>
-        <dependency>
             <groupId>com.formdev.flatlaf</groupId>
             <artifactId>flatlaf-core</artifactId>
             <version>0.10</version>
@@ -120,6 +120,70 @@
             <artifactId>forms_rt</artifactId>
             <version>7.0.3</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>19-ea+8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>19-ea+8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>19-ea+8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>19-ea+8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-swing -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>19-ea+8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-web -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>19-ea+8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-media -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>19-ea+8</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javafx/javafx -->
+        <dependency>
+            <groupId>javafx</groupId>
+            <artifactId>javafx</artifactId>
+            <version>2.2.7</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx</artifactId>
+            <version>19-ea+8</version>
+            <type>pom</type>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/eu.agrosense.client/util-javafx -->
+        <dependency>
+            <groupId>eu.agrosense.client</groupId>
+            <artifactId>util-javafx</artifactId>
+            <version>14.06-beta</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

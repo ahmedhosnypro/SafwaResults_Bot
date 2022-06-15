@@ -56,25 +56,30 @@ public class ResultsDataBase {
         String getResultQuery = String.format("""
                         SELECT *
                         FROM %s
-                        WHERE lower(email) LIKE '%%%s%%'
-                           OR replace(
+                        where trim(
                                       replace(
                                               replace(
                                                       replace(
                                                               replace(
-                                                                      replace(fullName, 'أ', 'ا'),
-                                                                      'إ', 'ا'),
+                                                                      replace(
+                                                                              replace(
+                                                                                      replace(
+                                                                                              replace(fullName, 'إ', 'ا'),
+                                                                                              'أ', 'ا'),
+                                                                                      'ى', 'ي'),
+                                                                              'ة', 'ه'),
+                                                                      'ؤ', 'و'),
                                                               'آ', 'ا'),
-                                                      'ؤ', 'و'),
-                                              'ي', 'ى'),
-                                      'ة', 'ه')
-                            LIKE '%%%s%%'
-                        """, subject.getEnglishName(),
-                nameOrEmail.toLowerCase(),
+                                                      '  ', ' '),
+                                              '   ', ' ')) like '%%%s%%'
+                           OR lower(email) LIKE '%%%s%%'
+                           """, subject.getEnglishName(),
                 nameOrEmail.replaceAll("[أإآ]", "ا")
                         .replaceAll("ؤ", "و")
-                        .replaceAll("ي", "ى")
-                        .replaceAll("ة", "ه"));
+                        .replaceAll("ى", "ي")
+                        .replaceAll("ة", "ه"),
+                nameOrEmail.toLowerCase()
+        );
         try (Statement statement = con.createStatement()) {
             var resultSet = statement.executeQuery(getResultQuery);
             if (resultSet.next()) {
@@ -88,7 +93,7 @@ public class ResultsDataBase {
 
     private static void setDataBaseURL(String path) {
         dataSource.setUrl(JDBC_URL_PREFIX + Main.getResourcePath() + path);
-        Logger.log("", 0,Main.getResourcePath() + Main.getResourcePath() + path);
+        Logger.log("", 0, Main.getResourcePath() + Main.getResourcePath() + path);
     }
 
     public static boolean isNotExists(StudyYear studyYear, String nameOrEmail) {
@@ -121,9 +126,33 @@ public class ResultsDataBase {
     }
 
     private static boolean isNotExists(YearsSubjects subject, String nameOrEmail, Connection con) {
-        String upperCaseEmail = nameOrEmail.toUpperCase().trim();
-        String isExistQuery = "SELECT * FROM " + subject.getEnglishName() +
-                " WHERE  upper(email) LIKE '%" + upperCaseEmail + "%' OR fullName LIKE '%" + nameOrEmail + "%'";
+        String isExistQuery = String.format("""
+                        SELECT *
+                        FROM %s
+                        where trim(
+                                      replace(
+                                              replace(
+                                                      replace(
+                                                              replace(
+                                                                      replace(
+                                                                              replace(
+                                                                                      replace(
+                                                                                              replace(fullName, 'إ', 'ا'),
+                                                                                              'أ', 'ا'),
+                                                                                      'ى', 'ي'),
+                                                                              'ة', 'ه'),
+                                                                      'ؤ', 'و'),
+                                                              'آ', 'ا'),
+                                                      '  ', ' '),
+                                              '   ', ' ')) like '%%%s%%'
+                           OR lower(email) LIKE '%%%s%%'
+                           """, subject.getEnglishName(),
+                nameOrEmail.replaceAll("[أإآ]", "ا")
+                        .replaceAll("ؤ", "و")
+                        .replaceAll("ى", "ي")
+                        .replaceAll("ة", "ه"),
+                nameOrEmail.toLowerCase()
+        );
         try (Statement statement = con.createStatement()) {
             var resultSet = statement.executeQuery(isExistQuery);
             if (resultSet.next()) {

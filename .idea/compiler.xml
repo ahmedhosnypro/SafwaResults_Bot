@@ -10,6 +10,7 @@
         <module name="bot2" />
         <module name="EltafseerElnatiqBot" />
         <module name="SafwahResult_bot" />
+        <module name="SafwaResults_Bot" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="18" />
