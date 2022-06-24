@@ -6,13 +6,14 @@ import com.safwah.study.year.StudyYear;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public abstract class MyTelegramBot extends TelegramLongPollingBot {
 
-    void start(String messageText, long chatId) {
+    void start(String messageText, long chatId, String userName) {
         inlineMarkupTitled(MessageText.START_MESSAGE.toString(), chatId);
-        Logger.log(messageText, chatId, MessageText.START_MESSAGE.name());
+        Logger.log(messageText, userName, MessageText.START_MESSAGE.name(), "info");
     }
 
     void inlineMarkupTitled(String messageText, long chatId) {
@@ -23,8 +24,7 @@ public abstract class MyTelegramBot extends TelegramLongPollingBot {
         try {
             execute(message);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            Logger.log(e.getMessage());
         }
     }
 
@@ -37,12 +37,11 @@ public abstract class MyTelegramBot extends TelegramLongPollingBot {
         try {
             execute(message);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            Logger.log(e.getMessage());
         }
     }
 
-    void addNewId(String messageText, long chatId) {
+    void addNewId(String messageText, long chatId, String username) {
         StudyYear studyYear = IdYearDataBase.getStudyYear(chatId);
 
         String message = "اكتب البريد أو الاسم للبحث عن النتيجة";
@@ -53,10 +52,22 @@ public abstract class MyTelegramBot extends TelegramLongPollingBot {
             studyYear = IdYearDataBase.getStudyYear(chatId);
             message = "تم اختيار: " + studyYear.getArabicNotation() + "\n" + message;
             sendMessage(message, chatId);
-            Logger.log(messageText, chatId, MessageText.INPUT_NAME_OR_EMAIL_INSTRUCTIONS.name());
+            Logger.log(messageText, username, MessageText.INPUT_NAME_OR_EMAIL_INSTRUCTIONS.name(), "info");
         } else {
             inlineMarkupTitled("حاول مجددا", chatId);
-            Logger.log(messageText, chatId, "SELECT_YEAR_ERROR");
+            Logger.log(messageText, username, "SELECT_YEAR_ERROR", "info");
+        }
+    }
+
+    void reply(Message replyMessage, String outputMessageText) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setReplyToMessageId(replyMessage.getMessageId());
+        sendMessage.setText(outputMessageText);
+        sendMessage.setChatId(String.valueOf(replyMessage.getChatId()));
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            Logger.log(e.getMessage());
         }
     }
 }

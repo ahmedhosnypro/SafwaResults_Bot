@@ -9,6 +9,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.safwah.Main;
 import com.safwah.bot.Bot;
 import com.safwah.bot.BotRunner;
+import com.safwah.bot.TelegramBotExecutor;
 import com.safwah.logger.Logger;
 import li.flor.nativejfilechooser.NativeJFileChooser;
 
@@ -28,6 +29,8 @@ import static java.lang.Thread.sleep;
  * @author unknown
  */
 public class MainFrame extends JFrame {
+    TelegramBotExecutor mainBot;
+    TelegramBotExecutor testBot;
     public MainFrame() {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -88,12 +91,16 @@ public class MainFrame extends JFrame {
         try {
             sleep(500);
         } catch (InterruptedException ex) {
-            Logger.log("", 0, ex.getMessage());
+            Logger.log(ex.getMessage());
         }
         testBotNameTextField.setEditable(true);
         testBotTokenTextField.setEditable(true);
         startTestBotButton.setEnabled(true);
         stopTestBotButton.setEnabled(false);
+    }
+
+    private void reply(ActionEvent e) {
+        // TODO add your code here
     }
 
     private void initComponents() {
@@ -120,9 +127,14 @@ public class MainFrame extends JFrame {
         testBotTokenTextField = new JTextField();
         startTestBotButton = new JButton();
         stopTestBotButton = new JButton();
+        splitPane1 = new JSplitPane();
         panel2 = new JPanel();
         logScrollPanel = new JScrollPane();
         logTextPane = new JTextPane();
+        panel1 = new JPanel();
+        replyButton = new JButton();
+        reactLogScrollPanel = new JScrollPane();
+        reactLogTextPane = new JTextPane();
 
         //======== this ========
         setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -328,32 +340,72 @@ public class MainFrame extends JFrame {
             GridConstraints.SIZEPOLICY_FIXED,
             null, null, null));
 
-        //======== panel2 ========
+        //======== splitPane1 ========
         {
-            panel2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-            panel2.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), 10, 3));
+            splitPane1.setDividerLocation(450);
+            splitPane1.setDividerSize(7);
+            splitPane1.setLastDividerLocation(450);
 
-            //======== logScrollPanel ========
+            //======== panel2 ========
             {
-                logScrollPanel.setBorder(null);
-                logScrollPanel.setAutoscrolls(true);
+                panel2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+                panel2.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), 10, 3));
 
-                //---- logTextPane ----
-                logTextPane.setAutoscrolls(false);
-                logTextPane.setEditable(false);
-                logTextPane.setMargin(new Insets(10, 10, 10, 10));
-                logScrollPanel.setViewportView(logTextPane);
+                //======== logScrollPanel ========
+                {
+                    logScrollPanel.setBorder(null);
+                    logScrollPanel.setAutoscrolls(true);
+
+                    //---- logTextPane ----
+                    logTextPane.setAutoscrolls(false);
+                    logTextPane.setEditable(false);
+                    logTextPane.setMargin(new Insets(10, 10, 10, 10));
+                    logScrollPanel.setViewportView(logTextPane);
+                }
+                panel2.add(logScrollPanel, new GridConstraints(0, 0, 1, 1,
+                    GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_BOTH,
+                    GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                    GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                    null, null, null));
             }
-            panel2.add(logScrollPanel, new GridConstraints(0, 0, 1, 1,
-                GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_BOTH,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
-                null, null, null));
+            splitPane1.setLeftComponent(panel2);
+
+            //======== panel1 ========
+            {
+                panel1.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), 10, 3));
+
+                //---- replyButton ----
+                replyButton.setText("text");
+                replyButton.addActionListener(e -> reply(e));
+                panel1.add(replyButton, new GridConstraints(0, 0, 1, 1,
+                    GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    null, null, null));
+
+                //======== reactLogScrollPanel ========
+                {
+                    reactLogScrollPanel.setBorder(null);
+                    reactLogScrollPanel.setAutoscrolls(true);
+
+                    //---- reactLogTextPane ----
+                    reactLogTextPane.setAutoscrolls(false);
+                    reactLogTextPane.setEditable(false);
+                    reactLogTextPane.setMargin(new Insets(10, 10, 10, 10));
+                    reactLogScrollPanel.setViewportView(reactLogTextPane);
+                }
+                panel1.add(reactLogScrollPanel, new GridConstraints(1, 0, 1, 1,
+                    GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_BOTH,
+                    GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                    GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                    null, null, null));
+            }
+            splitPane1.setRightComponent(panel1);
         }
-        contentPane.add(panel2, new GridConstraints(1, 0, 1, 1,
-            GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_BOTH,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW | GridConstraints.SIZEPOLICY_WANT_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW | GridConstraints.SIZEPOLICY_WANT_GROW,
+        contentPane.add(splitPane1, new GridConstraints(1, 0, 1, 1,
+            GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
             null, null, null));
         pack();
         setLocationRelativeTo(getOwner());
@@ -383,20 +435,30 @@ public class MainFrame extends JFrame {
     private JTextField testBotTokenTextField;
     private JButton startTestBotButton;
     private JButton stopTestBotButton;
+    private JSplitPane splitPane1;
     private JPanel panel2;
     private JScrollPane logScrollPanel;
     private JTextPane logTextPane;
+    private JPanel panel1;
+    private JButton replyButton;
+    private JScrollPane reactLogScrollPanel;
+    private JTextPane reactLogTextPane;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-    public void updateLog(String log) {
-        logTextPane.setText(logTextPane.getText() + "\n" + log);
+    public void updateLog(String log, String type) {
+        JTextPane logPane = logTextPane;
+        if (type.equals("react")) {
+            logPane = reactLogTextPane;
+        }
 
-        StyledDocument doc = logTextPane.getStyledDocument();
+        logPane.setText(logPane.getText() + "\n" + log);
+
+        StyledDocument doc = logPane.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-        logTextPane.setCaretPosition(logTextPane.getDocument().getLength());
+        logPane.setCaretPosition(logPane.getDocument().getLength());
     }
 }

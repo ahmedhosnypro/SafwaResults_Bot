@@ -28,7 +28,7 @@ public class Main {
 
     static void setLaf() {
         try {
-            UIManager.setLookAndFeel( new FlatDarkLaf());
+            UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
@@ -37,8 +37,7 @@ public class Main {
 
     public static void setResourcePath(String resourcePath) {
         Main.resourcePath = resourcePath;
-        Logger.log("", 0, resourcePath);
-        Logger.setLogLocation();
+        Logger.log(resourcePath);
         IdYearDataBase.updateSrcLocation();
     }
 

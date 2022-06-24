@@ -19,21 +19,21 @@ public class ResultFinder {
     static final String EMAIL_REGEX = "(?:[a-z\\d!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z\\d!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z\\d](?:[a-z\\d-]*[a-z\\d])?\\.)+[a-z\\d](?:[a-z\\d-]*[a-z\\d])?|\\[(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?|[a-z\\d-]*[a-z\\d]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)])";
     public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
-    static void getResults(MyTelegramBot bot, String messageText, long chatId) {
+    static void getResults(MyTelegramBot bot, String messageText, long chatId, String username) {
         StudyYear studyYear = IdYearDataBase.getStudyYear(chatId);
 
         if (studyYear == StudyYear.ERROR) {
             bot.inlineMarkupTitled(MessageText.SELECT_YEAR.toString(), chatId);
-            Logger.log(messageText, chatId, MessageText.SELECT_YEAR.name());
+            Logger.log(messageText, username, MessageText.SELECT_YEAR.name(), "normal");
             return;
         }
 
-        if (checkNameOrEmail(bot, messageText, chatId, studyYear)) {
-            getResult(bot, messageText, chatId, studyYear);
+        if (checkNameOrEmail(bot, messageText, chatId, studyYear, username)) {
+            getResult(bot, messageText, chatId, studyYear, username);
         }
     }
 
-    static void getResult(MyTelegramBot bot, String messageText, long chatId, StudyYear studyYear) {
+    static void getResult(MyTelegramBot bot, String messageText, long chatId, StudyYear studyYear, String username) {
         var results = ResultsDataBase.getResults(studyYear, messageText);
         AtomicReference<Integer> totalScore = new AtomicReference<>(0);
         AtomicInteger subjectCnt = new AtomicInteger();
@@ -65,7 +65,7 @@ public class ResultFinder {
                 .append("%").append(percent).append(" | ");
 
         bot.sendMessage(resultMessage.toString(), chatId);
-        Logger.log(messageText, chatId, resultMessage.toString());
+        Logger.log(messageText, username, "RESULTS", "normal");
     }
 
     static void beautyPrinter(YearsSubjects subject, String score, StringBuilder resultMessage) {
@@ -99,30 +99,30 @@ public class ResultFinder {
         return intScore;
     }
 
-    static boolean checkNameOrEmail(MyTelegramBot bot, String messageText, long chatId, StudyYear studyYear) {
+    static boolean checkNameOrEmail(MyTelegramBot bot, String messageText, long chatId, StudyYear studyYear, String username) {
         boolean isEmail = isEmail(messageText);
         String header = studyYear.getArabicNotation() + ":  \"" + messageText + "\"\n";
         if (isEmail && isInValidEmail(messageText)) {
             bot.sendMessage("\"" + messageText + "\"\n" + MessageText.EMAIL_ERROR, chatId);
-            Logger.log(messageText, chatId, MessageText.EMAIL_ERROR.name());
+            Logger.log(messageText, username, MessageText.EMAIL_ERROR.name(), "normal");
             return false;
         } else if (!isEmail) {
             var arr = messageText.split(" ");
             if (arr.length < 3) {
                 bot.sendMessage(header + MessageText.SHORT_NAME_ERROR, chatId);
-                Logger.log(messageText, chatId, header + MessageText.SHORT_NAME_ERROR.name());
+                Logger.log(messageText, username, header + MessageText.SHORT_NAME_ERROR.name(), "normal");
                 return false;
             }
 
             if (ResultsDataBase.isNotExists(studyYear, messageText)) {
                 bot.sendMessage(header + MessageText.NOT_FOUND_NAME_ERROR, chatId);
-                Logger.log(messageText, chatId, header + MessageText.NOT_FOUND_NAME_ERROR.name());
+                Logger.log(messageText, username, header + MessageText.NOT_FOUND_NAME_ERROR.name(), "react");
                 return false;
             }
         } else {
             if (ResultsDataBase.isNotExists(studyYear, messageText)) {
                 bot.sendMessage(header + MessageText.NOT_FOUND_EMAIL_ERROR, chatId);
-                Logger.log(messageText, chatId, header + MessageText.NOT_FOUND_EMAIL_ERROR.name());
+                Logger.log(messageText, username, header + MessageText.NOT_FOUND_EMAIL_ERROR.name(), "normal");
                 return false;
             }
         }

@@ -220,34 +220,73 @@ new FormModel {
 				"hSizePolicy": 0
 				"vSizePolicy": 0
 			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
-				"$columnCount": 1
-				"$rowCount": 1
-				"hGap": 10
-				"vGap": 3
-			} ) {
-				name: "panel2"
-				"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "logScrollPanel"
-					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"autoscrolls": true
-					add( new FormComponent( "javax.swing.JTextPane" ) {
-						name: "logTextPane"
-						"autoscrolls": false
-						"editable": false
-						"margin": new java.awt.Insets( 10, 10, 10, 10 )
+			add( new FormContainer( "javax.swing.JSplitPane", new FormLayoutManager( class javax.swing.JSplitPane ) ) {
+				name: "splitPane1"
+				"dividerLocation": 450
+				"dividerSize": 7
+				"lastDividerLocation": 450
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
+					"$columnCount": 1
+					"$rowCount": 1
+					"hGap": 10
+					"vGap": 3
+				} ) {
+					name: "panel2"
+					"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "logScrollPanel"
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"autoscrolls": true
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "logTextPane"
+							"autoscrolls": false
+							"editable": false
+							"margin": &Insets0 new java.awt.Insets( 10, 10, 10, 10 )
+						} )
+					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+						"fill": 3
+						"anchor": 1
 					} )
-				}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-					"fill": 3
-					"anchor": 1
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "left"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
+					"$columnCount": 1
+					"$rowCount": 2
+					"hGap": 10
+					"vGap": 3
+				} ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "replyButton"
+						"text": "text"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "reply", true ) )
+					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+						"hSizePolicy": 0
+						"vSizePolicy": 0
+						"anchor": 1
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "reactLogScrollPanel"
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"autoscrolls": true
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "reactLogTextPane"
+							"autoscrolls": false
+							"editable": false
+							"margin": #Insets0
+						} )
+					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+						"fill": 3
+						"anchor": 1
+						"row": 1
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "right"
 				} )
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 				"row": 1
 				"fill": 3
-				"hSizePolicy": 7
-				"vSizePolicy": 7
-				"anchor": 1
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 15, 25 )

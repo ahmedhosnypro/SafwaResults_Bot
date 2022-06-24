@@ -33,7 +33,9 @@ public class ResultsDataBase {
 
         for (var subject : subjects) {
             var result = getResult(subject, nameOrEmail);
+            if (result != null) {
             scores.put(result.getFirst(), result.getSecond());
+            }
         }
 
         return scores;
@@ -43,7 +45,8 @@ public class ResultsDataBase {
         try (Connection con = dataSource.getConnection()) {
             return getResults(subjects, nameOrEmail, con);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Logger.log(e.getMessage());
+            return null;
         }
     }
 
@@ -93,7 +96,7 @@ public class ResultsDataBase {
 
     private static void setDataBaseURL(String path) {
         dataSource.setUrl(JDBC_URL_PREFIX + Main.getResourcePath() + path);
-        Logger.log("", 0, Main.getResourcePath() + Main.getResourcePath() + path);
+        Logger.log(Main.getResourcePath() + Main.getResourcePath() + path);
     }
 
     public static boolean isNotExists(StudyYear studyYear, String nameOrEmail) {

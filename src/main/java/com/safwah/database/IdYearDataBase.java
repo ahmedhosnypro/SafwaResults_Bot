@@ -49,7 +49,7 @@ public class IdYearDataBase {
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Logger.log(e.getMessage());
             return false;
         } catch (Exception e) {
             return false;
@@ -62,7 +62,7 @@ public class IdYearDataBase {
             statement.setString(2, studyYear.toString());
             return statement.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Logger.log(e.getMessage());
             return true;
         }
     }
@@ -73,7 +73,7 @@ public class IdYearDataBase {
             statement.setString(2, String.valueOf(chatId));
             return !statement.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Logger.log(e.getMessage());
             return true;
         }
     }
@@ -89,13 +89,13 @@ public class IdYearDataBase {
                 return StudyYear.ERROR;
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Logger.log(e.getMessage());
             return StudyYear.ERROR;
         }
     }
 
     public static void updateSrcLocation() {
         dataSource.setUrl("jdbc:sqlite:" + Main.getResourcePath() + BB_NAME);
-        Logger.log("", 0,Main.getResourcePath() + BB_NAME);
+        Logger.log(Main.getResourcePath() + BB_NAME);
     }
 }

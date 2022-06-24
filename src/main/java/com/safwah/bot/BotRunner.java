@@ -31,22 +31,22 @@ public class BotRunner {
             }
         };
         // Instantiate Telegram Bots API
-        Logger.log("", 0, "--Connecting to Bot: " + bot.getBotName() + "----");
+        Logger.log("--Connecting to Bot: " + bot.getBotName() + "----");
         try {
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             var session = telegramBotsApi.registerBot(tgBot);
             if (session != null && session.isRunning()) {
-                Logger.log("", 0, "--Bot : " + bot.getBotName() + " Connected Successfully ----");
+                Logger.log(bot.getBotName() + " Connected Successfully ----");
                 sessions.put(tgBot, session);
                 Main.EXECUTOR.submit(session::start);
             }
         } catch (TelegramApiException e) {
-            Logger.log("", 0, Arrays.toString(e.getStackTrace()));
+            Logger.log(Arrays.toString(e.getStackTrace()));
         }
     }
 
     public static void stopBot(Bot bot) {
-        Logger.log("", 0, "--Disconnecting: " + bot.getBotName() + " Bot----");
+        Logger.log("--Disconnecting: " + bot.getBotName() + " Bot----");
 
         Main.EXECUTOR.submit(() -> {
             var opt = sessions.keySet().stream()
@@ -67,20 +67,26 @@ public class BotRunner {
                     }
                 }
                 opt.get().stop();
-                Logger.log("", 0, "--Bot: " + bot.getBotName() + "Disconnected Successfully ----");
+                Logger.log("--Bot: " + bot.getBotName() + "Disconnected Successfully ----");
             } else {
-                Logger.log("", 0, "-- can't stop " + bot.getBotName() + " Bot----");
+                Logger.log("-- can't stop " + bot.getBotName() + " Bot----");
             }
         });
     }
 
     static void onUpdate(TelegramBotExecutor executor, Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            Main.EXECUTOR.submit(() -> executor.processCommand(update.getMessage().getText(), update.getMessage().getChatId()));
+            Main.EXECUTOR.submit(() -> {
+                try {
+                    executor.processCommand(update.getMessage());
+                } catch (Exception e) {
+                    Logger.log(Arrays.toString(e.getStackTrace()));
+                }
+            });
         } else if (update.hasCallbackQuery()) {
             Main.EXECUTOR.submit(() -> {
                 executor.callBack(update.getCallbackQuery().getData(),
-                        update.getCallbackQuery().getMessage().getChatId());
+                        update.getCallbackQuery().getMessage().getChatId(), update.getChatJoinRequest().getUser().getUserName());
             });
         }
     }
