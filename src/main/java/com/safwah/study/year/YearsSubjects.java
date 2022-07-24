@@ -4,4 +4,5 @@ public interface YearsSubjects {
     String getArabicName();
 
     String getEnglishName();
+    String getTerm();
 }

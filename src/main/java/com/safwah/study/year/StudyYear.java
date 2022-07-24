@@ -12,11 +12,11 @@ public enum StudyYear {
 
 
     private final String arabicNotation;
-    private final String DB_NAME;
+    private final String dataBaseName;
 
     StudyYear(String arabicNotation, String url) {
         this.arabicNotation = arabicNotation;
-        this.DB_NAME = url;
+        this.dataBaseName = url;
     }
 
     public static StudyYear getByOrdinal(int ordinal) {
@@ -28,8 +28,8 @@ public enum StudyYear {
         return arabicNotation;
     }
 
-    public String getDB_NAME() {
-        return DB_NAME;
+    public String getDataBaseName() {
+        return dataBaseName;
     }
 
     public static StudyYear getByArabicNotation(String arabicNotation) {

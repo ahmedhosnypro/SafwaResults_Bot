@@ -13,8 +13,6 @@ G.idea/sonarlint/issuestore/a/5/a5db35984da8ffa0e255c16a2e31ae7b26e7d222,7\b\7b
 :
 
 .classpath,3\5\354079a72b91a4280407c16a36f47d1986fd85a5
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 V
 &src/main/java/com/safwah/bot/Menu.java,0\2\0276ab261fc4db3658a94d26cbc13da1048187f6
 U
@@ -35,9 +33,19 @@ e
 +src/main/java/com/safwah/bot/BotRunner.java,e\6\e657ccf55567e4363daf856bd25198e88d527110
 [
 +src/main/java/com/safwah/gui/MainFrame.java,4\4\442482855e06ae78f8c1a65c5df6c56809313eb7
+]
+-src/main/java/com/safwah/bot/MessageText.java,5\e\5e985c7ab85fec5c47a96495bd4563d27a41812d
+f
+6src/main/java/com/safwah/database/ResultsDataBase.java,3\a\3a5d147b5bc4a763b891b09fd297f8fc6d0fee03
 e
 5src/main/java/com/safwah/database/IdYearDataBase.java,d\b\db82ce61de3ade66d21ed2addd09a51d06893639
 f
-6src/main/java/com/safwah/database/ResultsDataBase.java,3\a\3a5d147b5bc4a763b891b09fd297f8fc6d0fee03
-]
--src/main/java/com/safwah/bot/MessageText.java,5\e\5e985c7ab85fec5c47a96495bd4563d27a41812d
+6src/main/java/com/safwah/study/year/YearsSubjects.java,f\4\f45587a29e0e97f98a3003731f304a075c28039f
+b
+2src/main/java/com/safwah/study/year/StudyYear.java,0\e\0ee2fd5aa6a84d8f41e0f39a8224138241044c55
+h
+8src/main/java/com/safwah/study/year/FstYearSubjects.java,6\3\63b9531c17f92ccee0424e09943a0100b291312e
+h
+8src/main/java/com/safwah/study/year/SndYearSubjects.java,3\c\3c20b83d50e453d6482215859037078f5a6e3704
+h
+8src/main/java/com/safwah/study/year/TrdYearSubjects.java,8\9\898756536d99138365bb16a497f25ef176406e41

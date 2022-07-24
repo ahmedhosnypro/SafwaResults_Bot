@@ -22,6 +22,7 @@ public class ResultFinder {
     static void getResults(MyTelegramBot bot, String messageText, long chatId, String username) {
         StudyYear studyYear = IdYearDataBase.getStudyYear(chatId);
 
+        // select the year
         if (studyYear == StudyYear.ERROR) {
             bot.inlineMarkupTitled(MessageText.SELECT_YEAR.toString(), chatId);
             Logger.log(messageText, username, MessageText.SELECT_YEAR.name(), "normal");
@@ -29,16 +30,24 @@ public class ResultFinder {
         }
 
         if (checkNameOrEmail(bot, messageText, chatId, studyYear, username)) {
-            getResult(bot, messageText, chatId, studyYear, username);
+            getResult(bot, messageText, chatId, studyYear, "fst", username);
+            getResult(bot, messageText, chatId, studyYear, "snd", username);
+
+
         }
     }
 
-    static void getResult(MyTelegramBot bot, String messageText, long chatId, StudyYear studyYear, String username) {
-        var results = ResultsDataBase.getResults(studyYear, messageText);
+    static void getResult(MyTelegramBot bot, String messageText, long chatId, StudyYear studyYear, String term, String username) {
+        var results = ResultsDataBase.getResults(studyYear, term, messageText);
         AtomicReference<Integer> totalScore = new AtomicReference<>(0);
         AtomicInteger subjectCnt = new AtomicInteger();
 
-        String header = studyYear.getArabicNotation() + " | الفصل الدراسي الثاني :  " + "\"" + messageText + "\"\n";
+        String header = switch (term) {
+            case "fst" -> studyYear.getArabicNotation() + " | الفصل الدراسي الأول :  " + "\"" + messageText + "\"\n";
+            case "snd" -> studyYear.getArabicNotation() + " | الفصل الدراسي الثاني :  " + "\"" + messageText + "\"\n";
+            default -> "";
+        };
+
         StringBuilder resultMessage = new StringBuilder(header);
         resultMessage.append("""
                 <pre>
@@ -51,7 +60,6 @@ public class ResultFinder {
             subjectCnt.getAndIncrement();
             beautyPrinter(subject, score, resultMessage);
         });
-
 
         resultMessage.append("</pre>\n");
 
@@ -71,11 +79,19 @@ public class ResultFinder {
     static void beautyPrinter(YearsSubjects subject, String score, StringBuilder resultMessage) {
         int intScore = 0;
         int percent = 0;
+        int fullScore = 0;
         boolean success = false;
         try {
-            intScore = intScore(score);
+            var s = score.replaceAll("\\s+", "").split("/");
+            intScore = Integer.parseInt(s[0].split("[.]")[0]);
+            fullScore = Integer.parseInt(s[1]);
 
-            percent = (intScore * 100) / 50;
+            if (intScore > 50) {
+                intScore = (int) Math.ceil(intScore / 2.0);
+                fullScore = (int) Math.ceil(fullScore / 2.0);
+            }
+
+            percent = (intScore * 100) / fullScore;
             success = percent >= 50;
         } catch (Exception ignored) {
             //ignored
@@ -95,6 +111,9 @@ public class ResultFinder {
             intScore = Integer.parseInt(s);
         } catch (Exception ignored) {
             // ignored
+        }
+        if (intScore > 50) {
+            intScore = (int) Math.ceil(intScore / 2.0);
         }
         return intScore;
     }
