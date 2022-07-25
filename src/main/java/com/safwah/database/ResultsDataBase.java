@@ -35,10 +35,23 @@ public class ResultsDataBase {
             case "fst" -> term = "1";
             case "snd" -> term = "2";
         }
+
         for (var subject : subjects) {
-            var result = getResult(subject, term, "1", nameOrEmail);
+            Pair<? extends YearsSubjects, String> result = null;
+            if (studyYear == StudyYear.FST_YEAR &&
+                    (subject.getEnglishName() + term + "_" + "1").equals("tagwid1_1")) {
+                String score = ExternalResults.getResult(nameOrEmail, 6);
+                result = new Pair<>(FstYearSubjects.TAGWID, score);
+            } else if (studyYear == StudyYear.FST_YEAR &&
+                    (subject.getEnglishName() + term + "_" + "1").equals("aqida1_1")) {
+                String score = ExternalResults.getResult(nameOrEmail, 5);
+                result = new Pair<>(FstYearSubjects.AQIDA, score);
+            } else {
+                result = getResult(subject, term, "1", nameOrEmail);
+            }
+
             if (result != null) {
-                fstAndSntStageResult(term, nameOrEmail, scores, subject, result);
+                fstAndSndStageResult(term, nameOrEmail, scores, subject, result);
             } else {
                 result = getResult(subject, term, "2", nameOrEmail);
                 if (result != null) {
@@ -50,7 +63,7 @@ public class ResultsDataBase {
         return scores;
     }
 
-    private static void fstAndSntStageResult(String term, String nameOrEmail, LinkedHashMap<YearsSubjects, String> scores, YearsSubjects subject, Pair<? extends YearsSubjects, String> result) {
+    private static void fstAndSndStageResult(String term, String nameOrEmail, LinkedHashMap<YearsSubjects, String> scores, YearsSubjects subject, Pair<? extends YearsSubjects, String> result) {
         int score = 0;
         int fullScore = 0;
         try {
@@ -58,7 +71,7 @@ public class ResultsDataBase {
             score = Integer.parseInt(s[0].split("[.]")[0]);
             fullScore = Integer.parseInt(s[1]);
         } catch (Exception e) {
-           // ignore
+            // ignore
         }
         if (score < fullScore / 2 || score == 0) {
             var sndStageResult = getResult(subject, term, "2", nameOrEmail);
@@ -77,7 +90,7 @@ public class ResultsDataBase {
                     scores.put(subject, result.getSecond());
                 }
             }
-        }else {
+        } else {
             scores.put(subject, result.getSecond());
         }
     }
@@ -126,6 +139,7 @@ public class ResultsDataBase {
                 return new Pair<>(subject, resultSet.getString("totalScore"));
             }
         } catch (SQLException e) {
+            Logger.log(e.getMessage());
             throw new RuntimeException(e);
         }
         return new Pair<>(subject, "0 / غائب");

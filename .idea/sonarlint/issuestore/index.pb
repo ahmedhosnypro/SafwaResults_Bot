@@ -21,12 +21,6 @@ Z
 *src/main/java/com/safwah/gui/MainFrame.jfd,1\d\1dff6062c0350fcc67635b29f96680bad58afcd0
 _
 /src/main/java/com/safwah/bot/MyTelegramBot.java,6\d\6d68567ffa0c60098f1fc45a938689e8427d4c3c
-^
-.src/main/java/com/safwah/bot/ResultFinder.java,3\0\3071579fa9ee9054d4cd137ad7d7c22e5f376ea0
-[
-+src/main/java/com/safwah/logger/Logger.java,1\3\13f07f333fde656d1bbd157ceae07f2449a4a4e6
-R
-"src/main/java/com/safwah/Main.java,e\0\e05773666afb5a96af6eca6ae35a4e9b2e44986e
 e
 5src/main/java/com/safwah/bot/TelegramBotExecutor.java,0\7\07a57a5e8c936cf15dea52b28075cc508d50a6c4
 [
@@ -35,12 +29,8 @@ e
 +src/main/java/com/safwah/gui/MainFrame.java,4\4\442482855e06ae78f8c1a65c5df6c56809313eb7
 ]
 -src/main/java/com/safwah/bot/MessageText.java,5\e\5e985c7ab85fec5c47a96495bd4563d27a41812d
-f
-6src/main/java/com/safwah/database/ResultsDataBase.java,3\a\3a5d147b5bc4a763b891b09fd297f8fc6d0fee03
 e
 5src/main/java/com/safwah/database/IdYearDataBase.java,d\b\db82ce61de3ade66d21ed2addd09a51d06893639
-f
-6src/main/java/com/safwah/study/year/YearsSubjects.java,f\4\f45587a29e0e97f98a3003731f304a075c28039f
 b
 2src/main/java/com/safwah/study/year/StudyYear.java,0\e\0ee2fd5aa6a84d8f41e0f39a8224138241044c55
 h

@@ -16,6 +16,16 @@
     </properties>
 
     <repositories>
+<!--        <repository>-->
+<!--            <id>ICM</id>-->
+<!--            <name>ICM</name>-->
+<!--            <url>https://maven.icm.edu.pl/artifactory/repo/</url>-->
+<!--        </repository>-->
+        <repository>
+            <id>JetBrains</id>
+            <name>JetBrains</name>
+            <url>https://dl.bintray.com/jetbrains/intellij-third-party-dependencies/</url>
+        </repository>
         <repository>
             <id>jcenter</id>
             <name>jcenter</name>
@@ -26,11 +36,8 @@
             <name>intellij</name>
             <url>https://www.jetbrains.com/intellij-repository/releases/</url>
         </repository>
-        <repository>
-            <id>ICM</id>
-            <name>ICM</name>
-            <url>https://maven.icm.edu.pl/artifactory/repo/</url>
-        </repository>
+
+
     </repositories>
 
     <dependencies>
@@ -156,21 +163,21 @@
             <version>19-ea+8</version>
         </dependency>
         <dependency>
-            <groupId>javafx</groupId>
-            <artifactId>javafx</artifactId>
-            <version>2.2.7</version>
-        </dependency>
-        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx</artifactId>
             <version>19-ea+8</version>
             <type>pom</type>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.jetbrains.intellij.platform</groupId>-->
+<!--            <artifactId>core-ui</artifactId>-->
+<!--            <version>221.6008.17</version>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>com.jetbrains.intellij.platform</groupId>
-            <artifactId>core-ui</artifactId>
-            <version>221.5787.30</version>
-            <scope>runtime</scope>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.0.6</version>
         </dependency>
     </dependencies>
     <build>
@@ -241,6 +248,24 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <source>18.0.1</source>
+                    <target>18.0.1</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                     <source>18.0.1</source>
                     <target>18.0.1</target>
                 </configuration>

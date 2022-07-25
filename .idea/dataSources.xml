@@ -29,5 +29,12 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/TrdYearResults.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="safwauni_app@localhost" uuid="81b6dd2e-2940-4a82-b904-ff9435ea0261">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://localhost:3306/safwauni_app</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 // use this to debug jar
-//java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005 bot2.jar
+//java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005 SafwaResults_Bot.jar
 public class Main {
 
     public static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
