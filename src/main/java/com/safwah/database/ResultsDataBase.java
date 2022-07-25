@@ -63,7 +63,8 @@ public class ResultsDataBase {
         return scores;
     }
 
-    private static void fstAndSndStageResult(String term, String nameOrEmail, LinkedHashMap<YearsSubjects, String> scores, YearsSubjects subject, Pair<? extends YearsSubjects, String> result) {
+    private static void fstAndSndStageResult(String term, String nameOrEmail, LinkedHashMap<YearsSubjects, String> scores,
+                                             YearsSubjects subject, Pair<? extends YearsSubjects, String> result) {
         int score = 0;
         int fullScore = 0;
         try {
@@ -78,13 +79,13 @@ public class ResultsDataBase {
             if (sndStageResult != null) {
                 int sndScore = 0;
                 try {
-                    var s = result.getSecond().replaceAll("\\s+", "").split("/");
+                    var s = sndStageResult.getSecond().replaceAll("\\s+", "").split("/");
                     sndScore = Integer.parseInt(s[0].split("[.]")[0]);
                     fullScore = Integer.parseInt(s[1]);
                 } catch (Exception e) {
                     // ignore
                 }
-                if (sndScore < score) {
+                if (sndScore > score) {
                     scores.put(subject, sndStageResult.getSecond());
                 } else {
                     scores.put(subject, result.getSecond());

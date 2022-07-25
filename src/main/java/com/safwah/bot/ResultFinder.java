@@ -32,8 +32,6 @@ public class ResultFinder {
         if (checkNameOrEmail(bot, messageText, chatId, studyYear, username)) {
             getResult(bot, messageText, chatId, studyYear, "fst", username);
             getResult(bot, messageText, chatId, studyYear, "snd", username);
-
-
         }
     }
 

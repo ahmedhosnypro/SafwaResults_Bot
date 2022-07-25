@@ -1,6 +1,7 @@
 package com.safwah.study.year;
 
 public enum FstYearSubjects implements YearsSubjects {
+
     ADAAB("صحيح الآداب الإسلامية", "adaab", "both", 50),
     AQIDA("العقيدة الإسلامية", "aqida", "both", 50),
     FIQH("الفقه", "fiqh", "both", 50),
@@ -14,7 +15,7 @@ public enum FstYearSubjects implements YearsSubjects {
     private final String arabicName;
     private final String englishName;
     private final String term;
-    private  final  int score;
+    private final int score;
 
     FstYearSubjects(String arabicName, String englishName, String term, int score) {
         this.arabicName = arabicName;

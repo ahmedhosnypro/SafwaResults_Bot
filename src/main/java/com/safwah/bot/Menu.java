@@ -22,7 +22,6 @@ public class Menu {
         }
 
         buttons.addFirst("لدي مشكلة");
-        buttons.addFirst("موعد اختبارات الإعادة");
 
         KeyboardRow keyboardRow = new KeyboardRow();
         keyboardRow.addAll(buttons);
