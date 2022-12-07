@@ -1,7 +1,7 @@
 package com.safwah;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.safwah.database.IdYearDataBase;
+import com.safwah.database.result.IdYearDataBase;
 import com.safwah.gui.MainFrame;
 import com.safwah.logger.Logger;
 
@@ -23,6 +23,7 @@ public class Main {
     public static void main(String[] args) {
         setLaf();
         mainFrame = new MainFrame();
+//        ResultsDataBase.writeUsers();
     }
 
 

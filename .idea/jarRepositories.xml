@@ -2,14 +2,14 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
-      <option name="id" value="central" />
-      <option name="name" value="Central Repository" />
-      <option name="url" value="https://repo.maven.apache.org/maven2" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="intellij" />
       <option name="name" value="intellij" />
       <option name="url" value="https://www.jetbrains.com/intellij-repository/releases/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="ICM" />
@@ -22,6 +22,11 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="JetBrains" />
+      <option name="name" value="JetBrains" />
+      <option name="url" value="https://dl.bintray.com/jetbrains/intellij-third-party-dependencies/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
@@ -29,11 +34,6 @@
     <remote-repository>
       <option name="id" value="JetBrains 3rdParty" />
       <option name="name" value="JetBrains 3rdParty" />
-      <option name="url" value="https://dl.bintray.com/jetbrains/intellij-third-party-dependencies/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="JetBrains" />
-      <option name="name" value="JetBrains" />
       <option name="url" value="https://dl.bintray.com/jetbrains/intellij-third-party-dependencies/" />
     </remote-repository>
     <remote-repository>

@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="chatIdYears.db" uuid="a20036c1-1ad0-4bdd-96e5-4395455a08a6">
+    <data-source source="LOCAL" name="chatIdYears.db" uuid="15e7a596-6e05-4700-9884-d5ef6678c121">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/chatIdYears.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="fstYearResults.db" uuid="469f16f9-9c3e-471c-8b0f-8f5715f09005">
+    <data-source source="LOCAL" name="4th_names.db" uuid="ec7c82c7-b65b-463a-ba4e-1e2f731fbec9">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/fstYearResults.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/4th_names.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="sndYearResults.db" uuid="88220552-f5aa-43be-a355-c3aed2d2e824">
+    <data-source source="LOCAL" name="trd_names.db" uuid="13554b02-dad2-4614-8193-9ba7f44feccc">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/sndYearResults.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/trd_names.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="TrdYearResults.db" uuid="22cf334b-afc6-42ed-a59d-246c82d570ad">
+    <data-source source="LOCAL" name="snd_names.db" uuid="fb20396c-d599-404e-abcc-aa2afe645588">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/TrdYearResults.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/snd_names.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="safwauni_app@localhost" uuid="81b6dd2e-2940-4a82-b904-ff9435ea0261">
-      <driver-ref>mariadb</driver-ref>
+    <data-source source="LOCAL" name="fst_names.db" uuid="1e5b1f4b-cd48-402b-80f3-3830e2885f32">
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mariadb://localhost:3306/safwauni_app</jdbc-url>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../SafwahResult_bot/resources/fst_names.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

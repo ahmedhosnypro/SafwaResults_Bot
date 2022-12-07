@@ -1,0 +1,146 @@
+
+h	java:S112Ò"FDefine and throw a dedicated exception instead of using a generic one.(ùÅ¨Œüÿÿÿÿ8·¬çâÎ0
+F
+java:S1604Ğ"(Make this anonymous inner class a lambda(ÉÄ§Ñ8º¬çâÎ0
+P
+java:S1199Ë"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199 "-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199Ö"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199„"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199‰"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199Í"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199•"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199×"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199¦"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199¾"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199«"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+P
+java:S1199Ë"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ8½¬çâÎ0
+j
+java:S3973Ñ"GUse indentation to denote the code conditionally executed by this "if".(ØÎê©ûÿÿÿÿ8¾¬çâÎ0
+~
+java:S1450÷"[Remove the "botSeparator" field and declare it as a local variable in the relevant methods.(ñ’èğûÿÿÿÿ8÷¬çâÎ0
+z
+java:S1450ÿ"\Remove the "botSeparator2" field and declare it as a local variable in the relevant methods.(Ú¿¨é8÷¬çâÎ0
+
+java:S1450ˆ"\Remove the "botSeparator3" field and declare it as a local variable in the relevant methods.(¦Œ’ÿÿÿÿÿ8÷¬çâÎ0
+z
+java:S1450€"\Remove the "botSeparator4" field and declare it as a local variable in the relevant methods.(ãôÇƒ8÷¬çâÎ0
+}
+java:S1450ï"_Remove the "botSettingsPanel" field and declare it as a local variable in the relevant methods.(Íùâ‡8÷¬çâÎ0
+v
+java:S1450é"XRemove the "botsPanel" field and declare it as a local variable in the relevant methods.(ªó¬8ø¬çâÎ0
+}
+java:S1450‚"_Remove the "codeBotNameLabel" field and declare it as a local variable in the relevant methods.(æñÓÅ8ø¬çâÎ0
+y
+java:S1450"[Remove the "codeBotPanel" field and declare it as a local variable in the relevant methods.(›ÍÚÚ8ø¬çâÎ0
+ƒ
+java:S1450„"`Remove the "codeBotTokenLabel" field and declare it as a local variable in the relevant methods.(ù€Œşÿÿÿÿ8ø¬çâÎ0
+
+java:S1450Š"cRemove the "codeTestBotNameLabel" field and declare it as a local variable in the relevant methods.(ÂöÖğ8ø¬çâÎ0
+}
+java:S1450‰"_Remove the "codeTestBotPanel" field and declare it as a local variable in the relevant methods.(Ü´Ÿ8ù¬çâÎ0
+‚
+java:S1450Œ"dRemove the "codeTestBotTokenLabel" field and declare it as a local variable in the relevant methods.(ÿœ¬É8ù¬çâÎ0
+x
+java:S1450ì"URemove the "label2" field and declare it as a local variable in the relevant methods.(äÈ„Áûÿÿÿÿ8ù¬çâÎ0
+s
+java:S1450í"URemove the "label3" field and declare it as a local variable in the relevant methods.(æøÕÄ8ù¬çâÎ0
+{
+java:S1450’"]Remove the "logScrollPanel" field and declare it as a local variable in the relevant methods.(¾æ§¾8ù¬çâÎ0
+‚
+java:S1450ñ"_Remove the "mainBotNameLabel" field and declare it as a local variable in the relevant methods.(ı«¡ùÿÿÿÿ8ù¬çâÎ0
+y
+java:S1450ğ"[Remove the "mainBotPanel" field and declare it as a local variable in the relevant methods.(ê¦ñó8ú¬çâÎ0
+~
+java:S1450ó"`Remove the "mainBotTokenLabel" field and declare it as a local variable in the relevant methods.(ÖÇƒÍ8ú¬çâÎ0
+s
+java:S1450”"URemove the "panel1" field and declare it as a local variable in the relevant methods.(–¾Ê‰8ú¬çâÎ0
+s
+java:S1450‘"URemove the "panel2" field and declare it as a local variable in the relevant methods.(›ÏÑ´8ú¬çâÎ0
+€
+java:S1450–"bRemove the "reactLogScrollPanel" field and declare it as a local variable in the relevant methods.(ÿ Œ8ú¬çâÎ0
+x
+java:S1450•"ZRemove the "replyButton" field and declare it as a local variable in the relevant methods.(‘‹ûâ8ú¬çâÎ0
+x
+java:S1450ê"ZRemove the "resDirPanel" field and declare it as a local variable in the relevant methods.(ÔŞ¥Œ8û¬çâÎ0
+
+java:S1450î"^Remove the "resDirSeparator" field and declare it as a local variable in the relevant methods.(ö‚éûÿÿÿÿ8û¬çâÎ0
+„
+java:S1450ë"aRemove the "selectResDirButton" field and declare it as a local variable in the relevant methods.(–šÈúÿÿÿÿ8û¬çâÎ0
+|
+java:S1450"YRemove the "splitPane1" field and declare it as a local variable in the relevant methods.(¢œ°¿ùÿÿÿÿ8û¬çâÎ0
+‚
+java:S1450ù"_Remove the "testBotNameLabel" field and declare it as a local variable in the relevant methods.(ˆÂ¡Òÿÿÿÿÿ8û¬çâÎ0
+~
+java:S1450ø"[Remove the "testBotPanel" field and declare it as a local variable in the relevant methods.(“öÜóûÿÿÿÿ8û¬çâÎ0
+ƒ
+java:S1450û"`Remove the "testBotTokenLabel" field and declare it as a local variable in the relevant methods.(ÿ‚…¼øÿÿÿÿ8ü¬çâÎ0
+E
+java:S1172*"(Remove this unused method parameter "e".(Õÿìª8ş¬çâÎ0
+J
+java:S1172;"(Remove this unused method parameter "e".(î‘Ç§ıÿÿÿÿ8­çâÎ0
+H
+java:S1602<",Remove useless curly braces around statement(°›ìU8­çâÎ0
+D
+java:S1172F"(Remove this unused method parameter "e".(ÚñµV8‚­çâÎ0
+D
+java:S1172N"(Remove this unused method parameter "e".(¨€¿O8ƒ­çâÎ0
+K
+java:S1172V".Remove this unused method parameter "ignored".(Àò˜8ƒ­çâÎ0
+€
+java:S2142["^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(è®ã¶øÿÿÿÿ8„­çâÎ0
+J
+java:S1172d"(Remove this unused method parameter "e".(¿°Õ£ÿÿÿÿÿ8„­çâÎ0
+O
+java:S1135e"2Complete the task associated to this TODO comment.(¿‰€ÿ8…­çâÎ0
+J
+java:S1172h"(Remove this unused method parameter "e".(üì¼ıÿÿÿÿ8…­çâÎ0
+J
+java:S1172p"(Remove this unused method parameter "e".(¡ÂÂşÿÿÿÿ8†­çâÎ0
+E
+java:S1172x"(Remove this unused method parameter "e".(©Á±ö8†­çâÎ0
+F
+java:S1172€"(Remove this unused method parameter "e".(åµôÏ8‡­çâÎ0
+F
+java:S1172ˆ"(Remove this unused method parameter "e".(ŸöŒ÷8‡­çâÎ0
+P
+java:S1135‰"2Complete the task associated to this TODO comment.(¿‰€ÿ8ˆ­çâÎ0
+K
+java:S1172Œ"(Remove this unused method parameter "e".(äÌØ“ıÿÿÿÿ8ˆ­çâÎ0
+P
+java:S1135"2Complete the task associated to this TODO comment.(¿‰€ÿ8ˆ­çâÎ0
+]
+java:S1612Ü"?Replace this lambda with method reference 'this::selectResDir'.(•Èµ©8­çâÎ0
+]
+java:S1612°"?Replace this lambda with method reference 'this::startMainBot'.(£ÀªË8‘­çâÎ0
+\
+java:S1612º">Replace this lambda with method reference 'this::stopMainBot'.(æî¡Ø8’­çâÎ0
+]
+java:S1612ó"?Replace this lambda with method reference 'this::startTestBot'.(šÉšı8“­çâÎ0
+\
+java:S1612ı">Replace this lambda with method reference 'this::stopTestBot'.(æûñ«8”­çâÎ0
+b
+java:S1612»"?Replace this lambda with method reference 'this::startCodeBot'.(ÒÒëÿÿÿÿÿ8–­çâÎ0
+a
+java:S1612Ä">Replace this lambda with method reference 'this::stopCodeBot'.(ÃÑ¤¥ùÿÿÿÿ8–­çâÎ0
+a
+java:S1612ı"CReplace this lambda with method reference 'this::startCodeTestBot'.(Úì¨İ8˜­çâÎ0
+e
+java:S1612†"BReplace this lambda with method reference 'this::stopCodeTestBot'.( òÌÎùÿÿÿÿ8˜­çâÎ0
+U
+java:S1612Ã"8Replace this lambda with method reference 'this::reply'.(†À‡Q8š­çâÎ0
+V
+java:S1144ˆ"8Remove this unused private "button2StateChanged" method.(ŸöŒ÷8­çâÎ0
+O
+java:S1144Œ",Remove this unused private "button3" method.(äÌØ“ıÿÿÿÿ8­çâÎ0

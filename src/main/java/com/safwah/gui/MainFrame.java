@@ -4,18 +4,18 @@
 
 package com.safwah.gui;
 
+import javax.swing.event.*;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.safwah.Main;
 import com.safwah.bot.Bot;
-import com.safwah.bot.BotRunner;
-import com.safwah.bot.TelegramBotExecutor;
+import com.safwah.bot.code.CodeBotRunner;
+import com.safwah.bot.result.BotRunner;
 import com.safwah.logger.Logger;
 import li.flor.nativejfilechooser.NativeJFileChooser;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -29,8 +29,6 @@ import static java.lang.Thread.sleep;
  * @author unknown
  */
 public class MainFrame extends JFrame {
-    TelegramBotExecutor mainBot;
-    TelegramBotExecutor testBot;
     public MainFrame() {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -103,8 +101,49 @@ public class MainFrame extends JFrame {
         // TODO add your code here
     }
 
+    private void startCodeBot(ActionEvent e) {
+        CodeBotRunner.runBot(new Bot(codeBotNameTextField.getText(), codeBotTokenTextField.getText()));
+        codeBotNameTextField.setEditable(false);
+        codeBotTokenTextField.setEditable(false);
+        startCodeBotButton.setEnabled(false);
+        stopCodeBotButton.setEnabled(true);
+    }
+
+    private void stopCodeBot(ActionEvent e) {
+        CodeBotRunner.stopBot(new Bot(codeBotNameTextField.getText(), codeBotTokenTextField.getText()));
+        codeBotNameTextField.setEditable(true);
+        codeBotTokenTextField.setEditable(true);
+        startCodeBotButton.setEnabled(true);
+        stopCodeBotButton.setEnabled(false);
+    }
+
+    private void startCodeTestBot(ActionEvent e) {
+        CodeBotRunner.runBot(new Bot(codeTestBotNameTextField.getText(), codeTestBotTokenTextField.getText()));
+        codeTestBotNameTextField.setEditable(false);
+        codeTestBotTokenTextField.setEditable(false);
+        startCodeTestBotButton.setEnabled(false);
+        stopCodeTestBotButton.setEnabled(true);
+    }
+
+    private void stopCodeTestBot(ActionEvent e) {
+        CodeBotRunner.stopBot(new Bot(codeTestBotNameTextField.getText(), codeTestBotTokenTextField.getText()));
+        codeTestBotNameTextField.setEditable(true);
+        codeTestBotTokenTextField.setEditable(true);
+        startCodeTestBotButton.setEnabled(true);
+        stopCodeTestBotButton.setEnabled(false);
+    }
+
+    private void button2StateChanged(ChangeEvent e) {
+        // TODO add your code here
+    }
+
+    private void button3(ActionEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - ahmed
         botsPanel = new JPanel();
         resDirPanel = new JPanel();
         selectResDirButton = new JButton();
@@ -127,6 +166,23 @@ public class MainFrame extends JFrame {
         testBotTokenTextField = new JTextField();
         startTestBotButton = new JButton();
         stopTestBotButton = new JButton();
+        botSeparator2 = new JSeparator();
+        botSeparator4 = new JSeparator();
+        codeBotPanel = new JPanel();
+        codeBotNameLabel = new JLabel();
+        codeBotNameTextField = new JTextField();
+        codeBotTokenLabel = new JLabel();
+        codeBotTokenTextField = new JTextField();
+        startCodeBotButton = new JButton();
+        stopCodeBotButton = new JButton();
+        botSeparator3 = new JSeparator();
+        codeTestBotPanel = new JPanel();
+        codeTestBotNameLabel = new JLabel();
+        codeTestBotNameTextField = new JTextField();
+        codeTestBotTokenLabel = new JLabel();
+        codeTestBotTokenTextField = new JTextField();
+        startCodeTestBotButton = new JButton();
+        stopCodeTestBotButton = new JButton();
         splitPane1 = new JSplitPane();
         panel2 = new JPanel();
         logScrollPanel = new JScrollPane();
@@ -141,10 +197,17 @@ public class MainFrame extends JFrame {
         setMinimumSize(new Dimension(750, 750));
         setIconImage(new ImageIcon(getClass().getResource("/bot.png")).getImage());
         var contentPane = getContentPane();
-        contentPane.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), 10, 10));
+        contentPane.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), 10, 10));
 
         //======== botsPanel ========
         {
+            botsPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,botsPanel. getBorder( )) ); botsPanel. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             botsPanel.setLayout(new GridLayoutManager(3, 1, new Insets(10, 10, 10, 10), 10, 10));
 
             //======== resDirPanel ========
@@ -196,7 +259,7 @@ public class MainFrame extends JFrame {
             //======== botSettingsPanel ========
             {
                 botSettingsPanel.setBorder(null);
-                botSettingsPanel.setLayout(new GridLayoutManager(4, 1, new Insets(10, 10, 10, 10), 10, 10));
+                botSettingsPanel.setLayout(new GridLayoutManager(8, 1, new Insets(10, 10, 10, 10), 10, 10));
 
                 //======== mainBotPanel ========
                 {
@@ -255,12 +318,12 @@ public class MainFrame extends JFrame {
                         GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                         null, null, null));
                 }
-                botSettingsPanel.add(mainBotPanel, new GridConstraints(1, 0, 1, 1,
+                botSettingsPanel.add(mainBotPanel, new GridConstraints(0, 0, 1, 1,
                     GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
                     GridConstraints.SIZEPOLICY_FIXED,
                     GridConstraints.SIZEPOLICY_FIXED,
                     new Dimension(750, 50), null, null));
-                botSettingsPanel.add(botSeparator, new GridConstraints(2, 0, 1, 1,
+                botSettingsPanel.add(botSeparator, new GridConstraints(1, 0, 1, 1,
                     GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
                     GridConstraints.SIZEPOLICY_FIXED,
                     GridConstraints.SIZEPOLICY_FIXED,
@@ -269,7 +332,7 @@ public class MainFrame extends JFrame {
                 //======== testBotPanel ========
                 {
                     testBotPanel.setBorder(null);
-                    testBotPanel.setLayout(new GridLayoutManager(1, 6, new Insets(10, 10, 10, 10), 10, 10));
+                    testBotPanel.setLayout(new GridLayoutManager(2, 6, new Insets(10, 10, 10, 10), 10, 10));
 
                     //---- testBotNameLabel ----
                     testBotNameLabel.setText("Test Bot Name");
@@ -322,7 +385,144 @@ public class MainFrame extends JFrame {
                         GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                         null, null, null));
                 }
-                botSettingsPanel.add(testBotPanel, new GridConstraints(3, 0, 1, 1,
+                botSettingsPanel.add(testBotPanel, new GridConstraints(2, 0, 1, 1,
+                    GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    null, null, null));
+                botSettingsPanel.add(botSeparator2, new GridConstraints(3, 0, 1, 1,
+                    GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    null, null, null));
+                botSettingsPanel.add(botSeparator4, new GridConstraints(4, 0, 1, 1,
+                    GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    null, null, null));
+
+                //======== codeBotPanel ========
+                {
+                    codeBotPanel.setBorder(null);
+                    codeBotPanel.setLayout(new GridLayoutManager(2, 6, new Insets(10, 10, 10, 10), 10, 10));
+
+                    //---- codeBotNameLabel ----
+                    codeBotNameLabel.setText("Code Bot Name");
+                    codeBotPanel.add(codeBotNameLabel, new GridConstraints(0, 0, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        null, null, null));
+
+                    //---- codeBotNameTextField ----
+                    codeBotNameTextField.setText("SafwahCode_Bot");
+                    codeBotPanel.add(codeBotNameTextField, new GridConstraints(0, 1, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        new Dimension(50, 30), null, null));
+
+                    //---- codeBotTokenLabel ----
+                    codeBotTokenLabel.setText("Code Bot Token");
+                    codeBotPanel.add(codeBotTokenLabel, new GridConstraints(0, 2, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        null, null, null));
+
+                    //---- codeBotTokenTextField ----
+                    codeBotTokenTextField.setText("5862702632:AAF2dxsSAVuZE7i1sjJ1FqCgQB-5CZgWx78");
+                    codeBotPanel.add(codeBotTokenTextField, new GridConstraints(0, 3, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        new Dimension(50, 30), null, null));
+
+                    //---- startCodeBotButton ----
+                    startCodeBotButton.setText("Start Code Bot");
+                    startCodeBotButton.addActionListener(e -> startCodeBot(e));
+                    codeBotPanel.add(startCodeBotButton, new GridConstraints(0, 4, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        null, null, null));
+
+                    //---- stopCodeBotButton ----
+                    stopCodeBotButton.setText("Stop Code Bot");
+                    stopCodeBotButton.addActionListener(e -> stopCodeBot(e));
+                    codeBotPanel.add(stopCodeBotButton, new GridConstraints(0, 5, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        null, null, null));
+                }
+                botSettingsPanel.add(codeBotPanel, new GridConstraints(5, 0, 1, 1,
+                    GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    null, null, null));
+                botSettingsPanel.add(botSeparator3, new GridConstraints(6, 0, 1, 1,
+                    GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    GridConstraints.SIZEPOLICY_FIXED,
+                    null, null, null));
+
+                //======== codeTestBotPanel ========
+                {
+                    codeTestBotPanel.setBorder(null);
+                    codeTestBotPanel.setLayout(new GridLayoutManager(2, 6, new Insets(10, 10, 10, 10), 10, 10));
+
+                    //---- codeTestBotNameLabel ----
+                    codeTestBotNameLabel.setText("Code Test Bot Name");
+                    codeTestBotPanel.add(codeTestBotNameLabel, new GridConstraints(0, 0, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        null, null, null));
+
+                    //---- codeTestBotNameTextField ----
+                    codeTestBotNameTextField.setText("SafwahCodeTest_Bot");
+                    codeTestBotPanel.add(codeTestBotNameTextField, new GridConstraints(0, 1, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        new Dimension(50, 30), null, null));
+
+                    //---- codeTestBotTokenLabel ----
+                    codeTestBotTokenLabel.setText("Code Test Bot Token");
+                    codeTestBotPanel.add(codeTestBotTokenLabel, new GridConstraints(0, 2, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        null, null, null));
+
+                    //---- codeTestBotTokenTextField ----
+                    codeTestBotTokenTextField.setText("5824154882:AAHsdn5bl7B4jCcXl20KRSw5v-7XIlcbcTI");
+                    codeTestBotPanel.add(codeTestBotTokenTextField, new GridConstraints(0, 3, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        new Dimension(50, 30), null, null));
+
+                    //---- startCodeTestBotButton ----
+                    startCodeTestBotButton.setText("Start Code Test Bot");
+                    startCodeTestBotButton.addActionListener(e -> startCodeTestBot(e));
+                    codeTestBotPanel.add(startCodeTestBotButton, new GridConstraints(0, 4, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        null, null, null));
+
+                    //---- stopCodeTestBotButton ----
+                    stopCodeTestBotButton.setText("Stop Code Test Bot");
+                    stopCodeTestBotButton.addActionListener(e -> stopCodeTestBot(e));
+                    codeTestBotPanel.add(stopCodeTestBotButton, new GridConstraints(0, 5, 1, 1,
+                        GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        null, null, null));
+                }
+                botSettingsPanel.add(codeTestBotPanel, new GridConstraints(7, 0, 1, 1,
                     GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
                     GridConstraints.SIZEPOLICY_FIXED,
                     GridConstraints.SIZEPOLICY_FIXED,
@@ -413,6 +613,7 @@ public class MainFrame extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - ahmed
     private JPanel botsPanel;
     private JPanel resDirPanel;
     private JButton selectResDirButton;
@@ -435,6 +636,23 @@ public class MainFrame extends JFrame {
     private JTextField testBotTokenTextField;
     private JButton startTestBotButton;
     private JButton stopTestBotButton;
+    private JSeparator botSeparator2;
+    private JSeparator botSeparator4;
+    private JPanel codeBotPanel;
+    private JLabel codeBotNameLabel;
+    private JTextField codeBotNameTextField;
+    private JLabel codeBotTokenLabel;
+    private JTextField codeBotTokenTextField;
+    private JButton startCodeBotButton;
+    private JButton stopCodeBotButton;
+    private JSeparator botSeparator3;
+    private JPanel codeTestBotPanel;
+    private JLabel codeTestBotNameLabel;
+    private JTextField codeTestBotNameTextField;
+    private JLabel codeTestBotTokenLabel;
+    private JTextField codeTestBotTokenTextField;
+    private JButton startCodeTestBotButton;
+    private JButton stopCodeTestBotButton;
     private JSplitPane splitPane1;
     private JPanel panel2;
     private JScrollPane logScrollPanel;
@@ -444,7 +662,6 @@ public class MainFrame extends JFrame {
     private JScrollPane reactLogScrollPanel;
     private JTextPane reactLogTextPane;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
 
     public void updateLog(String log, String type) {
         JTextPane logPane = logTextPane;
