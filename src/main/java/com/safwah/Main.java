@@ -21,7 +21,7 @@ public class Main {
 
     public static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
 
-    private static String resourcePath = "D:\\SafwahResult_bot\\resources\\";
+    private static String resourcePath = "C:\\SafwahResult_bot\\resources\\";
 
     public static final List<Bot> bots = new ArrayList<>();
     private static MainFrame mainFrame;
@@ -41,7 +41,7 @@ public class Main {
                     stopBots();
                     while (!isInternetOn()) {
                         try {
-                            Thread.sleep(3000);
+                            Thread.sleep(60000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -49,7 +49,7 @@ public class Main {
                     runBots();
                 }
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(60000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

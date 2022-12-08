@@ -127,6 +127,8 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "startMainBotButton"
 							"text": "Start Main Bot"
+							"background": new java.awt.Color( 0, 204, 204, 255 )
+							"foreground": new java.awt.Color( 0, 0, 0, 255 )
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startMainBot", true ) )
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 4
@@ -160,45 +162,46 @@ new FormModel {
 						"hGap": 10
 						"vGap": 10
 					} ) {
-						name: "testBotPanel"
+						name: "codeBotPanel"
 						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "testBotNameLabel"
-							"text": "Test Bot Name"
+							name: "codeBotNameLabel"
+							"text": "Code Bot Name"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
 						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "testBotNameTextField"
-							"text": "SafwahResultsBeta_bot"
+							name: "codeBotNameTextField"
+							"text": "SafwahCode_Bot"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 1
 							"fill": 1
 							"minimumSize": &Dimension0 new java.awt.Dimension( 50, 30 )
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "testBotTokenLabel"
-							"text": "Test Bot Token"
+							name: "codeBotTokenLabel"
+							"text": "Code Bot Token"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 2
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "testBotTokenTextField"
-							"text": "5376740361:AAEsrMPqWleyGYF3r28ipJCyapQKW6YUtYk"
+							name: "codeBotTokenTextField"
+							"text": "5862702632:AAF2dxsSAVuZE7i1sjJ1FqCgQB-5CZgWx78"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 3
 							"minimumSize": &Dimension1 new java.awt.Dimension( 50, 30 )
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "startTestBotButton"
-							"text": "Start Test Bot"
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startTestBot", true ) )
+							name: "startCodeBotButton"
+							"text": "Start Code Bot"
+							"background": new java.awt.Color( 0, 204, 204, 255 )
+							"foreground": sfield java.awt.Color black
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startCodeBot", true ) )
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 4
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "stopTestBotButton"
-							"text": "Stop Test Bot"
-							"enabled": false
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopTestBot", true ) )
+							name: "stopCodeBotButton"
+							"text": "Stop Code Bot"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopCodeBot", true ) )
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 5
 						} )
@@ -230,44 +233,45 @@ new FormModel {
 						"hGap": 10
 						"vGap": 10
 					} ) {
-						name: "codeBotPanel"
+						name: "testBotPanel"
 						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "codeBotNameLabel"
-							"text": "Code Bot Name"
+							name: "testBotNameLabel"
+							"text": "Test Bot Name"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
 						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "codeBotNameTextField"
-							"text": "SafwahCode_Bot"
+							name: "testBotNameTextField"
+							"text": "SafwahResultsBeta_bot"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 1
 							"fill": 1
 							"minimumSize": #Dimension0
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "codeBotTokenLabel"
-							"text": "Code Bot Token"
+							name: "testBotTokenLabel"
+							"text": "Test Bot Token"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 2
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "codeBotTokenTextField"
-							"text": "5862702632:AAF2dxsSAVuZE7i1sjJ1FqCgQB-5CZgWx78"
+							name: "testBotTokenTextField"
+							"text": "5376740361:AAEsrMPqWleyGYF3r28ipJCyapQKW6YUtYk"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 3
 							"minimumSize": #Dimension1
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "startCodeBotButton"
-							"text": "Start Code Bot"
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startCodeBot", true ) )
+							name: "startTestBotButton"
+							"text": "Start Test Bot"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startTestBot", true ) )
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 4
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "stopCodeBotButton"
-							"text": "Stop Code Bot"
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopCodeBot", true ) )
+							name: "stopTestBotButton"
+							"text": "Stop Test Bot"
+							"enabled": false
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopTestBot", true ) )
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 5
 						} )
@@ -418,8 +422,8 @@ new FormModel {
 				"fill": 3
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 25, 0 )
-			"size": new java.awt.Dimension( 1180, 780 )
+			"location": new java.awt.Point( 55, 0 )
+			"size": new java.awt.Dimension( 1150, 780 )
 		} )
 	}
 }
