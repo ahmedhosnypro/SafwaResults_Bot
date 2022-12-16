@@ -4,8 +4,9 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.power.PowerManagement;
 import com.safwah.bot.Bot;
 import com.safwah.bot.code.CodeBotRunner;
-import com.safwah.bot.result.BotRunner;
-import com.safwah.database.result.IdYearDataBase;
+import com.safwah.bot.result._1443.BotRunner;
+import com.safwah.bot.result._1444.BotRunner1444;
+import com.safwah.database.result._1443.IdYearDataBase;
 import com.safwah.gui.MainFrame;
 import com.safwah.logger.Logger;
 
@@ -60,20 +61,22 @@ public class Main {
 
     private static void runBots() {
         bots.stream().forEach(b -> {
-            if (b.getType().equals("resultBot")) {
-                BotRunner.runBot(b);
-            } else if (b.getType().equals("codeBot")) {
-                CodeBotRunner.runBot(b);
+            switch (b.getType()) {
+                case "resultBot" ->  BotRunner.runBot(b);
+                case "codeBot" ->  CodeBotRunner.runBot(b);
+                case "resultBot1444" -> BotRunner1444.runBot(b);
+                default -> throw new IllegalStateException("Unexpected value: " + b.getType());
             }
         });
     }
 
     private static void stopBots() {
         bots.stream().forEach(b -> {
-            if (b.getType().equals("resultBot")) {
-                BotRunner.stopBot(b, false);
-            } else if (b.getType().equals("codeBot")) {
-                CodeBotRunner.stopBot(b, false);
+            switch (b.getType()) {
+                case "resultBot" ->  BotRunner.stopBot(b, false);
+                case "codeBot" ->  CodeBotRunner.stopBot(b, false);
+                case "resultBot1444" -> BotRunner1444.stopBot(b, false);
+                default -> throw new IllegalStateException("Unexpected value: " + b.getType());
             }
         });
     }

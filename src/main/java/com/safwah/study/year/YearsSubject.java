@@ -1,6 +1,6 @@
 package com.safwah.study.year;
 
-public interface YearsSubjects {
+public interface YearsSubject {
     String getArabicName();
 
     String getEnglishName();
