@@ -128,6 +128,7 @@ public class CodeCorrector {
         // remaining characters are digits
         // and don't have invalid characters
         // then code is valid
+        code = formatCode(code);
         return code.length() == codeLength &&
                 (code.startsWith(fstCodePrefix) ||
                         code.startsWith(sndCodePrefix) ||

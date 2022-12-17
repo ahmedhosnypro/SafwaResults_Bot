@@ -80,7 +80,7 @@ new FormModel {
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
 					"$columnCount": 1
-					"$rowCount": 11
+					"$rowCount": 13
 					"margin": new java.awt.Insets( 10, 10, 10, 10 )
 					"hGap": 10
 					"vGap": 10
@@ -167,7 +167,7 @@ new FormModel {
 						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "mainBot1444NameLabel"
-							"text": "Main Bot Name"
+							"text": "Bot 1444 Name"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"anchor": 8
 						} )
@@ -181,7 +181,7 @@ new FormModel {
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "mainBot1444TokenLabel"
-							"text": "Main Bot Token"
+							"text": "Bot 1444 Token"
 						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 							"column": 2
 						} )
@@ -219,6 +219,74 @@ new FormModel {
 						name: "botSeparator5"
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 						"row": 3
+						"fill": 1
+						"hSizePolicy": 0
+						"vSizePolicy": 0
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
+						"$columnCount": 7
+						"$rowCount": 1
+						"margin": #Insets0
+						"hGap": 10
+						"vGap": 10
+					} ) {
+						name: "testBot1444Panel"
+						"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "testBot1444NameLabel"
+							"text": "Main Bot Name"
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"anchor": 8
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "testBot1444NameTextField"
+							"text": "safwa_trial_bot"
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"column": 1
+							"fill": 1
+							"minimumSize": #Dimension0
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "testBot1444TokenLabel"
+							"text": "Main Bot Token"
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"column": 2
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "testBot1444TokenTextField"
+							"text": "5933750295:AAG1WA5LMr07WgpZj1yuCYWkS0EDKPIBUEY"
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"column": 3
+							"minimumSize": #Dimension1
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "startTestBot1444Button"
+							"text": "Test Bot 1444"
+							"foreground": new java.awt.Color( 0, 0, 0, 255 )
+							"background": new java.awt.Color( 0, 204, 204, 255 )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startTestBot1444", true ) )
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"column": 4
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "stopTestBot1444Button"
+							"text": "Stop test Bot 1444"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopTestBot1444", true ) )
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"column": 6
+						} )
+					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+						"vSizePolicy": 0
+						"hSizePolicy": 0
+						"minimumSize": #Dimension2
+						"anchor": 8
+						"row": 4
+					} )
+					add( new FormComponent( "javax.swing.JSeparator" ) {
+						name: "botSeparator6"
+					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+						"row": 5
 						"fill": 1
 						"hSizePolicy": 0
 						"vSizePolicy": 0
@@ -275,14 +343,14 @@ new FormModel {
 							"column": 5
 						} )
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-						"row": 4
+						"row": 6
 						"hSizePolicy": 0
 						"vSizePolicy": 0
 					} )
 					add( new FormComponent( "javax.swing.JSeparator" ) {
 						name: "botSeparator2"
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-						"row": 5
+						"row": 7
 						"fill": 1
 						"hSizePolicy": 0
 						"vSizePolicy": 0
@@ -290,7 +358,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JSeparator" ) {
 						name: "botSeparator4"
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-						"row": 6
+						"row": 8
 						"fill": 1
 						"hSizePolicy": 0
 						"vSizePolicy": 0
@@ -345,14 +413,14 @@ new FormModel {
 							"column": 5
 						} )
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-						"row": 7
+						"row": 9
 						"hSizePolicy": 0
 						"vSizePolicy": 0
 					} )
 					add( new FormComponent( "javax.swing.JSeparator" ) {
 						name: "botSeparator3"
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-						"row": 8
+						"row": 10
 						"fill": 1
 						"hSizePolicy": 0
 						"vSizePolicy": 0
@@ -407,7 +475,7 @@ new FormModel {
 							"column": 5
 						} )
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-						"row": 9
+						"row": 11
 						"hSizePolicy": 0
 						"vSizePolicy": 0
 					} )

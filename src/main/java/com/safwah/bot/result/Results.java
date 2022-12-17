@@ -10,10 +10,10 @@ public class Results {
         boolean success = false;
         try {
             var s = score.replaceAll("\\s+", "").split("/");
-            intScore = Integer.parseInt(s[0].split("[.]")[0]);
-            fullScore = Integer.parseInt(s[1]);
+            intScore = Integer.parseInt(s[0].split("[.]")[0]) * 2;
+            fullScore = Integer.parseInt(s[1]) * 2;
 
-            if (intScore > 50) {
+            if (intScore > 100) {
                 intScore = (int) Math.ceil(intScore / 2.0);
                 fullScore = (int) Math.ceil(fullScore / 2.0);
             }

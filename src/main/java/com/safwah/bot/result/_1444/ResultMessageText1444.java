@@ -1,13 +1,18 @@
 package com.safwah.bot.result._1444;
 
 public enum ResultMessageText1444 {
-    START_MESSAGE("أدخل الرقم الجامعي"),
+    START_MESSAGE("""
+            أدخل الرقم الجامعي للحصول على نتيجتك
+            """),
     HELP("""
-            قم بملئ النموذج التالي اذا كان هناك خطأ في نتيجتك 
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXf5ruUkr6-YaOeHK4pb4h9PDsnpMLt0AgtA-K6pk9GxslRg/viewform"> نموذج مشاكل النتائج </a>
-                        
+            فضلا التأكد من أنك تستخدم الرقم الجامعي الصحيح الخاص بك أولا
             يمكنك الحصول على الرقم الجامعي من هنا
             <a href="https://t.me/SafwahCode_Bot"> بوت الرقم الجامعي </a>
+            
+أو محاولة البحث بالاسم الرباعي او البريد الذي سجل في الاختبارات            
+                        
+            قم بملئ النموذج التالي اذا كان هناك خطأ في نتيجتك 
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXf5ruUkr6-YaOeHK4pb4h9PDsnpMLt0AgtA-K6pk9GxslRg/viewform"> نموذج مشاكل النتائج </a>
             """),
 
     //    او ارسال المشكلة الى
