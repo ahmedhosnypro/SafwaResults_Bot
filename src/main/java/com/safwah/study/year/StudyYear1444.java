@@ -7,7 +7,7 @@ public enum StudyYear1444 {
     SND_YEAR("الفرقة الثانية", "1444_snd_results.db", "snd_names.db"),
     TRD_YEAR("الفرقة الثالثة", "1444_trd_results.db", "trd_names.db"),
     FTH_YEAR("الفرقة الرابعة", "1444_fth_results.db", "4th_names.db"),
-    ERROR("حدث خطأ ما", "", "");
+    ERROR("", "", "");
 
 
     private final String arabicNotation;

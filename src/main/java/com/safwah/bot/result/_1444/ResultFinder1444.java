@@ -24,20 +24,24 @@ public class ResultFinder1444 {
             codePrefix = code.substring(0, 2);
         }
 
-        StudyYear1444 studyYear = switch (codePrefix) {
-            case "AD" -> StudyYear1444.FST_YEAR;
-            case "AC" -> StudyYear1444.SND_YEAR;
-            case "AB" -> StudyYear1444.TRD_YEAR;
-            case "AA" -> StudyYear1444.FTH_YEAR;
-            default -> throw new IllegalStateException("Unexpected value: " + codePrefix);
-        };
         if (CodeCorrector.isValidCode(code)) {
+            StudyYear1444 studyYear = switch (codePrefix) {
+                case "AD" -> StudyYear1444.FST_YEAR;
+                case "AC" -> StudyYear1444.SND_YEAR;
+                case "AB" -> StudyYear1444.TRD_YEAR;
+                case "AA" -> StudyYear1444.FTH_YEAR;
+                default -> throw new IllegalStateException("Unexpected value: " + codePrefix);
+            };
             getResult(bot, studyYear, code, chatId, username);
         } else {
-            String header = studyYear.getArabicNotation() + " | الفصل الدراسي الأول :  " + "\"" + code + "\"\n";
-            bot.sendMessage(header + ResultMessageText1444.CODE_ERROR, chatId);
-            Logger.log(code, username, header + ResultMessageText1444.CODE_ERROR.name(), "normal");
+            sendBadRequest(bot, code, chatId, username, StudyYear1444.ERROR);
         }
+    }
+
+    private static void sendBadRequest(ResultBot1444 bot, String code, long chatId, String username, StudyYear1444 studyYear) {
+        String header = "\"" + code + "\"\n";
+        bot.sendMessage(header + ResultMessageText1444.CODE_ERROR, chatId);
+        Logger.log(code, username, header + ResultMessageText1444.CODE_ERROR.name(), "normal");
     }
 
 
@@ -91,14 +95,13 @@ public class ResultFinder1444 {
         });
 
 
-
         if (isMazhab && isMazhabScoreFound[0]) {
             beautyPrinter(mazhabScore.keySet().iterator().next(), mazhabScore.values().iterator().next(), resultMessage);
             resultMessage.append("</pre>\n");
         } else if (isMazhab && !isMazhabScoreFound[0]) {
             resultMessage.append("</pre>\n");
             resultMessage.append("لم يتم العثور على درجات المذهب");
-        }else{
+        } else {
             resultMessage.append("</pre>\n");
         }
 
