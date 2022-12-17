@@ -17,11 +17,7 @@ public class ResultMenu1444 {
         List<KeyboardRow> keyboardRows = new ArrayList<>();
         LinkedList<String> buttons = new LinkedList<>();
 
-        for (int i = 1; i < 4; i++) {
-            buttons.addFirst(StudyYear.getByOrdinal(i).getArabicNotation());
-        }
-
-        buttons.addFirst("لدي مشكلة");
+        buttons.addFirst("الحصول على مساعدة");
 
         KeyboardRow keyboardRow = new KeyboardRow();
         keyboardRow.addAll(buttons);

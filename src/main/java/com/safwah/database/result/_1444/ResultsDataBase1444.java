@@ -2,7 +2,6 @@ package com.safwah.database.result._1444;
 
 import com.safwah.Main;
 import com.safwah.logger.Logger;
-import com.safwah.study.year.StudyYear;
 import com.safwah.study.year.StudyYear1444;
 import com.safwah.study.year.YearsSubject;
 import kotlin.Pair;
@@ -13,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedHashMap;
 
-import static com.safwah.study.year.StudyYear.listExaminedSubjects;
+import static com.safwah.study.year.StudyYear1444.listExaminedSubjects;
 
 public class ResultsDataBase1444 {
     private ResultsDataBase1444() {
@@ -46,7 +45,7 @@ public class ResultsDataBase1444 {
         }
     }
 
-    public static LinkedHashMap<? extends YearsSubject, String> getResults(StudyYear studyYear, String code) {
+    public static LinkedHashMap<? extends YearsSubject, String> getResults(StudyYear1444 studyYear, String code) {
 
         LinkedHashMap<YearsSubject, String> scores = new LinkedHashMap<>();
 
@@ -59,7 +58,7 @@ public class ResultsDataBase1444 {
         return scores;
     }
 
-    private static Pair<? extends YearsSubject, String> getResult(StudyYear studyYear, YearsSubject subject, String code) {
+    private static Pair<? extends YearsSubject, String> getResult(StudyYear1444 studyYear, YearsSubject subject, String code) {
         Connection con = switch (studyYear) {
             case FTH_YEAR -> fthYearConnection;
             case TRD_YEAR -> trdYearConnection;

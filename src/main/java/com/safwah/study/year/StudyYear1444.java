@@ -1,8 +1,6 @@
 package com.safwah.study.year;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public enum StudyYear1444 {
     FST_YEAR("الفرقة الأولى", "1444_fst_results.db", "fst_names.db"),
@@ -42,5 +40,76 @@ public enum StudyYear1444 {
     public static StudyYear1444 getByArabicNotation(String arabicNotation) {
         Optional<StudyYear1444> opt = Arrays.stream(StudyYear1444.values()).filter(s -> Objects.equals(s.getArabicNotation(), arabicNotation)).findFirst();
         return opt.orElse(ERROR);
+    }
+
+    public static List<? extends YearsSubject> listSubjects(StudyYear studyYear) {
+        List<? extends YearsSubject> subjects;
+        subjects = switch (studyYear) {
+            case FTH_YEAR ->
+                    Arrays.stream(FthYearSubject.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case TRD_YEAR ->
+                    Arrays.stream(TrdYearSubject.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case SND_YEAR ->
+                    Arrays.stream(SndYearSubject.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
+            default -> Arrays.stream(FstYearSubject.values()).sorted(Comparator.comparing(Enum::ordinal)).toList();
+        };
+        return subjects;
+    }
+
+    public static List<? extends YearsSubject> listSubjects(StudyYear1444 studyYear, String term) {
+        List<? extends YearsSubject> subjects;
+        subjects = switch (studyYear) {
+            case FTH_YEAR -> Arrays.stream(FthYearSubject.values())
+                    .filter(subject -> subject.getTerm().equals("both") || subject.getTerm().equals(term))
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case TRD_YEAR -> Arrays.stream(TrdYearSubject.values())
+                    .filter(subject -> subject.getTerm().equals("both") || subject.getTerm().equals(term))
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case SND_YEAR -> Arrays.stream(SndYearSubject.values())
+                    .filter(subject -> subject.getTerm().equals("both") || subject.getTerm().equals(term))
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            default -> Arrays.stream(FstYearSubject.values())
+                    .filter(subject -> subject.getTerm().equals("both") || subject.getTerm().equals(term))
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+        };
+        return subjects;
+    }
+
+    public static List<? extends YearsSubject> listExaminedSubjects(StudyYear1444 studyYear) {
+        List<? extends YearsSubject> subjects;
+        subjects = switch (studyYear) {
+            case FTH_YEAR -> Arrays.stream(FthYearSubject.values())
+                    .filter(subject -> subject.isExamined())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case TRD_YEAR -> Arrays.stream(TrdYearSubject.values())
+                    .filter(subject -> subject.isExamined())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case SND_YEAR -> Arrays.stream(SndYearSubject.values())
+                    .filter(subject -> subject.isExamined())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            default -> Arrays.stream(FstYearSubject.values())
+                    .filter(subject -> subject.isExamined())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+        };
+        return subjects;
+    }
+
+    public static List<? extends YearsSubject> listNonCorrectCodeSubjects(StudyYear1444 studyYear) {
+        List<? extends YearsSubject> subjects;
+        subjects = switch (studyYear) {
+            case FTH_YEAR -> Arrays.stream(FthYearSubject.values())
+                    .filter(subject -> subject.isExamined() && !subject.isCodeCorrected())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case TRD_YEAR -> Arrays.stream(TrdYearSubject.values())
+                    .filter(subject -> subject.isExamined() && !subject.isCodeCorrected())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case SND_YEAR -> Arrays.stream(SndYearSubject.values())
+                    .filter(subject -> subject.isExamined() && !subject.isCodeCorrected())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            default -> Arrays.stream(FstYearSubject.values())
+                    .filter(subject -> subject.isExamined() && !subject.isCodeCorrected())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+        };
+        return subjects;
     }
 }

@@ -22,6 +22,8 @@ public abstract class ResultBotExecutor1444 extends ResultBot1444 {
         if (messageText != null && !messageText.isBlank() && !messageText.isEmpty()) {
             if (messageText.equals("/start")) {
                 start(messageText, chatId, userName);
+            } else if (messageText.equals("/help") || messageText.equals("الحصول على مساعدة")) {
+                sendMessage(ResultMessageText1444.HELP.toString(), chatId);
             } else {
                 String code = CodeCorrector.formatCode(messageText);
                 ResultFinder1444.getResults(this, code, chatId, userName);

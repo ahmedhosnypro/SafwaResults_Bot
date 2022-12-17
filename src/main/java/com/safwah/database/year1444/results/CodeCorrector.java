@@ -2,7 +2,7 @@ package com.safwah.database.year1444.results;
 
 import com.safwah.Main;
 import com.safwah.bot.code.CodeFinder;
-import com.safwah.study.year.StudyYear;
+import com.safwah.study.year.StudyYear1444;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
@@ -11,8 +11,8 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static com.safwah.study.year.StudyYear.*;
-import static com.safwah.study.year.StudyYear.FTH_YEAR;
+import static com.safwah.study.year.StudyYear1444.*;
+
 
 public class CodeCorrector {
     private static final Pattern INVALID_CODE_PATTERN = Pattern.compile("^([e-zE-Z])");
@@ -52,7 +52,7 @@ public class CodeCorrector {
     }
 
     public static void main(String[] args) {
-        List<StudyYear> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
+        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
 
         for (var studyYear : studyYears) {
             Connection connection = switch (studyYear) {
@@ -70,7 +70,7 @@ public class CodeCorrector {
         }
     }
 
-    private static void correctCode(Connection connection, StudyYear studyYear, String subject) {
+    private static void correctCode(Connection connection, StudyYear1444 studyYear, String subject) {
         String codeListQuery = String.format("""
                 SELECT code, fullName, email
                 FROM %s
@@ -105,7 +105,7 @@ public class CodeCorrector {
         }
     }
 
-    public static String searchCode(String email, String fullName, StudyYear year) {
+    public static String searchCode(String email, String fullName, StudyYear1444 year) {
         String foundCode = CodeFinder.getCode(fullName, year);
         if (foundCode == null || foundCode.equals("")) {
             foundCode = CodeFinder.getCode(email, year);
