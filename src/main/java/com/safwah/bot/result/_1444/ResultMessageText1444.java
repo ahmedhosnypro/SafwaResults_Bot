@@ -7,12 +7,12 @@ public enum ResultMessageText1444 {
     HELP("""
             فضلا التأكد من أنك تستخدم الرقم الجامعي الصحيح الخاص بك أولا
             يمكنك الحصول على الرقم الجامعي من هنا
-            <a href="https://t.me/SafwahCode_Bot"> بوت الرقم الجامعي </a>
+            <a href="https://t.me/SafwahCode_Bot">(اضغط هنا) بوت الرقم الجامعي </a>
             
 أو محاولة البحث بالاسم الرباعي او البريد الذي سجل في الاختبارات            
                         
             قم بملئ النموذج التالي اذا كان هناك خطأ في نتيجتك 
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXf5ruUkr6-YaOeHK4pb4h9PDsnpMLt0AgtA-K6pk9GxslRg/viewform"> نموذج مشاكل النتائج </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXf5ruUkr6-YaOeHK4pb4h9PDsnpMLt0AgtA-K6pk9GxslRg/viewform"> نموذج مشاكل النتائج (اضغط هنا) </a>
             """),
 
     //    او ارسال المشكلة الى

@@ -67,6 +67,21 @@ public class CodeCorrector {
             for (var subject : subjects) {
                 correctCode(connection, studyYear, subject.getEnglishName());
             }
+
+            //reset for bugs
+//            var correctedSubjects = listExaminedSubjects(studyYear);
+//
+//            for (var subject : correctedSubjects) {
+//                resetCorrectCode(connection, studyYear, subject.getEnglishName());
+//            }
+        }
+    }
+
+    private static void resetCorrectCode(Connection connection, StudyYear1444 studyYear, String subject) {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("UPDATE " + subject + " SET right_code = ''");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -83,7 +98,7 @@ public class CodeCorrector {
                 String resultCode = formatCode(inputCode);
 
                 if (!isValidCode(resultCode)) {
-                    String fullName = resultSet.getString("fullName").trim().replaceAll("\\s+", "");
+                    String fullName = resultSet.getString("fullName").trim();
                     String email = resultSet.getString("email").trim();
                     resultCode = searchCode(email, fullName, studyYear);
                 }
@@ -106,12 +121,15 @@ public class CodeCorrector {
     }
 
     public static String searchCode(String email, String fullName, StudyYear1444 year) {
-        String foundCode = CodeFinder.getCode(fullName, year);
-        if (foundCode == null || foundCode.equals("")) {
-            foundCode = CodeFinder.getCode(email, year);
+        String foundCode = CodeFinder.getCode(email, year);
+
+        boolean isFullName = fullName.split(" ").length > 2;
+
+        if (foundCode == null || foundCode.equals("") && isFullName) {
+            foundCode = CodeFinder.getCode(fullName.replaceAll("\\s+", ""), year);
         }
-        if (foundCode == null || foundCode.equals("")) {
-            foundCode = CodeFinder.getCode(fullName);
+        if ((foundCode == null || foundCode.equals("")) && isFullName) {
+            foundCode = CodeFinder.getCode(fullName.replaceAll("\\s+", ""));
         }
         if (foundCode == null || foundCode.equals("")) {
             foundCode = CodeFinder.getCode(email);
@@ -151,6 +169,7 @@ public class CodeCorrector {
                 .replaceAll("٨", "8")
                 .replaceAll("٩", "9")
                 .replaceAll("\\s+", "")
+                .replaceAll("\u200E", "")
                 .replaceAll("o", "0")
                 .replaceAll("O", "0");
     }

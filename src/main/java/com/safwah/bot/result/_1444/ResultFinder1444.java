@@ -19,14 +19,14 @@ public class ResultFinder1444 {
     private ResultFinder1444() {
     }
 
-    static void getResults(ResultBot1444 bot, String code, long chatId, String username) {
-        code = CodeCorrector.formatCode(code);
+    static void getResults(ResultBot1444 bot, String input, long chatId, String username) {
+        String formattedCode = CodeCorrector.formatCode(input);
         String codePrefix = "";
-        if (code.length() > 2) {
-            codePrefix = code.substring(0, 2);
+        if (formattedCode.length() > 2) {
+            codePrefix = formattedCode.substring(0, 2);
         }
 
-        if (CodeCorrector.isValidCode(code)) {
+        if (CodeCorrector.isValidCode(formattedCode)) {
             StudyYear1444 studyYear = switch (codePrefix) {
                 case "AD" -> StudyYear1444.FST_YEAR;
                 case "AC" -> StudyYear1444.SND_YEAR;
@@ -34,13 +34,13 @@ public class ResultFinder1444 {
                 case "AA" -> StudyYear1444.FTH_YEAR;
                 default -> throw new IllegalStateException("Unexpected value: " + codePrefix);
             };
-            getResult(bot, studyYear, code, chatId, username);
+            getResult(bot, studyYear, formattedCode, chatId, username);
         } else {
-            code = CodeFinder.getCode(code);
+            String code = CodeFinder.getCode(input);
             if (code != null && !code.equals("")) {
                 getResults(bot, code, chatId, username);
             } else {
-                sendBadRequest(bot, code, chatId, username, StudyYear1444.ERROR);
+                sendBadRequest(bot, input, chatId, username, StudyYear1444.ERROR);
             }
         }
     }

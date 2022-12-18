@@ -25,8 +25,7 @@ public abstract class ResultBotExecutor1444 extends ResultBot1444 {
             } else if (messageText.equals("/help") || messageText.equals("الحصول على مساعدة")) {
                 sendMessage(ResultMessageText1444.HELP.toString(), chatId);
             } else {
-                String code = CodeCorrector.formatCode(messageText);
-                ResultFinder1444.getResults(this, code, chatId, userName); // messageText = code
+                ResultFinder1444.getResults(this, messageText, chatId, userName); // messageText = code
             }
         }
     }

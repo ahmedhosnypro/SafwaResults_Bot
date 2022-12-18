@@ -1,15 +1,14 @@
 package com.safwah.study.year;
 
 public enum FstYearSubject implements YearsSubject {
-
-    ADAAB("صحيح الآداب الإسلامية", "adaab", "both", 50, false, false),
     AQIDA("العقيدة الإسلامية", "aqida", "both", 50, true, true),
-    FIQH("الفقه", "fiqh", "both", 50, false, false),
-    HADITH("الحديث", "hadith", "both", 50, true, true),
-    MOSTALH_HADITH("مصطلح الحديث", "mostalHadith", "fst", 100, false, false),
+    TAGWID("التجويد", "tagwid", "both", 50, true, true),
     NA7W("النحو", "na7w", "both", 50, true, true),
-    OSOOL("أصول الفقه", "osool", "both", 50, false, false),
-    TAGWID("التجويد", "tagwid", "both", 50, true, true);
+    HADITH("الحديث", "hadith", "both", 50, true, true),
+    OSOOL("أصول الفقه", "osool", "both", 50, true, true),
+    FIQH("الفقه", "fiqh", "both", 50, false, false),
+    ADAAB("صحيح الآداب الإسلامية", "adaab", "both", 50, false, false),
+    MOSTALH_HADITH("مصطلح الحديث", "mostalHadith", "fst", 100, false, false);
 
 
     private final String arabicName;

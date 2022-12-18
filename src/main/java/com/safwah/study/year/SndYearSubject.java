@@ -3,17 +3,20 @@ package com.safwah.study.year;
 public enum SndYearSubject implements YearsSubject {
     ADAAB("التربية والسلوك", "adaab", "both", 50, true, true),
     AQIDA("العقيدة الإسلامية", "aqida", "both", 50, true, true),
-    BALAGHA("البلاغة", "balagha", "fst", 100, false, false),
+    HISTORY("تاريخ التشريع", "history", "fst", 50, true, true),
     FIQH_HANAFY("الفقه الحنفي", "fiqhHanafy", "both", 50, true, true),
     FIQH_HANBALY("الفقه الحنبلي", "fiqhHanbaly", "both", 50, true, true),
     FIQH_MALKY("الفقه المالكي", "fiqhMalky", "both", 50, true, true),
     FIQH_SHAFEEY("الفقه الشافعي", "fiqhShafeey", "both", 50, true, true),
-    HISTORY("تاريخ التشريع", "history", "fst", 50, true, true),
-    MERATH("الميراث", "merath", "snd", 50, false, false),
-    OLOOM_QURAN("علوم القرآن", "oloomQuran", "both", 50, false, false),
-    SARF("الصرف", "sarf", "snd", 50, false, false),
+    TAFSEER("التفسير", "tafseer", "both", 50, true, true),
+    BALAGHA("البلاغة", "balagha", "fst", 100, false, false),
     SERA("السيرة", "sera", "both", 50, false, false),
-    TAFSEER("التفسير", "tafseer", "both", 50, false, false);
+    OLOOM_QURAN("علوم القرآن", "oloomQuran", "both", 50, false, false),
+    MERATH("الميراث", "merath", "snd", 50, false, false),
+
+    SARF("الصرف", "sarf", "snd", 50, false, false);
+
+
 
     private final String arabicName;
     private final String englishName;

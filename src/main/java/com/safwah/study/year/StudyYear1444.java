@@ -112,4 +112,24 @@ public enum StudyYear1444 {
         };
         return subjects;
     }
+    public static List<? extends YearsSubject> listCorrectCodeSubjects(StudyYear1444 studyYear) {
+        List<? extends YearsSubject> subjects;
+        subjects = switch (studyYear) {
+            case FTH_YEAR -> Arrays.stream(FthYearSubject.values())
+                    .filter(subject -> subject.isExamined() && subject.isCodeCorrected())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case TRD_YEAR -> Arrays.stream(TrdYearSubject.values())
+                    .filter(subject -> subject.isExamined() && subject.isCodeCorrected())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            case SND_YEAR -> Arrays.stream(SndYearSubject.values())
+                    .filter(subject -> subject.isExamined() && subject.isCodeCorrected())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+            default -> Arrays.stream(FstYearSubject.values())
+                    .filter(subject -> subject.isExamined() && subject.isCodeCorrected())
+                    .sorted(Comparator.comparing(Enum::ordinal)).toList();
+        };
+        return subjects;
+    }
+
+
 }
