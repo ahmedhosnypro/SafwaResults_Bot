@@ -7,7 +7,7 @@ public enum FstYearSubject implements YearsSubject {
     HADITH("الحديث", "hadith", "both", 50, true, true),
     OSOOL("أصول الفقه", "osool", "both", 50, true, true),
     FIQH("الفقه", "fiqh", "both", 50, false, false),
-    ADAAB("صحيح الآداب الإسلامية", "adaab", "both", 50, false, false),
+    ADAAB("الآداب الإسلامية", "adaab", "both", 50, false, false),
     MOSTALH_HADITH("مصطلح الحديث", "mostalHadith", "fst", 100, false, false);
 
 

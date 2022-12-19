@@ -3,6 +3,7 @@ package com.safwah.bot.result;
 import com.safwah.study.year.YearsSubject;
 
 public class Results {
+
     public static void beautyPrinter(YearsSubject subject, String score, StringBuilder resultMessage) {
         int intScore = 0;
         int percent = 0;
@@ -23,9 +24,15 @@ public class Results {
         } catch (Exception ignored) {
             //ignored
         }
-        resultMessage.append("").append(subject.getArabicName()).append(" | ")
-                .append(intScore).append(" | ")
-                .append("%").append(percent).append(" | ")
+        String subjectArabicName = subject.getArabicName();
+
+        int intScoreSpaces = 3 - String.valueOf(intScore).length();
+        int percentSpaces = 3 - String.valueOf(percent).length();
+
+        resultMessage.append("</pre>").append(subjectArabicName).append(":\n")
+//                append(" ".repeat(spaces))
+                .append("<pre>").append("\t | ").append(intScore).append(" ".repeat(intScoreSpaces)).append(" | ")
+                .append("%").append(percent).append(" ".repeat(percentSpaces)).append(" | ")
                 .append(success ? "ناجح" :
                         "راسب")
                 .append(" | ").append("\n\n");

@@ -130,6 +130,15 @@ public enum StudyYear1444 {
         };
         return subjects;
     }
-
+    public static int getMaxLengthOfSubjectsArabicName(StudyYear1444 studyYear1444){
+        List<? extends YearsSubject> subjects = listExaminedSubjects(studyYear1444);
+        int maxLength = 0;
+        for (YearsSubject subject : subjects) {
+            if (subject.getArabicName().length() > maxLength) {
+                maxLength = subject.getArabicName().length();
+            }
+        }
+        return maxLength;
+    }
 
 }

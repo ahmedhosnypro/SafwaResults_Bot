@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static com.safwah.bot.result.Results.beautyPrinter;
 import static com.safwah.bot.result.Results.intScore;
+import static com.safwah.study.year.StudyYear1444.getMaxLengthOfSubjectsArabicName;
 
 public class ResultFinder1444 {
 

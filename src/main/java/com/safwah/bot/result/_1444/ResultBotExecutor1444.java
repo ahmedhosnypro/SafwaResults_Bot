@@ -1,6 +1,5 @@
 package com.safwah.bot.result._1444;
 
-import com.safwah.database.year1444.results.CodeCorrector;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;
 
