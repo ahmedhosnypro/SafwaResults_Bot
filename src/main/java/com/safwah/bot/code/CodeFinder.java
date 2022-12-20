@@ -39,6 +39,10 @@ public class CodeFinder {
         return "";
     }
 
+    public static String getCodeByTryingMatchingNames(String fullName, StudyYear1444 year) {
+        return CodeDataBase.getCodeByTryingMatchingNames(fullName, year);
+    }
+
     public static String getHigherCode(String messageText, StudyYear1444 year) {
         if (checkNameOrEmail(messageText)) {
             return CodeDataBase.getHigherCode(messageText, year);

@@ -1,7 +1,8 @@
 package com.safwah.bot.result._1444;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
+
 import com.safwah.Main;
 import com.safwah.bot.code.CodeFinder;
 import com.safwah.Person;
@@ -53,7 +54,7 @@ public class CodeCorrector {
     static List<String> currentSubjectCodes = new ArrayList<>();
     static List<String> currentSubjectCorrectedCodes = new ArrayList<>();
 
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     private static final String CURRENT_SUBJECT_CODES_PATH_NAME = "D:\\13-Projects\\SafwaResults_Bot\\src\\main\\resources\\code\\repeated_codes.json";
     private static final String CURRENT_SUBJECT_CORRECTED_CODES_PATH_NAME = "D:\\13-Projects\\SafwaResults_Bot\\src\\main\\resources\\code\\repeated_corrected_codes.json";
 
@@ -84,9 +85,10 @@ public class CodeCorrector {
     public static void main(String[] args) {
         //time now var
         long startTime = System.currentTimeMillis();
-
+        boolean isReport = false;
+//        boolean isReport = true;
 //        resetCorrectCode();
-        correctCode();
+        correctCode(isReport);
 //        addColumn();
 
 
@@ -99,41 +101,7 @@ public class CodeCorrector {
 
     }
 
-    private static void addColumn() {
-        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
-        for (var studyYear : studyYears) {
-            Connection connection = getConnection(studyYear);
-            var subjects = listExaminedSubjects(studyYear);
-            for (var subject : subjects) {
-                addColumn(connection, studyYear, subject.getEnglishName(), "right_code_2");
-            }
-
-        }
-    }
-
-    private static void resetCorrectCode() {
-        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
-        for (var studyYear : studyYears) {
-            Connection connection = getConnection(studyYear);
-
-            var correctedSubjects = listExaminedSubjects(studyYear);
-            for (var subject : correctedSubjects) {
-                resetCorrectCode(connection, studyYear, subject.getEnglishName());
-            }
-        }
-    }
-
-    private static Connection getConnection(StudyYear1444 studyYear) {
-        return switch (studyYear) {
-            case FST_YEAR -> fstYearConnection;
-            case SND_YEAR -> sndYearConnection;
-            case TRD_YEAR -> trdYearConnection;
-            case FTH_YEAR -> fthYearConnection;
-            default -> throw new IllegalStateException("Unexpected value: " + studyYear);
-        };
-    }
-
-    private static void correctCode() {
+    private static void correctCode(boolean isReport) {
         List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
 
 //        List<StudyYear1444> studyYears = List.of(FST_YEAR);
@@ -152,60 +120,34 @@ public class CodeCorrector {
 //            }
 
 //            //for code correction v2
+//            var subjects = listNonCorrectCodeSubjects(studyYear);
             var subjects = listExaminedSubjects(studyYear);
             for (var subject : subjects) {
-                currentSubjectCodes = new ArrayList<>();
-                currentSubjectCorrectedCodes = new ArrayList<>();
-                repeatedCodesJson.get(studyYear.name()).put(subject.getEnglishName(), new LinkedHashMap<>());
-                repeatedCorrectedCodesJson.get(studyYear.name()).put(subject.getEnglishName(), new LinkedHashMap<>());
-                correctCode(connection, studyYear, subject.getEnglishName());
-            }
-        }
-
-        // delete non repeated codes from repeatedCodesJson
-        for (var studyYear : studyYears) {
-            for (var subject : listExaminedSubjects(studyYear)) {
-                repeatedCodesJson.get(studyYear.name()).get(subject.getEnglishName())
-                        .entrySet().removeIf(code -> code.getValue().size() == 1);
-
-                repeatedCorrectedCodesJson.get(studyYear.name()).get(subject.getEnglishName())
-                        .entrySet().removeIf(code -> code.getValue().size() == 1);
+                if (isReport) {
+                    currentSubjectCodes = new ArrayList<>();
+                    currentSubjectCorrectedCodes = new ArrayList<>();
+                    repeatedCodesJson.get(studyYear.name()).put(subject.getEnglishName(), new LinkedHashMap<>());
+                    repeatedCorrectedCodesJson.get(studyYear.name()).put(subject.getEnglishName(), new LinkedHashMap<>());
+                }
+                Main.EXECUTOR.submit(() -> {
+                    correctCode(connection, studyYear, subject.getEnglishName(), isReport);
+                });
             }
         }
 
 
-        //write to file
-        Path currentSubjectCodesPath = Paths.get(CURRENT_SUBJECT_CODES_PATH_NAME);
-        Path currentSubjectCorrectedCodesPath = Paths.get(CURRENT_SUBJECT_CORRECTED_CODES_PATH_NAME);
-        try (Writer repeatedCodesJsonWriter = Files.newBufferedWriter(currentSubjectCodesPath, StandardCharsets.UTF_8);
-             Writer repeatedCorrectedCodesJsonWriter = Files.newBufferedWriter(currentSubjectCorrectedCodesPath, StandardCharsets.UTF_8)) {
-            String repeatedCodesJsonString = gson.toJson(repeatedCodesJson);
-            String repeatedCorrectedCodesJsonString = gson.toJson(repeatedCorrectedCodesJson);
-            repeatedCodesJsonWriter.write(repeatedCodesJsonString);
-            repeatedCorrectedCodesJsonWriter.write(repeatedCorrectedCodesJsonString);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (isReport) {
+            // delete non repeated codes from repeatedCodesJson
+            deleteNonRepeatedCodes(studyYears);
+
+
+            //write to file
+            reportRepeatedCodes();
         }
+
     }
 
-    private static void addColumn(Connection connection, StudyYear1444 studyYear, String englishName, String columnName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = "ALTER TABLE " + englishName + " ADD  " + columnName + " TEXT";
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void resetCorrectCode(Connection connection, StudyYear1444 studyYear, String subject) {
-        try (Statement statement = connection.createStatement()) {
-            statement.execute("UPDATE " + subject + " SET right_code_2 = ''");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void correctCode(Connection connection, StudyYear1444 studyYear, String subject) {
+    private static void correctCode(Connection connection, StudyYear1444 studyYear, String subject, boolean isReport) {
         String codeListQuery = String.format("""
                 SELECT code, fullName, email
                 FROM %s
@@ -215,55 +157,69 @@ public class CodeCorrector {
             var resultSet = statement.executeQuery(codeListQuery);
             while (resultSet.next()) {
                 String inputCode = resultSet.getString("code");
-                String resultCode = formatCode(inputCode);
+                String inputFullName = resultSet.getString("fullName");
+
+                //debugging
+//                if (!inputFullName.equals("فيردا حنيفة رحماء ديوي ")) {
+//                    continue;
+//                }
+
+                String inputEmail = resultSet.getString("email");
+
+                Main.EXECUTOR.submit(() -> {
+                    String resultCode = formatCode(inputCode);
+                    String formattedFullName = inputFullName.trim()
+                            .replaceAll("[أإآ]", "ا")
+                            .replaceAll("ؤ", "و")
+                            .replaceAll("ى", "ي")
+                            .replaceAll("ة", "ه")
+                            .replaceAll("'", "''");
+                    String formattedEmail = inputEmail.trim()
+                            .replaceAll("'", "''");
+
+                    if (isReport) {
+                        addCodeToReport(studyYear, subject, resultCode, inputFullName, formattedEmail, currentSubjectCodes, repeatedCodesJson);
+                    }
 
 
-                String fullName = resultSet.getString("fullName").trim();
-                String email = resultSet.getString("email").trim();
+                    if (!isValidCode(resultCode)) {
+                        resultCode = searchCode(formattedEmail, formattedFullName, studyYear);
+                    } else {
+                        resultCode = validateCode(resultCode, formattedEmail, formattedFullName, studyYear);
+                    }
 
-                addCodeToReport(studyYear, subject, resultCode, fullName, email, currentSubjectCodes, repeatedCodesJson);
+
+                    if (resultCode.equals("")) {
+                        resultCode = searchCode(formattedEmail, formattedFullName, studyYear);
+                    }
+
+                    if (isReport) {
+                        addCodeToReport(studyYear, subject, resultCode, inputFullName, inputEmail, currentSubjectCorrectedCodes, repeatedCorrectedCodesJson);
+                    }
 
 
-                if (!isValidCode(resultCode)) {
-                    resultCode = searchCode(email, fullName, studyYear);
-                }
-
-                resultCode = validateCode(resultCode, email, fullName, studyYear);
-
-                if (resultCode.equals("")) {
-                    resultCode = searchCode(email, fullName, studyYear);
-                }
-
-                addCodeToReport(studyYear, subject, resultCode, fullName, email, currentSubjectCorrectedCodes, repeatedCorrectedCodesJson);
-
-                try (Statement updateStatement = connection.createStatement()) {
-                    String updateQuery = String.format("""
-                            UPDATE %s
-                            SET right_code_2 = '%s'
-                            WHERE code = '%s'
-                            """, subject, resultCode, inputCode);
-                    updateStatement.executeUpdate(updateQuery);
-                    System.out.println(studyYear + " -> " + subject + " -> inputCode: " + inputCode + " to: " + resultCode + " (name: " + fullName + ", email: " + email + ")");
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                    if (!resultCode.equals("")) {
+                        try (Statement updateStatement = connection.createStatement()) {
+                            String updateQuery = String.format("""
+                                            UPDATE %s
+                                            SET right_code_2 = '%s'
+                                            WHERE code = '%s'
+                                            and fullName = '%s'
+                                            and email = '%s'
+                                            """, subject, resultCode,
+                                    inputCode.replaceAll("'", "''"),
+                                    inputFullName.replaceAll("'", "''")
+                                    , inputEmail.replaceAll("'", "''"));
+                            updateStatement.executeUpdate(updateQuery);
+                            System.out.println(studyYear + " -> " + subject + " -> inputCode: " + inputCode + " to: " + resultCode + " (name: " + inputFullName + ", email: " + inputEmail + ")");
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    private static void addCodeToReport(StudyYear1444 studyYear, String subject, String resultCode, String fullName, String email, List<String> currentSubjectCodes, Map<String, Map<String, Map<String, List<Person>>>> repeatedCodesJson) {
-        if (resultCode.equals("")) {
-            return;
-        }
-
-        if (currentSubjectCodes.contains(resultCode)) {
-            repeatedCodesJson.get(studyYear.name()).get(subject).get(resultCode).add(new Person(fullName, email));
-        } else {
-            currentSubjectCodes.add(resultCode);
-            repeatedCodesJson.get(studyYear.name()).get(subject).put(resultCode, new ArrayList<>());
-            repeatedCodesJson.get(studyYear.name()).get(subject).get(resultCode).add(new Person(fullName, email));
         }
     }
 
@@ -285,12 +241,7 @@ public class CodeCorrector {
             return "";
         }
 
-        studentFullName = studentFullName.replaceAll("[أإآ]", "ا")
-                .replaceAll("ؤ", "و")
-                .replaceAll("ى", "ي")
-                .replaceAll("ة", "ه");
-
-        resultFullName = resultFullName.replaceAll("[أإآ]", "ا")
+        studentFullName = studentFullName.trim().replaceAll("[أإآ]", "ا")
                 .replaceAll("ؤ", "و")
                 .replaceAll("ى", "ي")
                 .replaceAll("ة", "ه");
@@ -338,21 +289,59 @@ public class CodeCorrector {
 
         boolean isFullName = fullName.split(" ").length > 2;
 
-        if (foundCode == null || foundCode.equals("") && isFullName) {
+        if (foundCode.equals("") && isFullName) {
             foundCode = CodeFinder.getCode(fullName.replaceAll("\\s+", ""), year);
         }
 
-        if ((foundCode == null || foundCode.equals("")) && isFullName) {
+        if (foundCode.equals("") && isFullName) {
+            foundCode = CodeFinder.getCodeByTryingMatchingNames(fullName, year);
+        }
+
+        if (foundCode.equals("") && isFullName) {
             foundCode = CodeFinder.getHigherCode(fullName.replaceAll("\\s+", ""), year);
         }
-        if (foundCode == null || foundCode.equals("")) {
+        if (foundCode.equals("")) {
             foundCode = CodeFinder.getHigherCode(email, year);
         }
 
-        if (foundCode == null) {
+        if (foundCode.equals("")) {
             foundCode = "";
         }
         return foundCode.toUpperCase();
+    }
+
+    private static void addColumn() {
+        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
+        for (var studyYear : studyYears) {
+            Connection connection = getConnection(studyYear);
+            var subjects = listExaminedSubjects(studyYear);
+            for (var subject : subjects) {
+                addColumn(connection, studyYear, subject.getEnglishName(), "right_code_2");
+            }
+
+        }
+    }
+
+    private static void resetCorrectCode() {
+        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
+        for (var studyYear : studyYears) {
+            Connection connection = getConnection(studyYear);
+
+            var correctedSubjects = listExaminedSubjects(studyYear);
+            for (var subject : correctedSubjects) {
+                resetCorrectCode(connection, studyYear, subject.getEnglishName());
+            }
+        }
+    }
+
+    private static Connection getConnection(StudyYear1444 studyYear) {
+        return switch (studyYear) {
+            case FST_YEAR -> fstYearConnection;
+            case SND_YEAR -> sndYearConnection;
+            case TRD_YEAR -> trdYearConnection;
+            case FTH_YEAR -> fthYearConnection;
+            default -> throw new IllegalStateException("Unexpected value: " + studyYear);
+        };
     }
 
     public static boolean isValidCode(String code) {
@@ -388,5 +377,65 @@ public class CodeCorrector {
                 .replaceAll("o", "0")
                 .replaceAll("O", "0");
         return code;
+    }
+
+
+    private static void deleteNonRepeatedCodes(List<StudyYear1444> studyYears) {
+        for (var studyYear : studyYears) {
+            for (var subject : listExaminedSubjects(studyYear)) {
+                repeatedCodesJson.get(studyYear.name()).get(subject.getEnglishName())
+                        .entrySet().removeIf(code -> code.getValue().size() == 1);
+
+                repeatedCorrectedCodesJson.get(studyYear.name()).get(subject.getEnglishName())
+                        .entrySet().removeIf(code -> code.getValue().size() == 1);
+            }
+        }
+    }
+
+    private static void reportRepeatedCodes() {
+        Path currentSubjectCodesPath = Paths.get(CURRENT_SUBJECT_CODES_PATH_NAME);
+        Path currentSubjectCorrectedCodesPath = Paths.get(CURRENT_SUBJECT_CORRECTED_CODES_PATH_NAME);
+        try (Writer repeatedCodesJsonWriter = Files.newBufferedWriter(currentSubjectCodesPath, StandardCharsets.UTF_8);
+             Writer repeatedCorrectedCodesJsonWriter = Files.newBufferedWriter(currentSubjectCorrectedCodesPath, StandardCharsets.UTF_8)) {
+            //    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//            String repeatedCodesJsonString = gson.toJson(repeatedCodesJson);
+//            String repeatedCorrectedCodesJsonString = gson.toJson(repeatedCorrectedCodesJson);
+//            repeatedCodesJsonWriter.write(repeatedCodesJsonString);
+//            repeatedCorrectedCodesJsonWriter.write(repeatedCorrectedCodesJsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static void addCodeToReport(StudyYear1444 studyYear, String subject, String resultCode, String fullName, String email, List<String> currentSubjectCodes, Map<String, Map<String, Map<String, List<Person>>>> repeatedCodesJson) {
+        if (resultCode.equals("")) {
+            return;
+        }
+
+        if (currentSubjectCodes.contains(resultCode)) {
+            repeatedCodesJson.get(studyYear.name()).get(subject).get(resultCode).add(new Person(fullName, email));
+        } else {
+            currentSubjectCodes.add(resultCode);
+            repeatedCodesJson.get(studyYear.name()).get(subject).put(resultCode, new ArrayList<>());
+            repeatedCodesJson.get(studyYear.name()).get(subject).get(resultCode).add(new Person(fullName, email));
+        }
+    }
+
+    private static void addColumn(Connection connection, StudyYear1444 studyYear, String englishName, String columnName) {
+        try (Statement statement = connection.createStatement()) {
+            String sql = "ALTER TABLE " + englishName + " ADD  " + columnName + " TEXT";
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void resetCorrectCode(Connection connection, StudyYear1444 studyYear, String subject) {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("UPDATE " + subject + " SET right_code_2 = ''");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

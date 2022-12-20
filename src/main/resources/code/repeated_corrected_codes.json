@@ -1,7 +1,263 @@
 {
-  "FST_YEAR": {},
-  "SND_YEAR": {},
-  "TRD_YEAR": {},
+  "FST_YEAR": {
+    "tagwid": {
+      "AD03011": [
+        {
+          "name": "مناير صالح عبدالله احمد",
+          "email": "manayer16@gmail.com"
+        },
+        {
+          "name": "مناير صالح عبدالله احمد",
+          "email": "manayer18y@gmail.com"
+        }
+      ],
+      "AD09694": [
+        {
+          "name": "سماح أحمد الحسيني محمد الجندي",
+          "email": "samahalhosini4@gmail.com"
+        },
+        {
+          "name": "سماح أحمد الحسيني محمد الجندي",
+          "email": "samahalhosini4@gmail.com"
+        }
+      ]
+    },
+    "aqida": {
+      "AD01290": [
+        {
+          "name": "هاروانطو بن شكرا بن سرفان",
+          "email": "hari160111@gmail.com"
+        },
+        {
+          "name": "هاروانطو بن شكرا بن سرفان",
+          "email": "hari160111@gmail.com"
+        }
+      ],
+      "AD05013": [
+        {
+          "name": "محمد جمال الدين عبد العزيز بلال",
+          "email": "mgahbelal@gmail.com"
+        },
+        {
+          "name": "محمد جمال الدين عبد العزيز بلال",
+          "email": "mgahbelal@gmail.com"
+        }
+      ],
+      "AD01266": [
+        {
+          "name": "هالة محمد سيد عبد المولي",
+          "email": "mummutter104@gmail.com"
+        },
+        {
+          "name": "هالة محمد سيد عبد المولي",
+          "email": "halamohamed1044@gmail.com"
+        }
+      ],
+      "AD18599": [
+        {
+          "name": "رضا سبتيان أرفيانشاه",
+          "email": "arviansyah238@gmail.com"
+        },
+        {
+          "name": "رضا سبتيان أرفيانشاه",
+          "email": "arviansyah238@gmail.com"
+        }
+      ],
+      "AD04648": [
+        {
+          "name": "محمد ضياء الحق حبيب الله بن محمد نور حسن",
+          "email": "ummaday@gmail.com"
+        },
+        {
+          "name": "محمد ضياء الحق بن نور سعيد عبد الله",
+          "email": "haqidhiya14@gmail.com"
+        }
+      ],
+      "AD04095": [
+        {
+          "name": "محمد وحي حدج",
+          "email": "muhammadwahyuhadju99@gmail.com"
+        },
+        {
+          "name": "محمد وحي حدج",
+          "email": "muhammadwahyuhadju99@gmail.com"
+        }
+      ],
+      "AD18555": [
+        {
+          "name": "ديدي رحمن",
+          "email": "d3d1.r4hm4n@gmail.com"
+        },
+        {
+          "name": "ديدي رحمن",
+          "email": "d3d1.r4hm4n@gmail.com"
+        }
+      ],
+      "AD20019": [
+        {
+          "name": "هدي فرغلي احمد عرابي",
+          "email": "ommhmod71@gmail.com"
+        },
+        {
+          "name": "هدى فرغلى احمد عرابى",
+          "email": "ommhmod71@gmail.com"
+        }
+      ],
+      "AD14137": [
+        {
+          "name": "أمل فوزي عمر غريب",
+          "email": "malakghorib320@gmail.com"
+        },
+        {
+          "name": "أمل فوزي عمر غريب",
+          "email": "malakghorib4@gmail.com"
+        }
+      ]
+    },
+    "na7w": {
+      "AD06798": [
+        {
+          "name": "عين الرشيدي بن ليغو بن مانونا بن موسهوان",
+          "email": "Callonimam@gmail.com"
+        },
+        {
+          "name": "عين الرشيدي بن ليغو بن مانونا بن موسهوان",
+          "email": "Callonimam@gmail.com"
+        }
+      ],
+      "AD01625": [
+        {
+          "name": "نورا متولى يونس سليمان",
+          "email": "nouramtwly@gmail.com"
+        },
+        {
+          "name": "نورا متولى يونس سليمان",
+          "email": "slymannwra46@gmail.com"
+        }
+      ]
+    },
+    "hadith": {
+      "AD01834": [
+        {
+          "name": "نهلة ثروت عبد الحق متولي",
+          "email": "nahlatharwat147@gmail.com"
+        },
+        {
+          "name": "نهلة ثروت عبد الحق متولي",
+          "email": "eltobakhmohamed@gmail.com"
+        }
+      ],
+      "AD02518": [
+        {
+          "name": "ميهوب مختار ميهوب مختار",
+          "email": "mayhoubmokhtar@gmail.com"
+        },
+        {
+          "name": "ميهوب مختار ميهوب مختار",
+          "email": "amr84.mayhoub@gmail.com"
+        }
+      ]
+    },
+    "osool": {
+      "AD20013": [
+        {
+          "name": "صديق جمعة شايخ ابو العبيدى",
+          "email": "mohamedeidmail78@gmail.com"
+        },
+        {
+          "name": "أحمد عبد اللصمد كيلانى أحمد",
+          "email": "mohamedeidmail78@gmail.com"
+        }
+      ],
+      "AD06798": [
+        {
+          "name": "عين الرشيدي بن ليغو بن مانونا بن موسهوان",
+          "email": "Callonimam@gmail.com"
+        },
+        {
+          "name": "عين الرشيدي بن ليغو بن مانونا بن موسهوان",
+          "email": "Callonimam@gmail.com"
+        }
+      ],
+      "AD04648": [
+        {
+          "name": "محمد ضياء الحق حبيب الله بن محمد نور حسن",
+          "email": "ummaday@gmail.com"
+        },
+        {
+          "name": "محمد ضياء الحق بن نور ساعد عبد الله",
+          "email": "haqidhiya14@gmail.com"
+        }
+      ]
+    }
+  },
+  "SND_YEAR": {
+    "adaab": {},
+    "aqida": {},
+    "history": {},
+    "fiqhHanafy": {},
+    "fiqhHanbaly": {},
+    "fiqhMalky": {},
+    "fiqhShafeey": {},
+    "tafseer": {}
+  },
+  "TRD_YEAR": {
+    "adaab": {},
+    "aqida": {
+      "AB00755": [
+        {
+          "name": "أبوبكر ابن إبراهيم به",
+          "email": "aboubacarlinsan@gmail.com"
+        },
+        {
+          "name": "أبوبكر ابن إبراهيم باه",
+          "email": "aboubacarlinsan@gmail.com"
+        }
+      ]
+    },
+    "fiqh": {
+      "AB00832": [
+        {
+          "name": "محمود حسنى محمد عبد الغنى",
+          "email": "mahmoudhosny2000@yahoo.com"
+        },
+        {
+          "name": "محمود حسنى محمد عبد الغنى",
+          "email": "mahmoudhosny2000@yahoo.com"
+        }
+      ],
+      "AB01517": [
+        {
+          "name": "القطب متولي محمد القطب",
+          "email": "elkotb.2971915@t12.moe.edu.eg"
+        },
+        {
+          "name": "القطب متولي محمد القطب",
+          "email": "2971915@sharkia3.moe.edu.eg"
+        }
+      ]
+    },
+    "fiqhHanafy": {},
+    "fiqhHanbaly": {},
+    "fiqhMalky": {},
+    "fiqhShafeey": {},
+    "mostalhHadith": {
+      "AB01242": [
+        {
+          "name": "ميليا ليستاري سوباغيو",
+          "email": "ummuabdullahhisyam@gmail.com"
+        },
+        {
+          "name": "ميليا ليستاري سوباغيو",
+          "email": "ummuabdullahali@gmail.com"
+        },
+        {
+          "name": "ميليا ليستاري سوباغيو",
+          "email": "mellialesthari509@gmail.com"
+        }
+      ]
+    }
+  },
   "FTH_YEAR": {
     "adaab": {},
     "aqida": {

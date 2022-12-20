@@ -9,7 +9,7 @@ public enum SndYearSubject implements YearsSubject {
     FIQH_MALKY("الفقه المالكي", "fiqhMalky", "both", 50, true, true),
     FIQH_SHAFEEY("الفقه الشافعي", "fiqhShafeey", "both", 50, true, true),
     TAFSEER("التفسير", "tafseer", "both", 50, true, true),
-    BALAGHA("البلاغة", "balagha", "fst", 100, false, false),
+    BALAGHA("البلاغة", "balagha", "fst", 100, true, true),
     SERA("السيرة", "sera", "both", 50, false, false),
     OLOOM_QURAN("علوم القرآن", "oloomQuran", "both", 50, false, false),
     MERATH("الميراث", "merath", "snd", 50, false, false),

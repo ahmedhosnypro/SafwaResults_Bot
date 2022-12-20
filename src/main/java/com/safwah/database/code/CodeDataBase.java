@@ -9,6 +9,8 @@ import org.sqlite.SQLiteDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 
 public class CodeDataBase {
     private CodeDataBase() {
@@ -58,28 +60,31 @@ public class CodeDataBase {
         return getCode(year, nameOrEmail);
     }
 
+    public static String getCodeByTryingMatchingNames(String fullName, StudyYear1444 year) {
+        return getCodeByTryingMatchingNames(year, fullName);
+    }
 
     public static String getHigherCode(String nameOrEmail, StudyYear1444 year) {
         return switch (year) {
             case FST_YEAR -> {
                 String code = getCode(StudyYear1444.SND_YEAR, nameOrEmail);
-                if (code == null) {
+                if (code.equals("")) {
                     code = getCode(StudyYear1444.TRD_YEAR, nameOrEmail);
                 }
-                if (code == null) {
+                if (code.equals("")) {
                     code = getCode(StudyYear1444.FTH_YEAR, nameOrEmail);
                 }
                 yield code;
             }
             case SND_YEAR -> {
                 String code = getCode(StudyYear1444.TRD_YEAR, nameOrEmail);
-                if (code == null) {
+                if (code.equals("")) {
                     code = getCode(StudyYear1444.FTH_YEAR, nameOrEmail);
                 }
                 yield code;
             }
             case TRD_YEAR, FTH_YEAR -> getCode(StudyYear1444.FTH_YEAR, nameOrEmail);
-            case ERROR -> null;
+            case ERROR -> "";
         };
     }
 
@@ -95,6 +100,16 @@ public class CodeDataBase {
             default -> fstYearConnection;
         };
         return getCode(nameOrEmail, con);
+    }
+
+    private static String getCodeByTryingMatchingNames(StudyYear1444 studyYear, String fullName) {
+        Connection con = switch (studyYear) {
+            case SND_YEAR -> sndYearConnection;
+            case TRD_YEAR -> trdYearConnection;
+            case FTH_YEAR -> _4thYearConnection;
+            default -> fstYearConnection;
+        };
+        return getCodeByTryingMatchingNames(fullName, con);
     }
 
     private static Student getStudent(StudyYear1444 studyYear, String resultCode) {
@@ -130,6 +145,58 @@ public class CodeDataBase {
         return null;
     }
 
+    private static String getCodeByTryingMatchingNames(String resultFullName, Connection con) {
+        String getResultQuery = """
+                SELECT name, code
+                FROM users
+                   """;
+        try (Statement statement = con.createStatement()) {
+            var resultSet = statement.executeQuery(getResultQuery);
+            while (resultSet.next()) {
+                String studentFullName = resultSet.getString("name");
+                String code = resultSet.getString("code");
+
+                studentFullName = studentFullName.replaceAll("[أإآ]", "ا")
+                        .replaceAll("ؤ", "و")
+                        .replaceAll("ى", "ي")
+                        .replaceAll("ة", "ه");
+
+
+                LinkedHashSet<String> studentFullNameSet = new LinkedHashSet<>(Arrays.asList(studentFullName.split(" ")));
+                LinkedHashSet<String> resultFullNameSet = new LinkedHashSet<>(Arrays.asList(resultFullName.split(" ")));
+
+                if (!(studentFullNameSet.size() < 2 || resultFullNameSet.size() < 2 ||
+                        !studentFullNameSet.iterator().next().equals(resultFullNameSet.iterator().next()))) {
+                    //try to find the same name
+                    int matchCount = 0;
+                    for (var resultFullNamePart : resultFullNameSet) {
+                        for (var studentFullNamePart : studentFullNameSet) {
+                            if (studentFullNamePart.equals(resultFullNamePart) &&
+                                    !(studentFullNamePart.equals("بن") ||
+                                            studentFullNamePart.equals("بنت") ||
+                                            studentFullNamePart.equals("عبد") ||
+                                            studentFullNamePart.equals("ابو") ||
+                                            studentFullNamePart.equals("ابن") ||
+                                            studentFullNamePart.equals("ابنه") ||
+                                            studentFullNamePart.equals("ابنت"))) {
+                                matchCount++;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (matchCount > 2) {
+                        return code;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            Logger.log(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return "";
+    }
+
     private static String getCode(String nameOrEmail, Connection con) {
         String getResultQuery = String.format("""
                         SELECT code
@@ -151,16 +218,10 @@ public class CodeDataBase {
                                                               'آ', 'ا'),
                                                       '\\n', ''),
                                               '\\t', ''),
-                                      ' ', '')) like '%s'
-                          OR lower(email) LIKE '%s'
-                           """, nameOrEmail.replaceAll("\\s+", "")
-                        .replaceAll("[أإآ]", "ا")
-                        .replaceAll("ؤ", "و")
-                        .replaceAll("ى", "ي")
-                        .replaceAll("ة", "ه")
-                        .replaceAll("'", "''"),
-                nameOrEmail.toLowerCase()
-                        .replaceAll("'", "''"));
+                                      ' ', '')) = '%s'
+                          OR lower(email) = '%s'
+                           """, nameOrEmail.replaceAll("\\s+", ""),
+                nameOrEmail.toLowerCase());
         try (Statement statement = con.createStatement()) {
             var resultSet = statement.executeQuery(getResultQuery);
             if (resultSet.next()) {
@@ -170,7 +231,7 @@ public class CodeDataBase {
             Logger.log(e.getMessage());
             throw new RuntimeException(e);
         }
-        return null;
+        return "";
     }
 
 
