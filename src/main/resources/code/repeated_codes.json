@@ -1,0 +1,55 @@
+{
+  "FST_YEAR": {},
+  "SND_YEAR": {},
+  "TRD_YEAR": {},
+  "FTH_YEAR": {
+    "adaab": {
+      "AA00268": [
+        {
+          "name": "فاطمة محمود عبده صالح",
+          "email": "esaleh784@gmail.com"
+        },
+        {
+          "name": "أحمد السيد توفيق علي",
+          "email": "ahmedtawfek149@gmai.com"
+        }
+      ]
+    },
+    "aqida": {
+      "AA00417": [
+        {
+          "name": "محمد عبد الله خالص دين",
+          "email": "cholees.udin@gmail.com"
+        },
+        {
+          "name": "محمد عبد الله خالص الدين",
+          "email": "cholees.udin@gmail.com"
+        }
+      ],
+      "AA00479": [
+        {
+          "name": "هالة محمد سيد عبد المولي",
+          "email": "mummutter104@gmail.com"
+        },
+        {
+          "name": "أبو كيسة",
+          "email": "tataruangloteng@gmail.com"
+        }
+      ]
+    },
+    "hadith1": {},
+    "hadith2": {},
+    "recent_problems1": {
+      "AA00341": [
+        {
+          "name": "سعد أحمد فجلة",
+          "email": "saad411968@gmail.com"
+        },
+        {
+          "name": "سعد احمد احمد",
+          "email": "saad_ahmed_1@hotmail.com"
+        }
+      ]
+    }
+  }
+}

@@ -72,7 +72,7 @@ public class ResultsDataBase1444 {
         String getResultQuery = String.format("""
                         SELECT *
                         FROM %s
-                        where right_code = '%s'
+                        where right_code_2 = '%s'
                            """,
                 subject.getEnglishName(),
                 code

@@ -2,7 +2,6 @@ package com.safwah.bot.result._1444;
 
 import com.safwah.bot.code.CodeFinder;
 import com.safwah.database.result._1444.ResultsDataBase1444;
-import com.safwah.database.year1444.results.CodeCorrector;
 import com.safwah.logger.Logger;
 import com.safwah.study.year.StudyYear1444;
 import com.safwah.study.year.YearsSubject;
@@ -13,7 +12,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static com.safwah.bot.result.Results.beautyPrinter;
 import static com.safwah.bot.result.Results.intScore;
-import static com.safwah.study.year.StudyYear1444.getMaxLengthOfSubjectsArabicName;
 
 public class ResultFinder1444 {
 

@@ -30,7 +30,6 @@ public class Results {
         int percentSpaces = 3 - String.valueOf(percent).length();
 
         resultMessage.append("</pre>").append(subjectArabicName).append(":\n")
-//                append(" ".repeat(spaces))
                 .append("<pre>").append("\t | ").append(intScore).append(" ".repeat(intScoreSpaces)).append(" | ")
                 .append("%").append(percent).append(" ".repeat(percentSpaces)).append(" | ")
                 .append(success ? "ناجح" :
