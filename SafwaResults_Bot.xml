@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>D:\13-Projects\SafwaResults_Bot\out\artifacts\SafwaResults_Bot_jar\SafwaResults_Bot.jar</jar>
+  <outfile>D:\13-Projects\SafwaResults_Bot\SafwaResults_Bot.exe</outfile>
+  <errTitle>error</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>D:\13-Projects\SafwaResults_Bot\Cornmanthe3rd-Metronome-System-settings.ico</icon>
+  <singleInstance>
+    <mutexName>safwa</mutexName>
+    <windowTitle></windowTitle>
+  </singleInstance>
+  <classPath>
+    <mainClass>com.safwah.Main</mainClass>
+    <cp>com.safwah.Main</cp>
+  </classPath>
+  <jre>
+    <path>C:\Program Files\Java\jdk-18.0.1.1\bin</path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.7</minVersion>
+    <maxVersion>1.9.0</maxVersion>
+    <jdkPreference>jreOnly</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+</launch4jConfig>

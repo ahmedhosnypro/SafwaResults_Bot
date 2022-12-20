@@ -1,0 +1,28 @@
+
+`	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112-"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112U"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112e"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112|"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+e	java:S1172"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(É¿ÕQ
+j
+java:S2095p"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(šˆşöıÿÿÿÿ
+U
+java:S1118	":Add a private constructor to hide the implicit public one.(ü£ìÚıÿÿÿÿ
+Q	java:S125"<This block of commented-out lines of code should be removed.(¢“’ˆ
+V	java:S125"<This block of commented-out lines of code should be removed.(…Æ®‹øÿÿÿÿ
+V	java:S125 "<This block of commented-out lines of code should be removed.(µÖ÷åÿÿÿÿÿ
+?
+java:S2115+")Add password protection to this database.(™“Š£
+c
+java:S5361J"HReplace this call to "replaceAll()" by a call to the "replace()" method.(†º…®ûÿÿÿÿ
+^
+java:S5361I"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ıš†Ë
+‚
+java:S5854H"gUse the CANON_EQ flag with "Pattern.compile(pattern, CANON_EQ).matcher(input).replaceAll(replacement)".(“ä¥èüÿÿÿÿ
+c
+java:S5361H"HReplace this call to "replaceAll()" by a call to the "replace()" method.(“ä¥èüÿÿÿÿ
+L
+java:S1068"1Remove this unused "AQIDA_EXAM_ID" private field.(î¨íüÿÿÿÿ
+G
+java:S1068"2Remove this unused "TAGWID_EXAM_ID" private field.(ä½2

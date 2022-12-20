@@ -1,0 +1,9 @@
+
+b
+java:S1192"GDefine a constant instead of duplicating this literal "normal" 5 times.(™¿¾÷øÿÿÿÿ
+E
+java:S5869"*Remove duplicates in this character class.(ò³í…ûÿÿÿÿ
+g
+java:S5998"LRefactor this repetition that can lead to a stack overflow for large inputs.(ò³í…ûÿÿÿÿ
+o
+java:S5843"TSimplify this regular expression to reduce its complexity from 82 to the 20 allowed.(ò³í…ûÿÿÿÿ
