@@ -2,14 +2,17 @@ package com.safwah.study.year;
 
 public class try23 {
     public static void main(String[] args) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i= 20; i<=43; i++){
-            stringBuilder.append("C").append(i).append(" = ").append(" '%s'").append(", ");
-        }
-        System.out.println(stringBuilder+ "\n");
+        String name1 = "مریم".replaceAll("ی", "ي");
+        String name2 =
+                "مريم";
 
-        for (int i=1; i<=25; i++){
-            System.out.print("resultSet.getString(" + i + "), ");
+        for (int i = 0; i < name1.length(); i++) {
+            System.out.println(String.format(name1.charAt(i) + " " + "\\u%04x", (int) name1.charAt(i)));
+            System.out.println(String.format(name2.charAt(i) + " " + "\\u%04x", (int) name2.charAt(i)));
+
         }
+
+
+        System.out.println(name1.equals(name2));
     }
 }

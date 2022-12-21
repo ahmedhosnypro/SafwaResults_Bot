@@ -3,10 +3,10 @@ package com.safwah.study.year;
 import java.util.*;
 
 public enum StudyYear1444 {
-    FST_YEAR("الفرقة الأولى", "1444_fst_results.db", "fst_names.db"),
-    SND_YEAR("الفرقة الثانية", "1444_snd_results.db", "snd_names.db"),
-    TRD_YEAR("الفرقة الثالثة", "1444_trd_results.db", "trd_names.db"),
-    FTH_YEAR("الفرقة الرابعة", "1444_fth_results.db", "4th_names.db"),
+    FST_YEAR("الفرقة: <code> الأولى </code>", "1444_fst_results.db", "fst_names.db"),
+    SND_YEAR("الفرقة:  <code> الثانية </code>", "1444_snd_results.db", "snd_names.db"),
+    TRD_YEAR("الفرقة:  <code> الثالثة </code>", "1444_trd_results.db", "trd_names.db"),
+    FTH_YEAR("الفرقة:  <code> الرابعة </code>", "1444_fth_results.db", "4th_names.db"),
     ERROR("", "", "");
 
 

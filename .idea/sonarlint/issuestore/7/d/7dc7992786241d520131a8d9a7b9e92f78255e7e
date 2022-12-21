@@ -1,2 +1,7 @@
 
 g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ã–æ¨ûÿÿÿÿ
+\
+java:S3457
+"AFormat specifiers should be used instead of string concatenation.(¥ÒŽßýÿÿÿÿ
+\
+java:S3457"AFormat specifiers should be used instead of string concatenation.(‡õùôüÿÿÿÿ

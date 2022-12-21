@@ -1,6 +1,8 @@
 package com.safwah.bot.result._1444;
 
+import com.safwah.Student;
 import com.safwah.bot.code.CodeFinder;
+import com.safwah.database.code.CodeDataBase;
 import com.safwah.database.result._1444.ResultsDataBase1444;
 import com.safwah.logger.Logger;
 import com.safwah.study.year.StudyYear1444;
@@ -18,7 +20,7 @@ public class ResultFinder1444 {
     private ResultFinder1444() {
     }
 
-    static void getResults(ResultBot1444 bot, String input, long chatId, String username) {
+    static void getResults(ResultBot1444 bot, String input, long chatId, String username) { // input code || name ||  email
         String formattedCode = CodeCorrector.formatCode(input);
         String codePrefix = "";
         if (formattedCode.length() > 2) {
@@ -33,11 +35,25 @@ public class ResultFinder1444 {
                 case "AA" -> StudyYear1444.FTH_YEAR;
                 default -> throw new IllegalStateException("Unexpected value: " + codePrefix);
             };
-            getResult(bot, studyYear, formattedCode, chatId, username);
+
+            //check if the code is in the database
+            if (CodeDataBase.isCodeExist(formattedCode)) {
+                Student student = CodeFinder.getStudent(formattedCode, studyYear);
+                String studentFullName = student.getName().equals("") ? "الاسم غير مسجل" : student.getName();
+                getResult(bot, studyYear, studentFullName, formattedCode, chatId, username);
+            } else {
+                bot.sendMessage("""
+                        ❌ هذا الكود غير موجود
+                                                
+                        تأكد من كتابة الكود بشكل صحيح
+                        
+                        هذا رد آلي من جهاز كمبيوتر
+                        """, chatId);
+            }
         } else {
-            String code = CodeFinder.getCode(input);
-            if (code != null && !code.equals("")) {
-                getResults(bot, code, chatId, username);
+            String[] codeResult = CodeFinder.getCode(input);
+            if (codeResult != null) {
+                getResults(bot, codeResult[1], chatId, username);
             } else {
                 sendBadRequest(bot, input, chatId, username, StudyYear1444.ERROR);
             }
@@ -45,13 +61,13 @@ public class ResultFinder1444 {
     }
 
     private static void sendBadRequest(ResultBot1444 bot, String code, long chatId, String username, StudyYear1444 studyYear) {
-        String header = "\"" + code + "\"\n";
+        String header = "\"<code>" + code + "</code>\"\n";
         bot.sendMessage(header + ResultMessageText1444.CODE_ERROR, chatId);
         Logger.log(code, username, header + ResultMessageText1444.CODE_ERROR.name(), "normal");
     }
 
 
-    static void getResult(ResultBot1444 bot, StudyYear1444 studyYear, String code, long chatId, String username) {
+    static void getResult(ResultBot1444 bot, StudyYear1444 studyYear, String name, String code, long chatId, String username) {
         boolean isMazhab;
         StudyYear1444 inputStudyYear = studyYear;
 
@@ -83,9 +99,13 @@ public class ResultFinder1444 {
         AtomicReference<Integer> totalScore = new AtomicReference<>(0);
         AtomicInteger subjectCnt = new AtomicInteger();
 
-        String header = "يجب استخدام الكود التالي في نموذج الاختبار يمكنك الضغط عليه وسيتم نسخه الى الحافظة: " +
-                "\n\uD83D\uDC49\uD83D\uDC49  <code>" + code + "</code>  \uD83D\uDC48\uD83D\uDC48\n" +
-                studyYear.getArabicNotation() + " | الفصل الدراسي الأول :  " + "\n";
+        String header = studyYear.getArabicNotation() + " -> الفصل: <code> الدراسي الأول </code> :  " + "\n" +
+                String.format("""
+                        الاسم المسجل بالجامعة : <code> %s </code>
+                                                
+                        الكود :  👈👈  <code> %s </code>  👉👉
+                                                
+                        """, name, code);
 
         StringBuilder resultMessage = new StringBuilder(header);
         resultMessage.append("""
@@ -122,7 +142,7 @@ public class ResultFinder1444 {
         if (isMazhab && isMazhabScoreFound[0]) {
             beautyPrinter(mazhabScore.keySet().iterator().next(), mazhabScore.values().iterator().next(), resultMessage);
             resultMessage.append("</pre>\n");
-        } else if (isMazhab && !isMazhabScoreFound[0]) {
+        } else if (isMazhab) {
             resultMessage.append("</pre>\n");
             resultMessage.append("لم يتم العثور على درجات المذهب");
         } else {

@@ -18,28 +18,42 @@ public class CodeFinder {
 
     static void getCode(CodeBot bot, String messageText, long chatId, String username) {
         if (checkNameOrEmail(bot, messageText, chatId, username)) {
-            String code = CodeDataBase.getCode(messageText);
-            bot.sendMessage("برجاء استخدام هذا الكود في نموذج الاختبار يمكنك الضغط عليه وسيتم نسخه الى الحافظة" +
-                    "\n \uD83D\uDC49\uD83D\uDC49  <code>" + code.toUpperCase() + "</code>  \uD83D\uDC48\uD83D\uDC48", chatId);
-            Logger.log(messageText, username, "CODE", "normal_code");
+            String[] result = CodeDataBase.getCode(messageText);
+            if (result == null) {
+                result = CodeDataBase.getCodeByTryingMatchingNames(messageText);
+            }
+            if (result != null) {
+                bot.sendMessage(String.format("""
+                        الاسم : <code> %s </code>
+                        
+                        الكود :  👈👈  <code> %s </code>  👉👉
+                        
+                        """, result[0], result[1]) +
+                        "⚠️⚠️ برجاء استخدام هذا الكود في نموذج الاختبار يمكنك الضغط عليه وسيتم نسخه الى الحافظة ⚠️⚠️", chatId);
+                Logger.log(messageText, username, "CODE", "normal_code");
+            } else {
+                bot.sendMessage(CodeMessageText.NOT_FOUND_NAME_ERROR.toString(), chatId);
+                Logger.log(messageText, username, CodeMessageText.NOT_FOUND_NAME_ERROR.name(), "react_code");
+            }
+
         }
     }
 
-    public static String getCode(String messageText) {
+    public static String[] getCode(String messageText) {
         if (checkNameOrEmail(messageText)) {
-            return CodeDataBase.getCode(messageText).toUpperCase();
+            return CodeDataBase.getCode(messageText);
         }
-        return "";
+        return null;
     }
 
-    public static String getCode(String messageText, StudyYear1444 year) {
+    public static String[] getCode(String messageText, StudyYear1444 year) {
         if (checkNameOrEmail(messageText)) {
             return CodeDataBase.getCode(messageText, year);
         }
-        return "";
+        return null;
     }
 
-    public static String getCodeByTryingMatchingNames(String fullName, StudyYear1444 year) {
+    public static String[] getCodeByTryingMatchingNames(String fullName, StudyYear1444 year) {
         return CodeDataBase.getCodeByTryingMatchingNames(fullName, year);
     }
 
@@ -63,26 +77,27 @@ public class CodeFinder {
             Logger.log(messageText, username, CodeMessageText.EMAIL_ERROR.name(), "normal_code");
             return false;
         } else if (!isEmail) {
-            var arr = messageText.split(" ");
-            if (arr.length < 3) {
-                bot.sendMessage(header + CodeMessageText.SHORT_NAME_ERROR, chatId);
-                Logger.log(messageText, username, header + CodeMessageText.SHORT_NAME_ERROR.name(), "normal_code");
-                return false;
-            }
-
-            if (!CodeDataBase.isExists(messageText)) {
-                bot.sendMessage(header + CodeMessageText.NOT_FOUND_NAME_ERROR, chatId);
-                Logger.log(messageText, username, header + CodeMessageText.NOT_FOUND_NAME_ERROR.name(), "react_code");
-                return false;
-            }
+            return true;
+            //            var arr = messageText.split(" ");
+//            if (arr.length < 3) {
+//                bot.sendMessage(header + CodeMessageText.SHORT_NAME_ERROR, chatId);
+//                Logger.log(messageText, username, header + CodeMessageText.SHORT_NAME_ERROR.name(), "normal_code");
+//                return false;
+//            }
+//
+//            if (!CodeDataBase.isExists(messageText)) {
+//                bot.sendMessage(header + CodeMessageText.NOT_FOUND_NAME_ERROR, chatId);
+//                Logger.log(messageText, username, header + CodeMessageText.NOT_FOUND_NAME_ERROR.name(), "react_code");
+//                return false;
+//            }
         } else {
-            if (!CodeDataBase.isExists(messageText)) {
-                bot.sendMessage(header + CodeMessageText.NOT_FOUND_EMAIL_ERROR, chatId);
-                Logger.log(messageText, username, header + CodeMessageText.NOT_FOUND_EMAIL_ERROR.name(), "normal_code");
-                return false;
-            }
+            return true;
+//            if (!CodeDataBase.isExists(messageText)) {
+//                bot.sendMessage(header + CodeMessageText.NOT_FOUND_EMAIL_ERROR, chatId);
+//                Logger.log(messageText, username, header + CodeMessageText.NOT_FOUND_EMAIL_ERROR.name(), "normal_code");
+//                return false;
+//            }
         }
-        return true;
     }
 
     static boolean checkNameOrEmail(String messageText) {
@@ -90,11 +105,11 @@ public class CodeFinder {
         if (isEmail && isInValidEmail(messageText)) {
             return false;
         } else if (!isEmail) {
-            if (!CodeDataBase.isExists(messageText)) {
+            if (!CodeDataBase.isCodeExistsFor(messageText)) {
                 return false;
             }
         } else {
-            if (!CodeDataBase.isExists(messageText)) {
+            if (!CodeDataBase.isCodeExistsFor(messageText)) {
                 return false;
             }
         }

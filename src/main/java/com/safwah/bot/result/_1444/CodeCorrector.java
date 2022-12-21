@@ -1,13 +1,11 @@
 package com.safwah.bot.result._1444;
 
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
-
 import com.safwah.Main;
 import com.safwah.bot.code.CodeFinder;
 import com.safwah.Person;
 import com.safwah.Student;
 import com.safwah.study.year.StudyYear1444;
+import org.jetbrains.annotations.NotNull;
 import org.sqlite.SQLiteDataSource;
 
 import java.io.IOException;
@@ -15,6 +13,7 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
@@ -54,7 +53,7 @@ public class CodeCorrector {
     static List<String> currentSubjectCodes = new ArrayList<>();
     static List<String> currentSubjectCorrectedCodes = new ArrayList<>();
 
-
+    private static int count = 0;
     private static final String CURRENT_SUBJECT_CODES_PATH_NAME = "D:\\13-Projects\\SafwaResults_Bot\\src\\main\\resources\\code\\repeated_codes.json";
     private static final String CURRENT_SUBJECT_CORRECTED_CODES_PATH_NAME = "D:\\13-Projects\\SafwaResults_Bot\\src\\main\\resources\\code\\repeated_corrected_codes.json";
 
@@ -102,24 +101,11 @@ public class CodeCorrector {
     }
 
     private static void correctCode(boolean isReport) {
-        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
+        List<StudyYear1444> studyYears = List.of(/*FST_YEAR*/ /*, SND_YEAR,*/ TRD_YEAR /*, FTH_YEAR*/);
 
-//        List<StudyYear1444> studyYears = List.of(FST_YEAR);
-//        List<StudyYear1444> studyYears = List.of(SND_YEAR);
-//        List<StudyYear1444> studyYears = List.of(TRD_YEAR);
-//        List<StudyYear1444> studyYears = List.of(FTH_YEAR);
-
-//        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR);
         for (var studyYear : studyYears) {
             Connection connection = getConnection(studyYear);
 
-            //v1
-//            var subjects = listNonCorrectCodeSubjects(studyYear);
-//            for (var subject : subjects) {
-//                correctCode(connection, studyYear, subject.getEnglishName());
-//            }
-
-//            //for code correction v2
 //            var subjects = listNonCorrectCodeSubjects(studyYear);
             var subjects = listExaminedSubjects(studyYear);
             for (var subject : subjects) {
@@ -135,11 +121,11 @@ public class CodeCorrector {
             }
         }
 
+        System.out.println(count);
 
         if (isReport) {
             // delete non repeated codes from repeatedCodesJson
             deleteNonRepeatedCodes(studyYears);
-
 
             //write to file
             reportRepeatedCodes();
@@ -148,78 +134,112 @@ public class CodeCorrector {
     }
 
     private static void correctCode(Connection connection, StudyYear1444 studyYear, String subject, boolean isReport) {
+//        String codeListQuery = String.format("""
+//                SELECT code, fullName, email, right_code_2
+//                FROM %s
+//                """, subject);
+
+        //skip corrected codes when retrying
         String codeListQuery = String.format("""
-                SELECT code, fullName, email
+                SELECT code, fullName, email, right_code_2
                 FROM %s
+                WHERE right_code_2 not like 'A%%'
                 """, subject);
+
+        String updateCodeQuery = "UPDATE " + subject + " SET right_code_2=?, partial_match=? " +
+                "WHERE code=? and fullName=? and email=?";
 
         try (Statement statement = connection.createStatement()) {
             var resultSet = statement.executeQuery(codeListQuery);
+
             while (resultSet.next()) {
+                count++;
                 String inputCode = resultSet.getString("code");
                 String inputFullName = resultSet.getString("fullName");
+                String inputEmail = resultSet.getString("email");
 
-                //debugging
-//                if (!inputFullName.equals("فيردا حنيفة رحماء ديوي ")) {
+                //skip corrected codes when retrying
+//                String rightCode2 = resultSet.getString("right_code_2");
+//                if (!(rightCode2 == null || rightCode2.isBlank() || rightCode2.isEmpty())) {
 //                    continue;
 //                }
 
-                String inputEmail = resultSet.getString("email");
+
+                //debugging
+//                if (!inputEmail.equals("sausannahdie@gmail.com")) {
+//                    continue;
+//                }
+
+//                if (!inputFullName.equals("رغدة الحياة مسعى")) {
+//                    continue;
+//                }
 
                 Main.EXECUTOR.submit(() -> {
                     String resultCode = formatCode(inputCode);
-                    String formattedFullName = inputFullName.trim()
-                            .replaceAll("[أإآ]", "ا")
-                            .replaceAll("ؤ", "و")
-                            .replaceAll("ى", "ي")
-                            .replaceAll("ة", "ه")
-                            .replaceAll("'", "''");
+                    String formattedFullName = getFormattedFullName(inputFullName);
+
+
                     String formattedEmail = inputEmail.trim()
                             .replaceAll("'", "''");
 
-                    if (isReport) {
-                        addCodeToReport(studyYear, subject, resultCode, inputFullName, formattedEmail, currentSubjectCodes, repeatedCodesJson);
-                    }
+                    String[] result = findTheRightCode(studyYear, resultCode, formattedFullName, formattedEmail);
+                    resultCode = result[0];
+                    String partialMatch = result[1];
 
-
-                    if (!isValidCode(resultCode)) {
-                        resultCode = searchCode(formattedEmail, formattedFullName, studyYear);
-                    } else {
-                        resultCode = validateCode(resultCode, formattedEmail, formattedFullName, studyYear);
-                    }
-
-
-                    if (resultCode.equals("")) {
-                        resultCode = searchCode(formattedEmail, formattedFullName, studyYear);
-                    }
-
-                    if (isReport) {
-                        addCodeToReport(studyYear, subject, resultCode, inputFullName, inputEmail, currentSubjectCorrectedCodes, repeatedCorrectedCodesJson);
-                    }
-
-
-                    if (!resultCode.equals("")) {
-                        try (Statement updateStatement = connection.createStatement()) {
-                            String updateQuery = String.format("""
-                                            UPDATE %s
-                                            SET right_code_2 = '%s'
-                                            WHERE code = '%s'
-                                            and fullName = '%s'
-                                            and email = '%s'
-                                            """, subject, resultCode,
-                                    inputCode.replaceAll("'", "''"),
-                                    inputFullName.replaceAll("'", "''")
-                                    , inputEmail.replaceAll("'", "''"));
-                            updateStatement.executeUpdate(updateQuery);
-                            System.out.println(studyYear + " -> " + subject + " -> inputCode: " + inputCode + " to: " + resultCode + " (name: " + inputFullName + ", email: " + inputEmail + ")");
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                    updateCode(connection, updateCodeQuery, inputCode, inputFullName, inputEmail, resultCode, partialMatch);
+                    System.out.println(studyYear + " -> " + subject + " -> inputCode: " + inputCode + " to: " + resultCode + " (name: " + inputFullName + ", email: " + inputEmail + ")");
                 });
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @NotNull
+    private static String getFormattedFullName(String inputFullName) {
+        return inputFullName.trim()
+                .replaceAll("[أإآ]", "ا")
+                .replaceAll("ؤ", "و")
+                .replaceAll("ى", "ي")
+                .replaceAll("ة", "ه")
+                .replaceAll("[ً-ْ]", "")
+                .replaceAll("'", "''")
+                .replaceAll("عبد ال", "عبدال")
+                .replaceAll("[-،._]|\\s+", " ");
+    }
+
+    @NotNull
+    private static String[] findTheRightCode(StudyYear1444 studyYear, String resultCode, String formattedFullName, String formattedEmail) {
+        String partialMatch = "0";
+        if (!isValidCode(resultCode)) {
+            String[] result = searchCode(formattedEmail, formattedFullName, studyYear);
+            resultCode = result[0];
+            partialMatch = result[1];
+        } else {
+            resultCode = validateCode(resultCode, formattedEmail, formattedFullName, studyYear);
+        }
+
+
+        if (resultCode.equals("")) {
+            String[] result = searchCode(formattedEmail, formattedFullName, studyYear);
+            resultCode = result[0];
+            partialMatch = result[1];
+        }
+        return new String[]{resultCode, partialMatch};
+    }
+
+    private static void updateCode(Connection connection, String updateCodeQuery, String inputCode, String inputFullName, String inputEmail, String resultCode, String partialMatch) {
+        if (!resultCode.equals("")) {
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateCodeQuery)) {
+                updateStatement.setString(1, resultCode);
+                updateStatement.setString(2, partialMatch);
+                updateStatement.setString(3, inputCode);
+                updateStatement.setString(4, inputFullName);
+                updateStatement.setString(5, inputEmail);
+                updateStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -244,7 +264,10 @@ public class CodeCorrector {
         studentFullName = studentFullName.trim().replaceAll("[أإآ]", "ا")
                 .replaceAll("ؤ", "و")
                 .replaceAll("ى", "ي")
-                .replaceAll("ة", "ه");
+                .replaceAll("ة", "ه")
+                .replaceAll("[ً-ْ]", "")
+                .replaceAll("'", "''")
+                .replaceAll("[-،._]|\\s+", " ");
 
         if (studentFullName.equals(resultFullName)) {
             return resultCode;
@@ -261,6 +284,17 @@ public class CodeCorrector {
 
         //try to find the same name
         int matchCount = 0;
+        matchCount = getMatchCount(studentFullNameSet, resultFullNameSet, matchCount);
+
+        //todo
+        if (matchCount > 2) {
+            return resultCode;
+        }
+
+        return "";
+    }
+
+    public static int getMatchCount(Set<String> studentFullNameSet, Set<String> resultFullNameSet, int matchCount) {
         for (var resultFullNamePart : resultFullNameSet) {
             for (var studentFullNamePart : studentFullNameSet) {
                 if (studentFullNamePart.equals(resultFullNamePart) &&
@@ -276,38 +310,37 @@ public class CodeCorrector {
                 }
             }
         }
-
-        if (matchCount > 2) {
-            return resultCode;
-        }
-
-        return "";
+        return matchCount;
     }
 
-    public static String searchCode(String email, String fullName, StudyYear1444 year) {
-        String foundCode = CodeFinder.getCode(email, year);
+    public static String[] searchCode(String email, String fullName, StudyYear1444 year) {
+        boolean isPartialMatch = false;
+        String foundCode = Objects.requireNonNull(CodeFinder.getCode(email, year))[1];
 
         boolean isFullName = fullName.split(" ").length > 2;
 
-        if (foundCode.equals("") && isFullName) {
-            foundCode = CodeFinder.getCode(fullName.replaceAll("\\s+", ""), year);
+        if ((foundCode == null || foundCode.equals("")) && isFullName) {
+            foundCode = Objects.requireNonNull(CodeFinder.getCode(fullName, year))[1];
         }
 
-        if (foundCode.equals("") && isFullName) {
-            foundCode = CodeFinder.getCodeByTryingMatchingNames(fullName, year);
+        if ((foundCode == null || foundCode.equals("")) && isFullName) {
+            foundCode = CodeFinder.getHigherCode(fullName, year);
         }
-
-        if (foundCode.equals("") && isFullName) {
-            foundCode = CodeFinder.getHigherCode(fullName.replaceAll("\\s+", ""), year);
-        }
-        if (foundCode.equals("")) {
+        if ((foundCode == null || foundCode.equals(""))) {
             foundCode = CodeFinder.getHigherCode(email, year);
         }
 
-        if (foundCode.equals("")) {
+        if ((foundCode == null || foundCode.equals("")) && isFullName) {
+            foundCode = CodeFinder.getCodeByTryingMatchingNames(fullName, year)[1];
+            if (!foundCode.equals("")) {
+                isPartialMatch = true;
+            }
+        }
+
+        if ((foundCode == null || foundCode.equals(""))) {
             foundCode = "";
         }
-        return foundCode.toUpperCase();
+        return new String[]{foundCode, isPartialMatch ? "1" : "0"};
     }
 
     private static void addColumn() {
@@ -316,7 +349,7 @@ public class CodeCorrector {
             Connection connection = getConnection(studyYear);
             var subjects = listExaminedSubjects(studyYear);
             for (var subject : subjects) {
-                addColumn(connection, studyYear, subject.getEnglishName(), "right_code_2");
+                addColumn(connection, subject.getEnglishName(), "partial_match");
             }
 
         }
@@ -361,7 +394,7 @@ public class CodeCorrector {
     }
 
     public static String formatCode(String inputCode) {
-        String code = inputCode.trim().toUpperCase()
+        return inputCode.trim().toUpperCase()
                 .replaceAll("٠", "0")
                 .replaceAll("١", "1")
                 .replaceAll("٢", "2")
@@ -376,7 +409,6 @@ public class CodeCorrector {
                 .replaceAll("\u200E", "")
                 .replaceAll("o", "0")
                 .replaceAll("O", "0");
-        return code;
     }
 
 
@@ -422,7 +454,7 @@ public class CodeCorrector {
         }
     }
 
-    private static void addColumn(Connection connection, StudyYear1444 studyYear, String englishName, String columnName) {
+    private static void addColumn(Connection connection, String englishName, String columnName) {
         try (Statement statement = connection.createStatement()) {
             String sql = "ALTER TABLE " + englishName + " ADD  " + columnName + " TEXT";
             statement.execute(sql);
@@ -433,7 +465,7 @@ public class CodeCorrector {
 
     private static void resetCorrectCode(Connection connection, StudyYear1444 studyYear, String subject) {
         try (Statement statement = connection.createStatement()) {
-            statement.execute("UPDATE " + subject + " SET right_code_2 = ''");
+            statement.execute("UPDATE " + subject + " SET right_code_2 = '', partial_match = ''");
         } catch (SQLException e) {
             e.printStackTrace();
         }

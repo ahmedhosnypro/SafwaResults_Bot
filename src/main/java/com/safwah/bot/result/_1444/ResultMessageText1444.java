@@ -5,21 +5,26 @@ public enum ResultMessageText1444 {
             أدخل الرقم الجامعي للحصول على نتيجتك
             """),
     HELP("""
-            فضلا التأكد من أنك تستخدم الرقم الجامعي الصحيح الخاص بك أولا
-            يمكنك الحصول على الرقم الجامعي من هنا
-            <a href="https://t.me/SafwahCode_Bot">(اضغط هنا) بوت الرقم الجامعي </a>
-            
-أو محاولة البحث بالاسم الرباعي او البريد الذي سجل في الاختبارات            
+                        فضلا التأكد من أنك تستخدم الرقم الجامعي الصحيح الخاص بك أولا
+                        يمكنك الحصول على الرقم الجامعي من هنا
+                        <a href="https://t.me/SafwahCode_Bot">(اضغط هنا) بوت الرقم الجامعي </a>
                         
-            قم بملئ النموذج التالي اذا كان هناك خطأ في نتيجتك 
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXf5ruUkr6-YaOeHK4pb4h9PDsnpMLt0AgtA-K6pk9GxslRg/viewform"> نموذج مشاكل النتائج (اضغط هنا) </a>
-            """),
+            أو محاولة البحث بالاسم الرباعي او البريد الذي سجل في الاختبارات            
+                                    
+                        قم بملئ النموذج التالي اذا كان هناك خطأ في نتيجتك 
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXf5ruUkr6-YaOeHK4pb4h9PDsnpMLt0AgtA-K6pk9GxslRg/viewform"> نموذج مشاكل النتائج (اضغط هنا) </a>
+                        """),
 
     //    او ارسال المشكلة الى
 //            <a href="https://t.me/Sufwah1_bot"> بوت تلقي الإشكالات </a>
+
     CODE_ERROR("""
-            ❗️  يوجد خطأ بالرقم الجامعي  ❗️
+            
+            ❌ تأكد من صحة ما كتبته
+            
+            هذا رد آلي من جهاز كمبيوتر
             """);
+
 
     private final String message;
 
@@ -31,4 +36,4 @@ public enum ResultMessageText1444 {
     public String toString() {
         return message;
     }
-}
+    }

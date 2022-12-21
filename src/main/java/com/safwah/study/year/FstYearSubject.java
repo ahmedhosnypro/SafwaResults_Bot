@@ -1,7 +1,7 @@
 package com.safwah.study.year;
 
 public enum FstYearSubject implements YearsSubject {
-    AQIDA("العقيدة الإسلامية", "aqida", "both", 50, true, true),
+    AQIDA("العقيدة الإسلامية", "aqida", "both", 50, true, false),
     TAGWID("التجويد", "tagwid", "both", 50, true, true),
     NA7W("النحو", "na7w", "both", 50, true, true),
     HADITH("الحديث", "hadith", "both", 50, true, true),
