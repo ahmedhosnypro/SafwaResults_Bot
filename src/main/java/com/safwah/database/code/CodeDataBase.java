@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-import static com.safwah.bot.result._1444.CodeCorrector.getMatchCount;
+import static com.safwah.bot.code.corrector.CodeCorrector.getMatchCount;
 
 public class CodeDataBase {
     private CodeDataBase() {
@@ -70,7 +70,7 @@ public class CodeDataBase {
             result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.TRD_YEAR);
             if (result == null) {
                 result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.SND_YEAR);
-                if (result != null) {
+                if (result == null) {
                     result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.FST_YEAR);
                 }
             }
@@ -173,7 +173,7 @@ public class CodeDataBase {
         String getResultQuery = """
                 SELECT name, code
                 FROM users
-                   """;
+                """;
         try (Statement statement = con.createStatement()) {
             var resultSet = statement.executeQuery(getResultQuery);
             while (resultSet.next()) {
@@ -181,11 +181,17 @@ public class CodeDataBase {
 
                 //todo
                 //debugging
-//                if (!studentFullName.equals("ألان سوارمان ابن ألادين ابن عبد الرحمن")) {
+//                if (!studentFullName.equals("حفصة المختار عبد الرحمان الرامي")) {
 //                    continue;
 //                }
 
                 String code = resultSet.getString("code");
+
+//                System.out.println("studentFullName = " + studentFullName + " code = " + code);
+
+//                if (!code.equals("AD20089")) {
+//                    continue;
+//                }
 
 
                 studentFullName = formatName(studentFullName);

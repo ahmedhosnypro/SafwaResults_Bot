@@ -1,4 +1,4 @@
-package com.safwah.bot.result._1444;
+package com.safwah.bot.code.corrector;
 
 import com.safwah.Main;
 import com.safwah.bot.code.CodeFinder;
@@ -89,6 +89,8 @@ public class CodeCorrector {
 //        resetCorrectCode();
 
 
+//        addColumn();
+
         Thread thread = new Thread(() -> {
             try {
                 correctCode(isReport);
@@ -103,9 +105,6 @@ public class CodeCorrector {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-//        addColumn();
 
 
         //time now var
@@ -123,8 +122,8 @@ public class CodeCorrector {
         for (var studyYear : studyYears) {
             Connection connection = getConnection(studyYear);
 
-//            var subjects = listNonCorrectCodeSubjects(studyYear);
-            var subjects = listExaminedSubjects(studyYear);
+            var subjects = listNonCorrectCodeSubjects(studyYear);
+//            var subjects = listExaminedSubjects(studyYear);
             for (var subject : subjects) {
                 if (isReport) {
                     currentSubjectCodes = new ArrayList<>();
@@ -151,29 +150,23 @@ public class CodeCorrector {
     }
 
     private static void correctCode(Connection connection, StudyYear1444 studyYear, String subject, boolean isReport) {
+//        String codeListQuery = String.format("""
+//                SELECT code, fullName, email, right_code_2
+//                FROM %s
+//                """, subject);
+
+        //skip corrected codes when retrying
         String codeListQuery = String.format("""
                 SELECT code, fullName, email, right_code_2
                 FROM %s
+                WHERE right_code_2 is null or right_code_2 not like 'A%%'
                 """, subject);
 
-        //skip corrected codes when retrying
-//        String codeListQuery = String.format("""
-//                SELECT code, fullName, email, right_code_2
-//                FROM %s
-//                WHERE right_code_2 not like 'A%%'
-//                """, subject);
-
-//        String codeListQuery = String.format("""
-//                SELECT code, fullName, email, right_code_2
-//                FROM %s
-//                WHERE right_code_2 is null or right_code_2 not like 'A%%'
-//                """, subject);
-
         // repair code for a student
-//                String codeListQuery = String.format("""
+//        String codeListQuery = String.format("""
 //                SELECT code, fullName, email, right_code_2
 //                FROM %s
-//                WHERE right_code_2 = 'AB02819'
+//                WHERE right_code_2 = 'AB02616'
 //                """, subject);
 
         String updateCodeQuery = "UPDATE " + subject + " SET right_code_2=?, partial_match=? " +

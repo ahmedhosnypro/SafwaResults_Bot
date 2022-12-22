@@ -17,7 +17,7 @@ public class CodeFinder {
     public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
     static void getCode(CodeBot bot, String messageText, long chatId, String username) {
-        if (checkNameOrEmail(bot, messageText, chatId, username)) {
+         if (checkNameOrEmail(bot, messageText, chatId, username)) {
             String[] result = CodeDataBase.getCode(messageText);
             if (result == null) {
                 result = CodeDataBase.getCodeByTryingMatchingNames(messageText);

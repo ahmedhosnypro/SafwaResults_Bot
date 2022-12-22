@@ -29,12 +29,14 @@ public class Results {
         int intScoreSpaces = 3 - String.valueOf(intScore).length();
         int percentSpaces = 3 - String.valueOf(percent).length();
 
-        resultMessage.append("</pre>").append(subjectArabicName).append(":\n")
-                .append("<pre>").append("\t | ").append(intScore).append(" ".repeat(intScoreSpaces)).append(" | ")
-                .append("%").append(percent).append(" ".repeat(percentSpaces)).append(" | ")
-                .append(success ? "ناجح" :
-                        "راسب")
-                .append(" | ").append("\n\n");
+        resultMessage.append(subjectArabicName);
+        if (intScore != 0) {
+            resultMessage.append(":\n").append("<pre>").append("\t | ").append(intScore).append(" ".repeat(intScoreSpaces)).append(" | ")
+                    .append("%").append(percent).append(" ".repeat(percentSpaces)).append(" | ");
+            resultMessage.append(success ? "ناجح" : "راسب").append(" | ").append("\n\n").append("</pre>");
+        } else {
+            resultMessage.append(":\t").append("غائب \uD83D\uDE36").append("\n\n");
+        }
     }
 
     public static int intScore(String score) {
