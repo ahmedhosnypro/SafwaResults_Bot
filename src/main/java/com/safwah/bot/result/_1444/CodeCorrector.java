@@ -87,7 +87,24 @@ public class CodeCorrector {
         boolean isReport = false;
 //        boolean isReport = true;
 //        resetCorrectCode();
-        correctCode(isReport);
+
+
+        Thread thread = new Thread(() -> {
+            try {
+                correctCode(isReport);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
 //        addColumn();
 
 
@@ -101,7 +118,7 @@ public class CodeCorrector {
     }
 
     private static void correctCode(boolean isReport) {
-        List<StudyYear1444> studyYears = List.of(/*FST_YEAR*/ /*, SND_YEAR,*/ TRD_YEAR /*, FTH_YEAR*/);
+        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
 
         for (var studyYear : studyYears) {
             Connection connection = getConnection(studyYear);
@@ -134,17 +151,30 @@ public class CodeCorrector {
     }
 
     private static void correctCode(Connection connection, StudyYear1444 studyYear, String subject, boolean isReport) {
-//        String codeListQuery = String.format("""
-//                SELECT code, fullName, email, right_code_2
-//                FROM %s
-//                """, subject);
-
-        //skip corrected codes when retrying
         String codeListQuery = String.format("""
                 SELECT code, fullName, email, right_code_2
                 FROM %s
-                WHERE right_code_2 not like 'A%%'
                 """, subject);
+
+        //skip corrected codes when retrying
+//        String codeListQuery = String.format("""
+//                SELECT code, fullName, email, right_code_2
+//                FROM %s
+//                WHERE right_code_2 not like 'A%%'
+//                """, subject);
+
+//        String codeListQuery = String.format("""
+//                SELECT code, fullName, email, right_code_2
+//                FROM %s
+//                WHERE right_code_2 is null or right_code_2 not like 'A%%'
+//                """, subject);
+
+        // repair code for a student
+//                String codeListQuery = String.format("""
+//                SELECT code, fullName, email, right_code_2
+//                FROM %s
+//                WHERE right_code_2 = 'AB02819'
+//                """, subject);
 
         String updateCodeQuery = "UPDATE " + subject + " SET right_code_2=?, partial_match=? " +
                 "WHERE code=? and fullName=? and email=?";
@@ -170,7 +200,7 @@ public class CodeCorrector {
 //                    continue;
 //                }
 
-//                if (!inputFullName.equals("رغدة الحياة مسعى")) {
+//                if (!inputFullName.equals("عيد سيد على خليل")) {
 //                    continue;
 //                }
 
@@ -315,40 +345,42 @@ public class CodeCorrector {
 
     public static String[] searchCode(String email, String fullName, StudyYear1444 year) {
         boolean isPartialMatch = false;
-        String foundCode = Objects.requireNonNull(CodeFinder.getCode(email, year))[1];
+        String[] foundCode = CodeFinder.getCode(email, year);
 
         boolean isFullName = fullName.split(" ").length > 2;
 
-        if ((foundCode == null || foundCode.equals("")) && isFullName) {
-            foundCode = Objects.requireNonNull(CodeFinder.getCode(fullName, year))[1];
+        if (foundCode == null && isFullName) {
+            foundCode = CodeFinder.getCode(fullName, year);
         }
 
-        if ((foundCode == null || foundCode.equals("")) && isFullName) {
+        if (foundCode == null && isFullName) {
             foundCode = CodeFinder.getHigherCode(fullName, year);
         }
-        if ((foundCode == null || foundCode.equals(""))) {
+        if (foundCode == null) {
             foundCode = CodeFinder.getHigherCode(email, year);
         }
 
-        if ((foundCode == null || foundCode.equals("")) && isFullName) {
-            foundCode = CodeFinder.getCodeByTryingMatchingNames(fullName, year)[1];
-            if (!foundCode.equals("")) {
+        if (foundCode == null && isFullName) {
+            foundCode = CodeFinder.getCodeByTryingMatchingNames(fullName, year);
+            if (foundCode != null) {
                 isPartialMatch = true;
             }
         }
 
-        if ((foundCode == null || foundCode.equals(""))) {
-            foundCode = "";
+        if (foundCode == null) {
+            foundCode = new String[]{"", ""};
         }
-        return new String[]{foundCode, isPartialMatch ? "1" : "0"};
+        return new String[]{foundCode[1], isPartialMatch ? "1" : "0"};
     }
 
     private static void addColumn() {
         List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
         for (var studyYear : studyYears) {
             Connection connection = getConnection(studyYear);
-            var subjects = listExaminedSubjects(studyYear);
+            var subjects = listNonCorrectCodeSubjects(studyYear);
             for (var subject : subjects) {
+                addColumn(connection, subject.getEnglishName(), "right_code");
+                addColumn(connection, subject.getEnglishName(), "right_code_2");
                 addColumn(connection, subject.getEnglishName(), "partial_match");
             }
 
@@ -389,7 +421,7 @@ public class CodeCorrector {
                         code.startsWith(sndCodePrefix) ||
                         code.startsWith(trdCodePrefix) ||
                         code.startsWith(fthCodePrefix)) &&
-                code.substring(2).matches("\\d+") &&
+                code.substring(2).matches("\\d{5}") &&
                 !INVALID_CODE_PATTERN.matcher(code).find();
     }
 

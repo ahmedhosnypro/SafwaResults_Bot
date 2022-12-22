@@ -57,11 +57,11 @@ public class CodeFinder {
         return CodeDataBase.getCodeByTryingMatchingNames(fullName, year);
     }
 
-    public static String getHigherCode(String messageText, StudyYear1444 year) {
+    public static String[] getHigherCode(String messageText, StudyYear1444 year) {
         if (checkNameOrEmail(messageText)) {
             return CodeDataBase.getHigherCode(messageText, year);
         }
-        return "";
+        return null;
     }
 
     public static Student getStudent(String resultCode, StudyYear1444 year) {

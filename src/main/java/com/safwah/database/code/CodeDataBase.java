@@ -87,28 +87,28 @@ public class CodeDataBase {
         return getCodeByTryingMatchingNames(year, fullName);
     }
 
-    public static String getHigherCode(String nameOrEmail, StudyYear1444 year) {
+    public static String[] getHigherCode(String nameOrEmail, StudyYear1444 year) {
         return switch (year) {
             case FST_YEAR -> {
                 String[] result = getCode(StudyYear1444.SND_YEAR, nameOrEmail);
 
-                if (result == null || result[1].equals("")) {
+                if (result == null) {
                     result = getCode(StudyYear1444.TRD_YEAR, nameOrEmail);
                 }
-                if (result == null || result[1].equals("")) {
+                if (result == null) {
                     result = getCode(StudyYear1444.FTH_YEAR, nameOrEmail);
                 }
-                yield result[1];
+                yield result;
             }
             case SND_YEAR -> {
                 String[] result = getCode(StudyYear1444.TRD_YEAR, nameOrEmail);
-                if (result == null || result[1].equals("")) {
+                if (result == null) {
                     result = getCode(StudyYear1444.FTH_YEAR, nameOrEmail);
                 }
-                yield result[1];
+                yield result;
             }
-            case TRD_YEAR, FTH_YEAR -> getCode(StudyYear1444.FTH_YEAR, nameOrEmail)[1];
-            case ERROR -> "";
+            case TRD_YEAR, FTH_YEAR -> getCode(StudyYear1444.FTH_YEAR, nameOrEmail);
+            case ERROR -> null;
         };
     }
 
@@ -181,9 +181,9 @@ public class CodeDataBase {
 
                 //todo
                 //debugging
-                if (!studentFullName.equals("ألان سوارمان ابن ألادين ابن عبد الرحمن")) {
-                    continue;
-                }
+//                if (!studentFullName.equals("ألان سوارمان ابن ألادين ابن عبد الرحمن")) {
+//                    continue;
+//                }
 
                 String code = resultSet.getString("code");
 
