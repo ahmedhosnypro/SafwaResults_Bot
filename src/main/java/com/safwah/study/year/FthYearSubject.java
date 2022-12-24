@@ -7,7 +7,8 @@ public enum FthYearSubject implements YearsSubject {
     HADITH2("حديث [2]", "hadith2", "both", 50, true, true),
     RECENT_PROBLEMS1("قضايا معاصرة [1]", "recent_problems1", "both", 50, true, true),
     RECENT_PROBLEMS2("قضايا معاصرة [2]", "recent_problems2", "both", 50, true, true),
-    ARABIC_ADAAB("الأدب العربي", "arabic_adaab", "both", 50, true, true);
+    ARABIC_ADAAB("الأدب العربي", "arabic_adaab", "both", 50, true, true),
+    SHBHAT("الشبهات الفكرية", "shbhat", "both", 50, true, false);
 
 
     private final String arabicName;

@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-import static com.safwah.bot.code.corrector.CodeCorrector.getMatchCount;
+import static com.safwah.bot.code.corrector.CodeFinder.getMatchCount;
 
 public class CodeDataBase {
     private CodeDataBase() {
@@ -55,7 +55,7 @@ public class CodeDataBase {
             result = getCode(StudyYear1444.TRD_YEAR, nameOrEmail);
             if (result == null) {
                 result = getCode(StudyYear1444.SND_YEAR, nameOrEmail);
-                if (result != null) {
+                if (result == null) {
                     result = getCode(StudyYear1444.FST_YEAR, nameOrEmail);
                 }
             }
@@ -64,14 +64,14 @@ public class CodeDataBase {
     }
 
     @Nullable
-    public static String[] getCodeByTryingMatchingNames(String nameOrEmail) {
-        var result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.FTH_YEAR);
+    public static String[] getCodeByTryingMatchingNames(String nameOrEmail, boolean isRepeating) {
+        var result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.FTH_YEAR, isRepeating);
         if (result == null) {
-            result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.TRD_YEAR);
+            result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.TRD_YEAR, isRepeating);
             if (result == null) {
-                result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.SND_YEAR);
+                result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.SND_YEAR, isRepeating);
                 if (result == null) {
-                    result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.FST_YEAR);
+                    result = getCodeByTryingMatchingNames(nameOrEmail, StudyYear1444.FST_YEAR, isRepeating);
                 }
             }
         }
@@ -83,8 +83,8 @@ public class CodeDataBase {
         return getCode(year, nameOrEmail);
     }
 
-    public static String[] getCodeByTryingMatchingNames(String fullName, StudyYear1444 year) {
-        return getCodeByTryingMatchingNames(year, fullName);
+    public static String[] getCodeByTryingMatchingNames(String fullName, StudyYear1444 year, boolean isRepeating) {
+        return getCodeByTryingMatchingNames(year, fullName, isRepeating);
     }
 
     public static String[] getHigherCode(String nameOrEmail, StudyYear1444 year) {
@@ -126,14 +126,14 @@ public class CodeDataBase {
         return getCode(nameOrEmail, con);
     }
 
-    private static String[] getCodeByTryingMatchingNames(StudyYear1444 studyYear, String fullName) {
+    private static String[] getCodeByTryingMatchingNames(StudyYear1444 studyYear, String fullName, boolean isRepeating) {
         Connection con = switch (studyYear) {
             case SND_YEAR -> sndYearConnection;
             case TRD_YEAR -> trdYearConnection;
             case FTH_YEAR -> _4thYearConnection;
             default -> fstYearConnection;
         };
-        return getCodeByTryingMatchingNames(fullName, con);
+        return getCodeByTryingMatchingNames(fullName, con, isRepeating);
     }
 
     private static Student getStudent(StudyYear1444 studyYear, String resultCode) {
@@ -158,7 +158,7 @@ public class CodeDataBase {
                 String email = resultSet.getString("email");
                 String name = resultSet.getString("name");
                 String code = resultSet.getString("code");
-                return new Student(email == null ? "" : email,
+                return new Student(email == null ? "" : email.toLowerCase(),
                         name == null ? "" : name,
                         code == null ? "" : code);
             }
@@ -169,53 +169,66 @@ public class CodeDataBase {
         return null;
     }
 
-    private static String[] getCodeByTryingMatchingNames(String resultFullName, Connection con) {
+    private static String[] getCodeByTryingMatchingNames(String resultFullName, Connection con, boolean isRepeating) {
         String getResultQuery = """
                 SELECT name, code
                 FROM users
                 """;
         try (Statement statement = con.createStatement()) {
             var resultSet = statement.executeQuery(getResultQuery);
+
+            var result = new String[2];
+            int matchCount = 0;
             while (resultSet.next()) {
                 String studentFullName = resultSet.getString("name");
-
-                //todo
-                //debugging
-//                if (!studentFullName.equals("حفصة المختار عبد الرحمان الرامي")) {
-//                    continue;
-//                }
-
                 String code = resultSet.getString("code");
 
-//                System.out.println("studentFullName = " + studentFullName + " code = " + code);
-
-//                if (!code.equals("AD20089")) {
-//                    continue;
-//                }
-
-
+                //todo
+                {
+//                    //debugging
+//                    if (!studentFullName.equals("حفصة المختار عبد الرحمان الرامي")) {
+//                        continue;
+//                    }
+//                    System.out.println("studentFullName = " + studentFullName + " code = " + code);
+//                    if (!code.equals("AD20089")) {
+//                        continue;
+//                    }
+                }
                 studentFullName = formatName(studentFullName);
                 resultFullName = formatName(resultFullName);
 
-                LinkedHashSet<String> studentFullNameSet = new LinkedHashSet<>(Arrays.asList(studentFullName.split(" ")));
-                LinkedHashSet<String> resultFullNameSet = new LinkedHashSet<>(Arrays.asList(resultFullName.split(" ")));
-
-                if (!(studentFullNameSet.size() < 2 || resultFullNameSet.size() < 2 ||
-                        !studentFullNameSet.iterator().next().equals(resultFullNameSet.iterator().next()))) {
-                    //try to find the same name
-                    int matchCount = 0;
-                    matchCount = getMatchCount(studentFullNameSet, resultFullNameSet, matchCount);
-
-                    if (matchCount > 2) {
-                        return new String[]{studentFullName, code.toUpperCase()};
-                    }
+                matchCount += getPartialMatchCount(resultFullName, result, studentFullName, code);
+                if (!isRepeating && matchCount == 1) {
+                    return result;
                 }
+            }
+            if (matchCount != 0) {
+                return result;
             }
         } catch (SQLException e) {
             Logger.log(e.getMessage());
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    private static int getPartialMatchCount(String resultFullName, String[] result, String studentFullName, String code) {
+        LinkedHashSet<String> studentFullNameSet = new LinkedHashSet<>(Arrays.asList(studentFullName.split(" ")));
+        LinkedHashSet<String> resultFullNameSet = new LinkedHashSet<>(Arrays.asList(resultFullName.split(" ")));
+
+        if (!(studentFullNameSet.size() < 2 || resultFullNameSet.size() < 2 ||
+                !studentFullNameSet.iterator().next().equals(resultFullNameSet.iterator().next()))) {
+            //try to find the same name
+            int partialMatchCount = 0;
+            partialMatchCount = getMatchCount(studentFullNameSet, resultFullNameSet, partialMatchCount);
+
+            if (partialMatchCount > 2) {
+                result[0] = studentFullName;
+                result[1] = code.toUpperCase();
+                return 1;
+            }
+        }
+        return 0;
     }
 
     @NotNull
@@ -247,8 +260,24 @@ public class CodeDataBase {
 
         try (Statement statement = con.createStatement()) {
             var resultSet = statement.executeQuery(getResultQuery);
-            if (resultSet.next()) {
-                return new String[]{resultSet.getString("name"), resultSet.getString("code").toUpperCase()};
+//            if (resultSet.next()) {
+//                return new String[]{resultSet.getString("name"), resultSet.getString("code").toUpperCase()};
+//            }
+
+            var result = new String[2];
+
+            int matchCount = 0;
+            while (resultSet.next()) {
+                if (matchCount != 0) {
+                    matchCount++;
+                    break;
+                }
+                result[0] = resultSet.getString("name");
+                result[1] = resultSet.getString("code").toUpperCase();
+                matchCount++;
+            }
+            if (matchCount == 1) {
+                return result;
             }
         } catch (SQLException e) {
             Logger.log(e.getMessage());
@@ -256,6 +285,23 @@ public class CodeDataBase {
         }
         return null;
     }
+
+
+//    var result = new String[2];
+//
+//    int matchCount = 0;
+//            while (resultSet.next()) {
+//        if (matchCount != 0) {
+//            matchCount++;
+//            break;
+//        }
+//        result[0] = resultSet.getString("name");
+//        result[1] = resultSet.getString("code").toUpperCase();
+//        matchCount++;
+//    }
+//            if (matchCount == 1) {
+//        return result;
+//    }
 
 
     public static boolean isCodeExistsFor(String nameOrEmail) {

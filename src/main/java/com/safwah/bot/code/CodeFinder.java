@@ -4,6 +4,7 @@ import com.safwah.database.code.CodeDataBase;
 import com.safwah.Student;
 import com.safwah.logger.Logger;
 import com.safwah.study.year.StudyYear1444;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,17 +18,14 @@ public class CodeFinder {
     public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
     static void getCode(CodeBot bot, String messageText, long chatId, String username) {
-         if (checkNameOrEmail(bot, messageText, chatId, username)) {
-            String[] result = CodeDataBase.getCode(messageText);
-            if (result == null) {
-                result = CodeDataBase.getCodeByTryingMatchingNames(messageText);
-            }
+        if (checkNameOrEmail(bot, messageText, chatId, username)) {
+            String[] result = tryToGetCode(messageText, true);
             if (result != null) {
                 bot.sendMessage(String.format("""
                         الاسم : <code> %s </code>
-                        
+                                                
                         الكود :  👈👈  <code> %s </code>  👉👉
-                        
+                                                
                         """, result[0], result[1]) +
                         "⚠️⚠️ برجاء استخدام هذا الكود في نموذج الاختبار يمكنك الضغط عليه وسيتم نسخه الى الحافظة ⚠️⚠️", chatId);
                 Logger.log(messageText, username, "CODE", "normal_code");
@@ -37,6 +35,15 @@ public class CodeFinder {
             }
 
         }
+    }
+
+    @Nullable
+    public static String[] tryToGetCode(String messageText, Boolean isRepeating) {
+        String[] result = CodeDataBase.getCode(messageText);
+        if (result == null) {
+            result = CodeDataBase.getCodeByTryingMatchingNames(messageText, isRepeating);
+        }
+        return result;
     }
 
     public static String[] getCode(String messageText) {
@@ -53,8 +60,8 @@ public class CodeFinder {
         return null;
     }
 
-    public static String[] getCodeByTryingMatchingNames(String fullName, StudyYear1444 year) {
-        return CodeDataBase.getCodeByTryingMatchingNames(fullName, year);
+    public static String[] getCodeByTryingMatchingNames(String fullName, StudyYear1444 year, boolean isRepeating) {
+        return CodeDataBase.getCodeByTryingMatchingNames(fullName, year, isRepeating);
     }
 
     public static String[] getHigherCode(String messageText, StudyYear1444 year) {
@@ -105,9 +112,9 @@ public class CodeFinder {
         if (isEmail && isInValidEmail(messageText)) {
             return false;
         } else if (!isEmail) {
-            if (!CodeDataBase.isCodeExistsFor(messageText)) {
-                return false;
-            }
+//            if (!CodeDataBase.isCodeExistsFor(messageText)) {
+//                return false;
+//            }
         } else {
             if (!CodeDataBase.isCodeExistsFor(messageText)) {
                 return false;

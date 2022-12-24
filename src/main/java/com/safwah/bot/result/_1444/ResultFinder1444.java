@@ -13,6 +13,8 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.safwah.bot.code.corrector.Utilities.formatCode;
+import static com.safwah.bot.code.corrector.Utilities.isValidCode;
 import static com.safwah.bot.result.Results.beautyPrinter;
 import static com.safwah.bot.result.Results.intScore;
 
@@ -22,13 +24,13 @@ public class ResultFinder1444 {
     }
 
     static void getResults(ResultBot1444 bot, String input, long chatId, String username) { // input code || name ||  email
-        String formattedCode = CodeCorrector.formatCode(input);
+        String formattedCode = formatCode(input);
         String codePrefix = "";
         if (formattedCode.length() > 2) {
             codePrefix = formattedCode.substring(0, 2);
         }
 
-        if (CodeCorrector.isValidCode(formattedCode)) {
+        if (isValidCode(formattedCode)) {
             StudyYear1444 studyYear = switch (codePrefix) {
                 case "AD" -> StudyYear1444.FST_YEAR;
                 case "AC" -> StudyYear1444.SND_YEAR;
@@ -52,7 +54,7 @@ public class ResultFinder1444 {
                         """, chatId);
             }
         } else {
-            String[] codeResult = CodeFinder.getCode(input);
+             String[] codeResult = CodeFinder.tryToGetCode(input, false);
             if (codeResult != null) {
                 getResults(bot, codeResult[1], chatId, username);
             } else {
@@ -145,7 +147,7 @@ public class ResultFinder1444 {
             resultMessage.append("</pre>\n");
         } else if (isMazhab) {
             resultMessage.append("</pre>\n");
-            resultMessage.append("لم يتم العثور على درجات المذهب");
+            resultMessage.append("لم يتم العثور على درجات المذهب \uD83D\uDE36");
         } else {
             resultMessage.append("</pre>\n");
         }
