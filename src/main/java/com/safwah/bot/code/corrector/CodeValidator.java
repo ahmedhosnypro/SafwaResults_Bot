@@ -1,7 +1,7 @@
 package com.safwah.bot.code.corrector;
 
 import com.safwah.Student;
-import com.safwah.bot.code.CodeFinder;
+import com.safwah.bot.code.bot.CodeFinder;
 import com.safwah.study.year.StudyYear1444;
 
 import java.util.Arrays;

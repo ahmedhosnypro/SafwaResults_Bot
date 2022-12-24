@@ -1,8 +1,7 @@
 package com.safwah.bot.result._1444;
 
 import com.safwah.Student;
-import com.safwah.bot.code.corrector.CodeCorrector;
-import com.safwah.bot.code.CodeFinder;
+import com.safwah.bot.code.bot.CodeFinder;
 import com.safwah.database.code.CodeDataBase;
 import com.safwah.database.result._1444.ResultsDataBase1444;
 import com.safwah.logger.Logger;
@@ -49,12 +48,12 @@ public class ResultFinder1444 {
                         ❌ هذا الكود غير موجود
                                                 
                         تأكد من كتابة الكود بشكل صحيح
-                        
+                                                
                         هذا رد آلي من جهاز كمبيوتر
                         """, chatId);
             }
         } else {
-             String[] codeResult = CodeFinder.tryToGetCode(input, false);
+            String[] codeResult = CodeFinder.tryToGetCode(input, false);
             if (codeResult != null) {
                 getResults(bot, codeResult[1], chatId, username);
             } else {
@@ -180,6 +179,61 @@ public class ResultFinder1444 {
                 default -> throw new IllegalStateException("Unexpected value: " + studyYear);
             }
         }
+    }
+
+    public static int getTotalScore(StudyYear1444 studyYear, String code) {
+        boolean isMazhab;
+        StudyYear1444 inputStudyYear = studyYear;
+
+        LinkedHashMap<? extends YearsSubject, String> results = ResultsDataBase1444.getResults(studyYear, code);
+
+        if (studyYear != StudyYear1444.FST_YEAR) {
+            while (results.values().stream().allMatch(s -> intScore(s) == 0) && studyYear != StudyYear1444.FST_YEAR) {
+                studyYear = switch (studyYear) {
+                    case FTH_YEAR -> StudyYear1444.TRD_YEAR;
+                    case TRD_YEAR -> StudyYear1444.SND_YEAR;
+                    default -> StudyYear1444.FST_YEAR;
+                };
+                results = ResultsDataBase1444.getResults(studyYear, code);
+            }
+            if (results.values().stream().allMatch(s -> intScore(s) == 0) && inputStudyYear != studyYear) {
+                studyYear = inputStudyYear;
+                results = ResultsDataBase1444.getResults(studyYear, code);
+            }
+        }
+
+        if (results.keySet().stream().anyMatch(s ->
+                s.getEnglishName().equals("fiqhShafeey") || s.getEnglishName().equals("fiqhHanafy") ||
+                        s.getEnglishName().equals("fiqhMalky") || s.getEnglishName().equals("fiqhHanbaly"))) {
+            isMazhab = true;
+        } else {
+            isMazhab = false;
+        }
+
+        AtomicReference<Integer> totalScore = new AtomicReference<>(0);
+        AtomicInteger subjectCnt = new AtomicInteger();
+
+
+        final boolean[] isMazhabScoreFound = {false};
+        LinkedHashMap<YearsSubject, String> mazhabScore = new LinkedHashMap<>();
+        results.forEach((subject, score) -> {
+            totalScore.updateAndGet(v -> v + intScore(score));
+            subjectCnt.getAndIncrement();
+            if (isMazhab) {
+                if (subject.getEnglishName().equals("fiqhShafeey") ||
+                        subject.getEnglishName().equals("fiqhHanafy") ||
+                        subject.getEnglishName().equals("fiqhMalky") ||
+                        subject.getEnglishName().equals("fiqhHanbaly")) {
+                    if (!isMazhabScoreFound[0]) {
+                        if (intScore(score) > 0) {
+                            isMazhabScoreFound[0] = true;
+                            mazhabScore.put(subject, score);
+                        }
+                    }
+                }
+            }
+        });
+        return totalScore.get();
     }
 
     static void getLastResults(ResultBot1444 bot, StudyYear1444 studyYear, String code, long chatId, String username) {

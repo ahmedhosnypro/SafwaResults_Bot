@@ -56,17 +56,17 @@ public class CodeCorrector {
     }
 
     private static void correctCode(Connection connection, StudyYear1444 studyYear, String subject, boolean isReport) {
-//        String codeListQuery = String.format("""
-//                SELECT code, fullName, email, right_code_2
-//                FROM %s
-//                """, subject);
-
-//        skip corrected codes when retrying
         String codeListQuery = String.format("""
                 SELECT code, fullName, email, right_code_2
                 FROM %s
-                WHERE right_code_2 is null or right_code_2 not like 'A%%'
                 """, subject);
+
+//        skip corrected codes when retrying
+//        String codeListQuery = String.format("""
+//                SELECT code, fullName, email, right_code_2
+//                FROM %s
+//                WHERE right_code_2 is null or right_code_2 not like 'A%%'
+//                """, subject);
 
 //         repair code for a student
 //        String codeListQuery = String.format("""
@@ -128,13 +128,13 @@ public class CodeCorrector {
     }
 
     private static void correctCode(boolean isReport) {
-        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
-//        List<StudyYear1444> studyYears = List.of(FST_YEAR);
+//        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
+        List<StudyYear1444> studyYears = List.of(SND_YEAR, TRD_YEAR, FTH_YEAR);
         for (var studyYear : studyYears) {
             Connection connection = getConnection(studyYear);
 
-            var subjects = listNonCorrectCodeSubjects(studyYear);
-//            var subjects = listExaminedSubjects(studyYear);
+//            var subjects = listNonCorrectCodeSubjects(studyYear);
+            var subjects = listExaminedSubjects(studyYear);
             for (var subject : subjects) {
                 if (isReport) {
                     currentSubjectCodes = new ArrayList<>();

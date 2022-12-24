@@ -90,7 +90,7 @@ public class Utilities {
     }
 
     @NotNull
-    static String getFormattedFullName(String inputFullName) {
+    public static String getFormattedFullName(String inputFullName) {
         return inputFullName.trim()
                 .replaceAll("[أإآ]", "ا")
                 .replaceAll("ؤ", "و")

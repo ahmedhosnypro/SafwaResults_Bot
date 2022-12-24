@@ -1,4 +1,4 @@
-package com.safwah.bot.code;
+package com.safwah.bot.code.bot;
 
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;

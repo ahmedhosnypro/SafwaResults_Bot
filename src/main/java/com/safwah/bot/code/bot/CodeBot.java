@@ -1,4 +1,4 @@
-package com.safwah.bot.code;
+package com.safwah.bot.code.bot;
 
 import com.safwah.logger.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;

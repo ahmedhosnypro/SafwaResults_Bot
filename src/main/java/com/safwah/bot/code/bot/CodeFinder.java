@@ -1,4 +1,4 @@
-package com.safwah.bot.code;
+package com.safwah.bot.code.bot;
 
 import com.safwah.database.code.CodeDataBase;
 import com.safwah.Student;

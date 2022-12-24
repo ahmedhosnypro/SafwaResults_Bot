@@ -3,7 +3,7 @@ package com.safwah;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.power.PowerManagement;
 import com.safwah.bot.Bot;
-import com.safwah.bot.code.CodeBotRunner;
+import com.safwah.bot.code.bot.CodeBotRunner;
 import com.safwah.bot.result._1443.BotRunner;
 import com.safwah.bot.result._1444.BotRunner1444;
 import com.safwah.database.result._1443.IdYearDataBase;

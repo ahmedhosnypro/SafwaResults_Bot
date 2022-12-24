@@ -1,4 +1,4 @@
-package com.safwah.bot.code;
+package com.safwah.bot.code.bot;
 
 public enum CodeMessageText {
     START_MESSAGE("أدخل اسمك أو بريدك الإلكتروني"),

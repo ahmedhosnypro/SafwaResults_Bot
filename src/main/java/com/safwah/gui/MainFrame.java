@@ -10,7 +10,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.safwah.Main;
 import com.safwah.bot.Bot;
-import com.safwah.bot.code.CodeBotRunner;
+import com.safwah.bot.code.bot.CodeBotRunner;
 import com.safwah.bot.result._1443.BotRunner;
 import com.safwah.bot.result._1444.BotRunner1444;
 import li.flor.nativejfilechooser.NativeJFileChooser;

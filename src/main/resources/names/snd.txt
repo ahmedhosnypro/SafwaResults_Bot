@@ -1,0 +1,122 @@
+{
+  "سماح محمد عمر لطفي": [
+    {
+      "name": "samahlotfy09@gmail.com",
+      "email": "سماح محمد عمر لطفي",
+      "code": "AC02204",
+      "totalScore": 36
+    }
+  ],
+  "سام الدين بن اسماعيل بن عبدالمومن التراوري": [
+    {
+      "name": "samudeen8585@gmail.com",
+      "email": "سام الدين بن اسماعيل بن عبدالمومن التراوري",
+      "code": "AC02834",
+      "totalScore": 44
+    }
+  ],
+  "انعام الحسن": [
+    {
+      "name": "hasaninamul589@gmail.com",
+      "email": "انعام الحسن",
+      "code": "AC02639",
+      "totalScore": 22
+    }
+  ],
+  "ياسمين يوسف محمد رمضان": [
+    {
+      "name": "jassyossif@gmail.com",
+      "email": "ياسمين يوسف محمد رمضان",
+      "code": "AC02106",
+      "totalScore": 42
+    }
+  ],
+  "سماح محمد عبدالفتاح زيدان": [
+    {
+      "name": "moumadsama@gmail.com",
+      "email": "سماح محمد عبدالفتاح زيدان",
+      "code": "AC02619",
+      "totalScore": 40
+    }
+  ],
+  "احمد محمد احمد الزعبي": [
+    {
+      "name": "alzoubia.1980@gmail.com",
+      "email": "احمد محمد احمد الزعبي",
+      "code": "AC02730",
+      "totalScore": 76
+    }
+  ],
+  "خميس مرزوق محمود علي": [
+    {
+      "name": "khmysmrzwq818@gmail.com",
+      "email": "خميس مرزوق محمود علي",
+      "code": "AC02019",
+      "totalScore": 42
+    }
+  ],
+  "زينب عبدالسيد علي احمد": [
+    {
+      "name": "WWW.admashrafdshnawy@gmail.com",
+      "email": "زينب عبدالسيد علي احمد",
+      "code": "AC02252",
+      "totalScore": 21
+    }
+  ],
+  "صلاح يسري شاذلي عاشور": [
+    {
+      "name": "syosry48@jmail.com",
+      "email": "صلاح يسري شاذلي عاشور",
+      "code": "AC02677",
+      "totalScore": 82
+    }
+  ],
+  "حبيبه حسن عمر احمد الحلو": [
+    {
+      "name": "habibahelo10@gmail.com",
+      "email": "حبيبه حسن عمر احمد الحلو",
+      "code": "AC02074",
+      "totalScore": 40
+    }
+  ],
+  "حلوه نورا بنت عبدالمطلب": [
+    {
+      "name": "raaziiz93@gmail.com",
+      "email": "حلوه نورا بنت عبدالمطلب",
+      "code": "AC01795",
+      "totalScore": 34
+    }
+  ],
+  "مريم اسماعيل محمد سعافين": [
+    {
+      "name": "umrushdi1956@gmail.com",
+      "email": "مريم اسماعيل محمد سعافين",
+      "code": "AC02680",
+      "totalScore": 48
+    }
+  ],
+  "ماجده حسن محمد احمد": [
+    {
+      "name": "mama_adda@hotmail.com",
+      "email": "ماجده حسن محمد احمد",
+      "code": "AC02403",
+      "totalScore": 40
+    }
+  ],
+  "نفيسه محمد عبدالنعيم محمد": [
+    {
+      "name": "b51289874@gmail.com",
+      "email": "نفيسه محمد عبدالنعيم محمد",
+      "code": "AC01086",
+      "totalScore": 64
+    }
+  ],
+  "بسمه محمد مرسي عبدالفتاح": [
+    {
+      "name": "morsybasma659@gmail.com",
+      "email": "بسمه محمد مرسي عبدالفتاح",
+      "code": "AC01588",
+      "totalScore": 32
+    }
+  ]
+}{}

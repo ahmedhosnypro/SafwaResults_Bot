@@ -49,23 +49,23 @@ public class CodeFinder {
 
     public static String[] searchCode(String email, String fullName, StudyYear1444 year) {
         boolean isPartialMatch = false;
-        String[] foundCode = com.safwah.bot.code.CodeFinder.getCode(email, year);
+        String[] foundCode = com.safwah.bot.code.bot.CodeFinder.getCode(email, year);
 
         boolean isFullName = fullName.split(" ").length > 2;
 
         if (foundCode == null) {
-            foundCode = com.safwah.bot.code.CodeFinder.getCode(fullName, year);
+            foundCode = com.safwah.bot.code.bot.CodeFinder.getCode(fullName, year);
         }
 
         if (foundCode == null) {
-            foundCode = com.safwah.bot.code.CodeFinder.getHigherCode(fullName, year);
+            foundCode = com.safwah.bot.code.bot.CodeFinder.getHigherCode(fullName, year);
         }
         if (foundCode == null) {
-            foundCode = com.safwah.bot.code.CodeFinder.getHigherCode(email, year);
+            foundCode = com.safwah.bot.code.bot.CodeFinder.getHigherCode(email, year);
         }
 
         if (foundCode == null && isFullName) {
-            foundCode = com.safwah.bot.code.CodeFinder.getCodeByTryingMatchingNames(fullName, year, false);
+            foundCode = com.safwah.bot.code.bot.CodeFinder.getCodeByTryingMatchingNames(fullName, year, false);
             if (foundCode != null) {
                 isPartialMatch = true;
             }
