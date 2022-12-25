@@ -231,6 +231,23 @@ public class CodeDataBase {
         return 0;
     }
 
+    public static int getPartialMatchCount(String resultFullName, String studentFullName) {
+        LinkedHashSet<String> studentFullNameSet = new LinkedHashSet<>(Arrays.asList(studentFullName.split(" ")));
+        LinkedHashSet<String> resultFullNameSet = new LinkedHashSet<>(Arrays.asList(resultFullName.split(" ")));
+
+        if (!(studentFullNameSet.size() < 2 || resultFullNameSet.size() < 2 ||
+                !studentFullNameSet.iterator().next().equals(resultFullNameSet.iterator().next()))) {
+            //try to find the same name
+            int partialMatchCount = 0;
+            partialMatchCount = getMatchCount(studentFullNameSet, resultFullNameSet, partialMatchCount);
+
+            if (partialMatchCount > 2) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
     @NotNull
     private static String formatName(String studentFullName) {
         studentFullName = studentFullName.replaceAll("[أإآ]", "ا")

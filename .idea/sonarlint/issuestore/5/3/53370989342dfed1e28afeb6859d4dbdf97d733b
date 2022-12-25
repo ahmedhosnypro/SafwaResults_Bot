@@ -14,14 +14,6 @@ V	java:S125"<This block of commented-out lines of code should be removed.(…Æ®
 V	java:S125 "<This block of commented-out lines of code should be removed.(µÖ÷åÿÿÿÿÿ
 ?
 java:S2115+")Add password protection to this database.(™“Š£
-c
-java:S5361J"HReplace this call to "replaceAll()" by a call to the "replace()" method.(†º…®ûÿÿÿÿ
-^
-java:S5361I"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ıš†Ë
-‚
-java:S5854H"gUse the CANON_EQ flag with "Pattern.compile(pattern, CANON_EQ).matcher(input).replaceAll(replacement)".(“ä¥èüÿÿÿÿ
-c
-java:S5361H"HReplace this call to "replaceAll()" by a call to the "replace()" method.(“ä¥èüÿÿÿÿ
 L
 java:S1068"1Remove this unused "AQIDA_EXAM_ID" private field.(î¨íüÿÿÿÿ
 G

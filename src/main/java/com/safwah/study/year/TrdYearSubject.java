@@ -11,7 +11,7 @@ public enum TrdYearSubject implements YearsSubject {
     MOSTALH_HADITH("مصطلح الحديث", "mostalhHadith", "both", 50, true, true),
     FIQH_RULES("قواعد فقهية", "fiqhRules", "both", 50, true, true),
     TAFSEER("التفسير", "tafseer", "fst", 100, true, true),
-    TAGWID("التجويد", "tagwid", "fst", 50, true, false),
+    TAGWID("التجويد", "tagwid", "fst", 50, true, true),
     OSOOL("أصول الفقه", "osool", "fst", 50, false, false),
     FERAQ("الفرق والمذاهب", "feraq", "both", 50, false, false),
     HISTORY("التاريخ", "history", "both", 50, false, false),

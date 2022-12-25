@@ -11,7 +11,7 @@ public enum SndYearSubject implements YearsSubject {
     TAFSEER("التفسير", "tafseer", "both", 50, true, true),
     BALAGHA("البلاغة", "balagha", "fst", 100, true, true),
     SERA("السيرة", "sera", "both", 50, true, true),
-    OLOOM_QURAN("علوم القرآن", "oloomQuran", "both", 50, true, false),
+    OLOOM_QURAN("علوم القرآن", "oloomQuran", "both", 50, true, true),
     MERATH("الميراث", "merath", "snd", 50, false, false),
 
     SARF("الصرف", "sarf", "snd", 50, false, false);

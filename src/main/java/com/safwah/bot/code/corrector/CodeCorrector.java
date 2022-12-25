@@ -133,8 +133,8 @@ public class CodeCorrector {
         for (var studyYear : studyYears) {
             Connection connection = getConnection(studyYear);
 
-//            var subjects = listNonCorrectCodeSubjects(studyYear);
-            var subjects = listExaminedSubjects(studyYear);
+            var subjects = listNonCorrectCodeSubjects(studyYear);
+//            var subjects = listExaminedSubjects(studyYear);
             for (var subject : subjects) {
                 if (isReport) {
                     currentSubjectCodes = new ArrayList<>();

@@ -58,7 +58,7 @@ public enum StudyYear {
         List<? extends YearsSubject> subjects;
         subjects = switch (studyYear) {
             case FTH_YEAR -> Arrays.stream(TrdYearSubject.values())
-                    .filter(subject -> subject.getTerm().equals("both") || subject.getTerm().equals(term))
+                    .filter(subject -> (subject.getTerm().equals("both") || subject.getTerm().equals(term)) && subject != TrdYearSubject.FIQH_RULES)
                     .sorted(Comparator.comparing(Enum::ordinal)).toList();
             case TRD_YEAR -> Arrays.stream(SndYearSubject.values())
                     .filter(subject -> subject.getTerm().equals("both") || subject.getTerm().equals(term))

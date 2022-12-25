@@ -71,5 +71,12 @@
       <jdbc-url>jdbc:sqlite:C:/SafwahResult_bot/resources/fstYearResults.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="institute.db" uuid="e575dd8c-f5b1-4915-8f5e-9770ec8f1f75">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:/SafwahResult_bot/resources/institute.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
