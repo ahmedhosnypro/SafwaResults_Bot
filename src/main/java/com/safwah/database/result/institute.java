@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-import static com.safwah.bot.code.corrector.Utilities.getFormattedFullName;
+import static com.safwah.bot.code.corrector.CodeUtilities.getFormattedFullName;
 import static com.safwah.database.code.CodeDataBase.getPartialMatchCount;
 
 public class institute {

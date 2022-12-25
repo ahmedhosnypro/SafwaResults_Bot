@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class Utilities {
+public class CodeUtilities {
     static final Pattern INVALID_CODE_PATTERN = Pattern.compile("^([e-zE-Z])");
     static int codeLength = 7;
     static String fstCodePrefix = "AD";

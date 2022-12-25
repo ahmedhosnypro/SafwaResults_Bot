@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 import static com.safwah.bot.code.corrector.CodeFinder.getMatchCount;
-import static com.safwah.bot.code.corrector.Utilities.getFormattedFullName;
+import static com.safwah.bot.code.corrector.CodeUtilities.getFormattedFullName;
 
 public class CodeValidator {
     static String validateCode(String resultCode, String resultEmail, String resultFullName, StudyYear1444 studyYear) {

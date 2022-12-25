@@ -37,7 +37,6 @@ public class DataBaseEditor {
     static List<String> currentSubjectCorrectedCodes = new ArrayList<>();
 
 
-
     static {
         fstDataSource.setUrl(JDBC_URL_PREFIX + Main.getResourcePath() + fstYearDb);
         sndDataSource.setUrl(JDBC_URL_PREFIX + Main.getResourcePath() + sndYearDb);
@@ -62,7 +61,7 @@ public class DataBaseEditor {
         repeatedCorrectedCodesJson.put(FTH_YEAR.name(), new LinkedHashMap<>());
     }
 
-    static Connection getConnection(StudyYear1444 studyYear) {
+    public static Connection getConnection(StudyYear1444 studyYear) {
         return switch (studyYear) {
             case FST_YEAR -> fstYearConnection;
             case SND_YEAR -> sndYearConnection;
@@ -74,19 +73,20 @@ public class DataBaseEditor {
 
     static void updateCode(Connection connection, String updateCodeQuery, String inputCode, String inputFullName, String inputEmail, String resultCode, String partialMatch) {
 //        if (!resultCode.equals("")) {
-            try (PreparedStatement updateStatement = connection.prepareStatement(updateCodeQuery)) {
-                updateStatement.setString(1, resultCode);
-                updateStatement.setString(2, partialMatch);
-                updateStatement.setString(3, inputCode);
-                updateStatement.setString(4, inputFullName);
-                updateStatement.setString(5, inputEmail);
-                updateStatement.executeUpdate();
+        try (PreparedStatement updateStatement = connection.prepareStatement(updateCodeQuery)) {
+            updateStatement.setString(1, resultCode);
+            updateStatement.setString(2, partialMatch);
+            updateStatement.setString(3, inputCode);
+            updateStatement.setString(4, inputFullName);
+            updateStatement.setString(5, inputEmail);
+            updateStatement.executeUpdate();
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 //        }
     }
+
     private static void resetCorrectCode() {
         List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
         for (var studyYear : studyYears) {
@@ -105,22 +105,23 @@ public class DataBaseEditor {
             Connection connection = getConnection(studyYear);
             var subjects = listNonCorrectCodeSubjects(studyYear);
             for (var subject : subjects) {
-                addColumn(connection, subject.getEnglishName(), "right_code");
-                addColumn(connection, subject.getEnglishName(), "right_code_2");
-                addColumn(connection, subject.getEnglishName(), "partial_match");
+                addColumn(connection, subject.getEnglishName(), "right_code", "TEXT");
+                addColumn(connection, subject.getEnglishName(), "right_code_2", "TEXT");
+                addColumn(connection, subject.getEnglishName(), "partial_match", "TEXT");
             }
 
         }
     }
 
-    public static void addColumn(Connection connection, String englishName, String columnName) {
+    public static void addColumn(Connection connection, String tableName, String columnName, String columnType) {
         try (Statement statement = connection.createStatement()) {
-            String sql = "ALTER TABLE " + englishName + " ADD  " + columnName + " TEXT";
+            String sql = "ALTER TABLE " + tableName + " ADD  " + columnName + " " + columnType;
             statement.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     private static void resetCorrectCode(Connection connection, StudyYear1444 studyYear, String subject) {
         try (Statement statement = connection.createStatement()) {

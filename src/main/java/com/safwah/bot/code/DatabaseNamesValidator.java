@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.safwah.bot.code.corrector.Utilities.getFormattedFullName;
+import static com.safwah.bot.code.corrector.CodeUtilities.getFormattedFullName;
 import static com.safwah.bot.result._1444.ResultFinder1444.getTotalScore;
 
 public class DatabaseNamesValidator {

@@ -10,7 +10,7 @@ import java.util.*;
 
 import static com.safwah.bot.code.corrector.CodeFinder.*;
 import static com.safwah.bot.code.corrector.DataBaseEditor.*;
-import static com.safwah.bot.code.corrector.Utilities.*;
+import static com.safwah.bot.code.corrector.CodeUtilities.*;
 import static com.safwah.study.year.StudyYear1444.*;
 
 
