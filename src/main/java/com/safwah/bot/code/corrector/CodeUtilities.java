@@ -1,7 +1,7 @@
 package com.safwah.bot.code.corrector;
 
 import com.safwah.Person;
-import com.safwah.study.year.StudyYear1444;
+import com.safwah.study.year.university.StudyYear1444;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -18,10 +18,9 @@ import java.util.regex.Pattern;
 public class CodeUtilities {
     static final Pattern INVALID_CODE_PATTERN = Pattern.compile("^([e-zE-Z])");
     static int codeLength = 7;
-    static String fstCodePrefix = "AD";
-    static String sndCodePrefix = "AC";
-    static String trdCodePrefix = "AB";
-    static String fthCodePrefix = "AA";
+    static String fstCodePrefix = "AAC";
+    static String sndCodePrefix = "AAB";
+    static String trdCodePrefix = "AAA";
 
     private static final String CURRENT_SUBJECT_CODES_PATH_NAME = "D:\\13-Projects\\SafwaResults_Bot\\src\\main\\resources\\code\\repeated_codes.json";
     private static final String CURRENT_SUBJECT_CORRECTED_CODES_PATH_NAME = "D:\\13-Projects\\SafwaResults_Bot\\src\\main\\resources\\code\\repeated_corrected_codes.json";
@@ -36,8 +35,7 @@ public class CodeUtilities {
         return code.length() == codeLength &&
                 (code.startsWith(fstCodePrefix) ||
                         code.startsWith(sndCodePrefix) ||
-                        code.startsWith(trdCodePrefix) ||
-                        code.startsWith(fthCodePrefix)) &&
+                        code.startsWith(trdCodePrefix)) &&
                 code.substring(2).matches("\\d{5}") &&
                 !INVALID_CODE_PATTERN.matcher(code).find();
     }

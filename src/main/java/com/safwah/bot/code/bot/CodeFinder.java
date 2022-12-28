@@ -3,7 +3,7 @@ package com.safwah.bot.code.bot;
 import com.safwah.database.code.CodeDataBase;
 import com.safwah.Student;
 import com.safwah.logger.Logger;
-import com.safwah.study.year.StudyYear1444;
+import com.safwah.study.year.university.StudyYear1444;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Matcher;

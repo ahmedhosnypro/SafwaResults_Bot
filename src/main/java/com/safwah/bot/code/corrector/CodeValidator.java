@@ -2,7 +2,7 @@ package com.safwah.bot.code.corrector;
 
 import com.safwah.Student;
 import com.safwah.bot.code.bot.CodeFinder;
-import com.safwah.study.year.StudyYear1444;
+import com.safwah.study.year.university.StudyYear1444;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -11,7 +11,7 @@ import static com.safwah.bot.code.corrector.CodeFinder.getMatchCount;
 import static com.safwah.bot.code.corrector.CodeUtilities.getFormattedFullName;
 
 public class CodeValidator {
-    static String validateCode(String resultCode, String resultEmail, String resultFullName, StudyYear1444 studyYear) {
+    public static String validateCode(String resultCode, String resultEmail, String resultFullName, StudyYear1444 studyYear) {
         Student student = CodeFinder.getStudent(resultCode, studyYear);
         if (student == null) {
             return "";

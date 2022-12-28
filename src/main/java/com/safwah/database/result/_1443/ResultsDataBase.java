@@ -2,7 +2,7 @@ package com.safwah.database.result._1443;
 
 import com.safwah.Main;
 import com.safwah.logger.Logger;
-import com.safwah.study.year.StudyYear;
+import com.safwah.study.year.university.StudyYear;
 import com.safwah.study.year.YearsSubject;
 import kotlin.Pair;
 import org.sqlite.SQLiteDataSource;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-import static com.safwah.study.year.StudyYear.listSubjects;
+import static com.safwah.study.year.university.StudyYear.listSubjects;
 
 public class ResultsDataBase {
     private ResultsDataBase() {

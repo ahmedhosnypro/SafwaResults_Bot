@@ -3,7 +3,7 @@ package com.safwah.bot.result._1443;
 import com.safwah.database.result._1443.IdYearDataBase;
 import com.safwah.database.result._1443.ResultsDataBase;
 import com.safwah.logger.Logger;
-import com.safwah.study.year.StudyYear;
+import com.safwah.study.year.university.StudyYear;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;

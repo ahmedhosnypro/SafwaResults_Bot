@@ -1,6 +1,5 @@
 package com.safwah.bot.result._1444;
 
-import com.safwah.study.year.StudyYear;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 

@@ -5,7 +5,7 @@ import com.safwah.bot.code.bot.CodeFinder;
 import com.safwah.database.code.CodeDataBase;
 import com.safwah.database.result._1444.ResultsDataBase1444;
 import com.safwah.logger.Logger;
-import com.safwah.study.year.StudyYear1444;
+import com.safwah.study.year.university.StudyYear1444;
 import com.safwah.study.year.YearsSubject;
 
 import java.util.LinkedHashMap;

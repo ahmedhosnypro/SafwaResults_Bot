@@ -1,7 +1,7 @@
 package com.safwah.bot.code.corrector;
 
 import com.safwah.Main;
-import com.safwah.study.year.StudyYear1444;
+import com.safwah.study.year.university.StudyYear1444;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,7 +11,7 @@ import java.util.*;
 import static com.safwah.bot.code.corrector.CodeFinder.*;
 import static com.safwah.bot.code.corrector.DataBaseEditor.*;
 import static com.safwah.bot.code.corrector.CodeUtilities.*;
-import static com.safwah.study.year.StudyYear1444.*;
+import static com.safwah.study.year.university.StudyYear1444.*;
 
 
 public class CodeCorrector {
@@ -21,6 +21,10 @@ public class CodeCorrector {
 
 
     public static void main(String[] args) {
+        correctCode();
+    }
+
+    static void correctCode(){
         //time now var
         long startTime = System.currentTimeMillis();
         boolean isReport = false;
@@ -52,10 +56,9 @@ public class CodeCorrector {
         long timeElapsed = (endTime - startTime) / 1000;
         System.out.println("Execution time in seconds: " + timeElapsed);
         System.out.println("Execution time in minutes: " + timeElapsed / 60);
-
     }
 
-    private static void correctCode(Connection connection, StudyYear1444 studyYear, String subject, boolean isReport) {
+     static void correctCode(Connection connection, StudyYear1444 studyYear, String subject, boolean isReport) {
         String codeListQuery = String.format("""
                 SELECT code, fullName, email, right_code_2
                 FROM %s

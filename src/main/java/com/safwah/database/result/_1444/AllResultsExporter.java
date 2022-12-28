@@ -4,7 +4,7 @@ import com.safwah.Main;
 import com.safwah.bot.code.bot.CodeFinder;
 import com.safwah.bot.code.corrector.CodeUtilities;
 import com.safwah.bot.code.corrector.DataBaseEditor;
-import com.safwah.study.year.StudyYear1444;
+import com.safwah.study.year.university.StudyYear1444;
 import com.safwah.study.year.YearsSubject;
 
 import java.sql.Connection;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 import static com.safwah.bot.code.corrector.DataBaseEditor.getConnection;
 import static com.safwah.bot.result.Results.intScore;
-import static com.safwah.study.year.StudyYear1444.*;
+import static com.safwah.study.year.university.StudyYear1444.*;
 
 public class AllResultsExporter {
 

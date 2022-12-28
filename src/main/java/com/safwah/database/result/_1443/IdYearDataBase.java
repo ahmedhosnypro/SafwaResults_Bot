@@ -1,6 +1,6 @@
 package com.safwah.database.result._1443;
 
-import com.safwah.study.year.StudyYear;
+import com.safwah.study.year.university.StudyYear;
 import com.safwah.Main;
 import com.safwah.logger.Logger;
 import org.sqlite.SQLiteDataSource;

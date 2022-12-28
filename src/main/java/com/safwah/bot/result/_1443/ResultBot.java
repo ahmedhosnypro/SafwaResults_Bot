@@ -2,7 +2,7 @@ package com.safwah.bot.result._1443;
 
 import com.safwah.database.result._1443.IdYearDataBase;
 import com.safwah.logger.Logger;
-import com.safwah.study.year.StudyYear;
+import com.safwah.study.year.university.StudyYear;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

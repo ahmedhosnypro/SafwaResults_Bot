@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.safwah.Student;
 import com.safwah.database.code.CodeDataBase;
-import com.safwah.study.year.StudyYear1444;
+import com.safwah.study.year.university.StudyYear1444;
 
 import java.io.IOException;
 import java.io.Writer;
