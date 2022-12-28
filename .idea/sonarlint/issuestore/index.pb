@@ -49,8 +49,6 @@ l
 <src/main/java/com/safwah/bot/result/_1444/ResultBot1444.java,8\4\84f8f969ecc93fea9f0c441146c46b05264da447
 t
 Dsrc/main/java/com/safwah/bot/result/_1444/ResultMessageText1444.java,3\6\3623df884613dbd01a367232140921809998e3d4
-t
-Dsrc/main/java/com/safwah/bot/result/_1444/ResultBotExecutor1444.java,5\6\56402f95d0ab80964ac37f32f22664338a5d58fd
 l
 <src/main/java/com/safwah/bot/result/_1444/BotRunner1444.java,c\0\c0c8bd80aa7cb7468caf3264fff2dae48b9974ac
 T
@@ -71,14 +69,10 @@ w
 Gsrc/main/java/com/safwah/database/result/_1444/ResultsDataBase1444.java,9\5\95e0ea04d5fd3c70a4f8fa8d03b21fb5e9523fc9
 `
 0src/main/java/com/safwah/bot/result/Results.java,f\8\f825668f2b68663dbf25f02c0a3114173eda7ac4
-o
-?src/main/java/com/safwah/bot/result/_1444/ResultFinder1444.java,4\6\46cac5c74d84ad03842939c58a8286fa5498308a
 [
 +src/main/java/com/safwah/gui/MainFrame.java,4\4\442482855e06ae78f8c1a65c5df6c56809313eb7
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-v
-Fsrc/main/java/com/safwah/database/result/_1444/AllResultsExporter.java,c\3\c394cad7a35b62571771d8dbec7d290985f68e8b
 R
 "src/main/java/com/safwah/Main.java,e\0\e05773666afb5a96af6eca6ae35a4e9b2e44986e
 ^
@@ -93,8 +87,6 @@ q
 Asrc/main/java/com/safwah/study/year/university/StudyYear1444.java,6\f\6f61b07e755238886d912b44094aa796d19f49c7
 z
 Jsrc/main/java/com/safwah/study/year/institute/InstituteFstYearSubject.java,1\8\18077155f1e68e34a6df5b0e8542b23142de9e0a
-n
->src/main/java/com/safwah/bot/code/corrector/CodeUtilities.java,4\2\42b0c5b068790b9be94c3dbbc22fd26016d29241
 Å
 Qsrc/main/java/com/safwah/bot/code/corrector/institute/InstituteCodeValidator.java,4\5\45b95f90de2073f919606083d6fb7bc74c8a1ccd
 y

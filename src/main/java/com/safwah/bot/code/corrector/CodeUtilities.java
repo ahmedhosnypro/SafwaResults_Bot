@@ -18,12 +18,31 @@ import java.util.regex.Pattern;
 public class CodeUtilities {
     static final Pattern INVALID_CODE_PATTERN = Pattern.compile("^([e-zE-Z])");
     static int codeLength = 7;
-    static String fstCodePrefix = "AAC";
-    static String sndCodePrefix = "AAB";
-    static String trdCodePrefix = "AAA";
+    static String fstCodePrefix = "AD";
+    static String sndCodePrefix = "AC";
+    static String trdCodePrefix = "AB";
+    static String fthCodePrefix = "AA";
+    static String instituteFstCodePrefix = "AAC";
+    static String instituteSndCodePrefix = "AAB";
+    static String instituteTrdCodePrefix = "AAA";
 
     private static final String CURRENT_SUBJECT_CODES_PATH_NAME = "D:\\13-Projects\\SafwaResults_Bot\\src\\main\\resources\\code\\repeated_codes.json";
     private static final String CURRENT_SUBJECT_CORRECTED_CODES_PATH_NAME = "D:\\13-Projects\\SafwaResults_Bot\\src\\main\\resources\\code\\repeated_corrected_codes.json";
+
+    public static boolean isValidInstituteCode(String code) {
+        // if code has valid length
+        // and code starts with valid prefix
+        // remaining characters are digits
+        // and don't have invalid characters
+        // then code is valid
+        code = formatCode(code);
+        return code.length() == codeLength &&
+                (code.startsWith(instituteFstCodePrefix) ||
+                        code.startsWith(instituteSndCodePrefix) ||
+                        code.startsWith(instituteTrdCodePrefix)) &&
+                code.substring(2).matches("\\d{5}") &&
+                !INVALID_CODE_PATTERN.matcher(code).find();
+    }
 
     public static boolean isValidCode(String code) {
         // if code has valid length
@@ -35,10 +54,13 @@ public class CodeUtilities {
         return code.length() == codeLength &&
                 (code.startsWith(fstCodePrefix) ||
                         code.startsWith(sndCodePrefix) ||
-                        code.startsWith(trdCodePrefix)) &&
+                        code.startsWith(trdCodePrefix) ||
+                        code.startsWith(fthCodePrefix)) &&
                 code.substring(2).matches("\\d{5}") &&
                 !INVALID_CODE_PATTERN.matcher(code).find();
     }
+
+
 
     public static String formatCode(String inputCode) {
         return inputCode.trim().toUpperCase()

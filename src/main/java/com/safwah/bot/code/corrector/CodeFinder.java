@@ -6,8 +6,8 @@ import com.safwah.study.year.university.StudyYear1444;
 
 import java.util.Set;
 
-import static com.safwah.bot.code.corrector.CodeValidator.validateCode;
 import static com.safwah.bot.code.corrector.CodeUtilities.isValidCode;
+import static com.safwah.bot.code.corrector.CodeValidator.validateCode;
 
 public class CodeFinder {
 

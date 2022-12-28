@@ -12,8 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.safwah.bot.code.corrector.CodeUtilities.formatCode;
-import static com.safwah.bot.code.corrector.CodeUtilities.isValidCode;
+import static com.safwah.bot.code.corrector.CodeUtilities.*;
 import static com.safwah.bot.result.Results.beautyPrinter;
 import static com.safwah.bot.result.Results.intScore;
 

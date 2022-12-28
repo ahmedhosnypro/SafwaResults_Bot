@@ -5,7 +5,7 @@ import com.safwah.study.year.institute.InstituteStudyYear1444;
 
 import java.util.Set;
 
-import static com.safwah.bot.code.corrector.CodeUtilities.isValidCode;
+import static com.safwah.bot.code.corrector.CodeUtilities.isValidInstituteCode;
 import static com.safwah.bot.code.corrector.institute.InstituteCodeValidator.validateCode;
 
 public class InstituteCodeFinder {
@@ -31,7 +31,7 @@ public class InstituteCodeFinder {
 
     static String[] findTheRightCode(InstituteStudyYear1444 studyYear, String resultCode, String formattedFullName, String formattedEmail) {
         String partialMatch = "0";
-        if (!isValidCode(resultCode)) {
+        if (!isValidInstituteCode(resultCode)) {
             String[] result = searchCode(formattedEmail, formattedFullName, studyYear);
             resultCode = result[0];
             partialMatch = result[1];
