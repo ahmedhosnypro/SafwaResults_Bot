@@ -1,4 +1,4 @@
-package com.safwah.database.result;
+package com.safwah.database.result.institute;
 
 import com.safwah.Main;
 import org.sqlite.SQLiteDataSource;

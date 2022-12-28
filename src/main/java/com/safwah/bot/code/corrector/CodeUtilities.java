@@ -36,12 +36,11 @@ public class CodeUtilities {
         // and don't have invalid characters
         // then code is valid
         code = formatCode(code);
-        return code.length() == codeLength &&
-                (code.startsWith(instituteFstCodePrefix) ||
+        return (code.startsWith(instituteFstCodePrefix) ||
                         code.startsWith(instituteSndCodePrefix) ||
                         code.startsWith(instituteTrdCodePrefix)) &&
-                code.substring(2).matches("\\d{5}") &&
-                !INVALID_CODE_PATTERN.matcher(code).find();
+                        code.substring(2).matches("\\d+") &&
+                        !INVALID_CODE_PATTERN.matcher(code).find();
     }
 
     public static boolean isValidCode(String code) {
@@ -59,7 +58,6 @@ public class CodeUtilities {
                 code.substring(2).matches("\\d{5}") &&
                 !INVALID_CODE_PATTERN.matcher(code).find();
     }
-
 
 
     public static String formatCode(String inputCode) {

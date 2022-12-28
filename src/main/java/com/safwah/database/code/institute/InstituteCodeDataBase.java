@@ -85,7 +85,12 @@ public class InstituteCodeDataBase {
     }
 
     public static String[] getCodeByTryingMatchingNames(String fullName, InstituteStudyYear1444 year, boolean isRepeating) {
-        return getCodeByTryingMatchingNames(year, fullName, isRepeating);
+        try {
+            return getCodeByTryingMatchingNames(year, fullName, isRepeating);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static String[] getHigherCode(String nameOrEmail, InstituteStudyYear1444 year) {
@@ -182,6 +187,7 @@ public class InstituteCodeDataBase {
             var result = new String[2];
             int matchCount = 0;
             while (resultSet.next()) {
+                System.out.print("-");
                 String studentFullName = resultSet.getString("name");
                 String code = resultSet.getString("code");
 
