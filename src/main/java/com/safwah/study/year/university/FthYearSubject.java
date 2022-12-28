@@ -12,7 +12,7 @@ public enum FthYearSubject implements YearsSubject {
     ARABIC_ADAAB("الأدب العربي", "arabic_adaab", "both", 50, true, true),
     SHBHAT("الشبهات الفكرية", "shbhat", "both", 50, true, true),
     HISTORY("التاريخ", "history", "both", 50, true, true),
-    RESEARCH("مهارات البحث العلمي", "research", "both", 50, true, true);
+    RESEARCH("مهارات البحث العلمي", "research", "both", 50, true, false);
 
 
     private final String arabicName;

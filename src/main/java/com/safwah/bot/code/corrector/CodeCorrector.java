@@ -59,17 +59,17 @@ public class CodeCorrector {
     }
 
      static void correctCode(Connection connection, StudyYear1444 studyYear, String subject, boolean isReport) {
-        String codeListQuery = String.format("""
-                SELECT code, fullName, email, right_code_2
-                FROM %s
-                """, subject);
-
-//        skip corrected codes when retrying
 //        String codeListQuery = String.format("""
 //                SELECT code, fullName, email, right_code_2
 //                FROM %s
-//                WHERE right_code_2 is null or right_code_2 not like 'A%%'
 //                """, subject);
+
+//        skip corrected codes when retrying
+        String codeListQuery = String.format("""
+                SELECT code, fullName, email, right_code_2
+                FROM %s
+                WHERE right_code_2 is null or right_code_2 not like 'A%%'
+                """, subject);
 
 //         repair code for a student
 //        String codeListQuery = String.format("""
