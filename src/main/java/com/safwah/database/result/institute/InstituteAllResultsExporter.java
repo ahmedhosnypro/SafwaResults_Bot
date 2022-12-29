@@ -1,6 +1,5 @@
 package com.safwah.database.result.institute;
 
-import com.safwah.Main;
 import com.safwah.Student;
 import com.safwah.bot.code.bot.institute.InstituteCodeFinderBot;
 import com.safwah.bot.code.corrector.CodeUtilities;

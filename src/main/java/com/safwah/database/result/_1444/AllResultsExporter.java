@@ -37,35 +37,35 @@ public class AllResultsExporter {
     private static void exportResults(Connection connection, StudyYear1444 studyYear) {
         var subjects = listExaminedSubjects(studyYear);
         for (var subject : subjects) {
-            Main.EXECUTOR.submit(() -> {
-                var studentsResults = getAllResults(connection, subject, studyYear);
-                addResultsToTable(studentsResults, subject, connection);
-            });
+//            Main.EXECUTOR.submit(() -> {
+            var studentsResults = getAllResults(connection, subject, studyYear);
+            addResultsToTable(studentsResults, subject, connection);
+//            });
         }
     }
 
     private static void addResultsToTable(List<Map<String, String>> studentsResults, YearsSubject subject, Connection connection) {
         for (var studentResult : studentsResults) {
-            Main.EXECUTOR.submit(() -> {
-                String code = studentResult.get("code");
-                try (Statement statement = connection.createStatement()) {
-                    String isCodeExistQuery = "SELECT * FROM " + ALL_RESULTS + " WHERE code = '" + code + "'";
-                    var resultSet = statement.executeQuery(isCodeExistQuery);
-                    if (resultSet.next()) {
-                        String updateQuery = "UPDATE " + ALL_RESULTS + " SET " + subject.getArabicName().replaceAll(" ", "_") + " = " + Integer.parseInt(studentResult.get("result")) + " WHERE code = '" + code + "'";
-                        statement.execute(updateQuery);
-                    } else {
-                        String insertQuery = "INSERT INTO " + ALL_RESULTS + " (code, name, email, " + subject.getArabicName().replaceAll(" ", "_") + ") " +
-                                "VALUES ('" + code + "', '" +
-                                studentResult.get("name") + "', '" +
-                                studentResult.get("email") + "', " +
-                                Integer.parseInt(studentResult.get("result")) + ")";
-                        statement.execute(insertQuery);
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+//            Main.EXECUTOR.submit(() -> {
+            String code = studentResult.get("code");
+            try (Statement statement = connection.createStatement()) {
+                String isCodeExistQuery = "SELECT * FROM " + ALL_RESULTS + " WHERE code = '" + code + "'";
+                var resultSet = statement.executeQuery(isCodeExistQuery);
+                if (resultSet.next()) {
+                    String updateQuery = "UPDATE " + ALL_RESULTS + " SET " + subject.getArabicName().replaceAll(" ", "_") + " = " + Integer.parseInt(studentResult.get("result")) + " WHERE code = '" + code + "'";
+                    statement.execute(updateQuery);
+                } else {
+                    String insertQuery = "INSERT INTO " + ALL_RESULTS + " (code, name, email, " + subject.getArabicName().replaceAll(" ", "_") + ") " +
+                            "VALUES ('" + code + "', '" +
+                            studentResult.get("name") + "', '" +
+                            studentResult.get("email") + "', " +
+                            Integer.parseInt(studentResult.get("result")) + ")";
+                    statement.execute(insertQuery);
                 }
-            });
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+//            });
         }
     }
 
@@ -95,18 +95,18 @@ public class AllResultsExporter {
         return allResults;
     }
 
-    static void addColumns(StudyYear1444 studyYear1444) {
+    static void addColumns(StudyYear1444 studyYear) {
 //        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
-        List<StudyYear1444> studyYears = List.of(studyYear1444);
-        for (var studyYear : studyYears) {
-            Connection connection = getConnection(studyYear);
-            DataBaseEditor.addColumn(connection, ALL_RESULTS, "email", "TEXT");
-            DataBaseEditor.addColumn(connection, ALL_RESULTS, "name", "TEXT");
-            DataBaseEditor.addColumn(connection, ALL_RESULTS, "code", "TEXT");
-            var subjects = listExaminedSubjects(studyYear);
-            for (var subject : subjects) {
-                DataBaseEditor.addColumn(connection, ALL_RESULTS, subject.getArabicName().replaceAll(" ", "_"), "INTEGER");
-            }
+//        List<StudyYear1444> studyYears = List.of(studyYear);
+//        for (var studyYear : studyYears) {
+        Connection connection = getConnection(studyYear);
+        DataBaseEditor.addColumn(connection, ALL_RESULTS, "email", "TEXT");
+        DataBaseEditor.addColumn(connection, ALL_RESULTS, "name", "TEXT");
+        DataBaseEditor.addColumn(connection, ALL_RESULTS, "code", "TEXT");
+        var subjects = listExaminedSubjects(studyYear);
+        for (var subject : subjects) {
+            DataBaseEditor.addColumn(connection, ALL_RESULTS, subject.getArabicName().replaceAll(" ", "_"), "INTEGER");
         }
+//        }
     }
 }

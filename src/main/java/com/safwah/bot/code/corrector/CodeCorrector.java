@@ -132,11 +132,11 @@ public class CodeCorrector {
 
     private static void correctCode(boolean isReport) {
 //        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
-        List<StudyYear1444> studyYears = List.of(SND_YEAR, TRD_YEAR, FTH_YEAR);
+        List<StudyYear1444> studyYears = List.of(FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR);
         for (var studyYear : studyYears) {
             Connection connection = getConnection(studyYear);
 
-            var subjects = listNonCorrectCodeSubjects(studyYear);
+            var subjects = listExaminedSubjects(studyYear);
 //            var subjects = listExaminedSubjects(studyYear);
             for (var subject : subjects) {
                 if (isReport) {

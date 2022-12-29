@@ -4,10 +4,11 @@ import com.safwah.study.year.YearsSubject;
 
 public enum InstituteFstYearSubject implements YearsSubject {
     AQIDA("العقيدة الإسلامية", "aqida", "both", 50, true, true),
-    TAGWID("التجويد", "tagweed", "both", 50, true, true),
+
     OSOOL("أصول الفقه", "usool", "both", 50, true, true),
     FIQH("الفقه", "fiqh", "both", 50, true, true),
-    ADAAB("الآداب الإسلامية", "adab", "both", 50, true, true);
+    ADAAB("الآداب الإسلامية", "adab", "both", 50, true, true),
+    TAGWID("التجويد", "tagweed", "both", 50, true, true);
 
 
     private final String arabicName;
