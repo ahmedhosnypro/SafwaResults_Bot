@@ -24,7 +24,7 @@ public class AllResultsExporter {
     public static final String ALL_RESULTS = "allResults";
 
     public static void main(String[] args) {
-        exportAllResults(SND_YEAR);
+        exportAllResults(FTH_YEAR);
 //        FST_YEAR, SND_YEAR, TRD_YEAR, FTH_YEAR
     }
 
@@ -52,10 +52,18 @@ public class AllResultsExporter {
                 String isCodeExistQuery = "SELECT * FROM " + ALL_RESULTS + " WHERE code = '" + code + "'";
                 var resultSet = statement.executeQuery(isCodeExistQuery);
                 if (resultSet.next()) {
-                    String updateQuery = "UPDATE " + ALL_RESULTS + " SET " + subject.getArabicName().replaceAll(" ", "_") + " = " + Integer.parseInt(studentResult.get("result")) + " WHERE code = '" + code + "'";
+                    String updateQuery = "UPDATE " + ALL_RESULTS + " SET " + subject.getArabicName()
+                            .replace("]", "")
+                            .replace("[", "")
+                            .replaceAll(" ", "_") +
+                            " = " + Integer.parseInt(studentResult.get("result")) + " WHERE code = '" + code + "'";
                     statement.execute(updateQuery);
                 } else {
-                    String insertQuery = "INSERT INTO " + ALL_RESULTS + " (code, name, email, " + subject.getArabicName().replaceAll(" ", "_") + ") " +
+                    String insertQuery = "INSERT INTO " + ALL_RESULTS + " (code, name, email, " + subject.getArabicName()
+                            .replace("]", "")
+                            .replace("[", "")
+                            .replaceAll(" ", "_") +
+                            ") " +
                             "VALUES ('" + code + "', '" +
                             studentResult.get("name") + "', '" +
                             studentResult.get("email") + "', " +
@@ -105,7 +113,12 @@ public class AllResultsExporter {
         DataBaseEditor.addColumn(connection, ALL_RESULTS, "code", "TEXT");
         var subjects = listExaminedSubjects(studyYear);
         for (var subject : subjects) {
-            DataBaseEditor.addColumn(connection, ALL_RESULTS, subject.getArabicName().replaceAll(" ", "_"), "INTEGER");
+            DataBaseEditor.addColumn(connection, ALL_RESULTS, subject.getArabicName()
+                            .replace("]", "")
+                            .replace("[", "")
+                    .replaceAll(" ", "_")
+
+                    , "INTEGER");
         }
 //        }
     }

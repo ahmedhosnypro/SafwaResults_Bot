@@ -16,8 +16,8 @@ public enum TrdYearSubject implements YearsSubject {
     TAGWID("التجويد", "tagwid", "fst", 50, true, true),
     OSOOL("أصول الفقه", "osool", "fst", 50, true, true),
     FERAQ("الفرق والمذاهب", "feraq", "both", 50, true, true),
-    HISTORY("التاريخ", "history", "both", 50, true, false),
-    ARAABIC_ADAAB(" العربي", "arabic_adaab", "both", 50, true, true),
+    HISTORY("التاريخ", "history", "both", 50, true, true),
+    ARABIC_LANGUAGE("اللغة العربية", "arabic_language", "fst", 50, true, false),
     ARABIC("النحو", "arabic", "both", 50, false, false),
     EMLAA("الإملاء", "emlaa", "snd", 50, false, false);
 
